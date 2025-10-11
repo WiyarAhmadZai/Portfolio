@@ -137,10 +137,10 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen py-20 px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen py-20 px-4 sm:px-6 lg:px-8" role="main">
       <div className="max-w-7xl mx-auto">
         {/* Hero Section */}
-        <div className={`relative text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <section className={`relative text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} aria-labelledby="hero-title">
           {/* Background Elements */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-full blur-3xl animate-pulse-slow"></div>
@@ -156,7 +156,7 @@ const Home = () => {
               {/* Main image container */}
               <div className="relative bg-gradient-to-br from-blue-500 to-purple-600 rounded-full w-56 h-56 mx-auto overflow-hidden border-4 border-white/20 shadow-2xl transform transition-all duration-500 hover:scale-105 hover:rotate-3">
                 <img 
-                  src="/Photos Simples/.jpg" 
+                  src="/Photos Simples/Smile.jpg" 
                   alt="Wiyar Ahmad Zai" 
                   className="w-full h-full object-cover"
                 />
@@ -174,7 +174,7 @@ const Home = () => {
           
           {/* Enhanced Typography */}
           <div className="relative z-10">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 mb-6 leading-tight">
+            <h1 id="hero-title" className="text-5xl sm:text-6xl md:text-7xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 mb-6 leading-tight">
               <span className="inline-block animate-fade-in">Wiyar</span>
               <span className="inline-block animate-fade-in" style={{animationDelay: '0.2s'}}> Ahmad</span>
               <span className="inline-block animate-fade-in" style={{animationDelay: '0.4s'}}> Zai</span>
@@ -225,23 +225,25 @@ const Home = () => {
             
             {/* Enhanced CTA Buttons */}
             <div className="mt-12 flex flex-col sm:flex-row justify-center gap-4 animate-slide-in-up" style={{animationDelay: '1.6s'}}>
-              <Link 
-                to="/about" 
-                className="group relative px-8 py-4 text-base font-semibold rounded-xl text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 md:py-5 md:text-lg md:px-12 transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-blue-500/25"
-              >
-                <span className="relative z-10 flex items-center justify-center">
-                  <i className="fas fa-user mr-2"></i>
-                  Learn More
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </Link>
+            <Link 
+              to="/about" 
+              className="group relative px-8 py-4 text-base font-semibold rounded-xl text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 md:py-5 md:text-lg md:px-12 transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-blue-500/25"
+              aria-label="Learn more about Wiyar Ahmad Zai"
+            >
+              <span className="relative z-10 flex items-center justify-center">
+                <i className="fas fa-user mr-2" aria-hidden="true"></i>
+                Learn More
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </Link>
               
               <Link 
                 to="/projects" 
                 className="group relative px-8 py-4 text-base font-semibold rounded-xl text-white bg-gray-800/50 backdrop-blur-sm border border-gray-600/50 hover:border-gray-500/50 hover:bg-gray-700/50 md:py-5 md:text-lg md:px-12 transition-all duration-300 transform hover:scale-105 shadow-xl"
+                aria-label="View Wiyar's projects and portfolio"
               >
                 <span className="relative z-10 flex items-center justify-center">
-                  <i className="fas fa-folder-open mr-2"></i>
+                  <i className="fas fa-folder-open mr-2" aria-hidden="true"></i>
                   View Projects
                 </span>
               </Link>
@@ -249,27 +251,63 @@ const Home = () => {
               <Link 
                 to="/contact" 
                 className="group relative px-8 py-4 text-base font-semibold rounded-xl text-white border-2 border-transparent bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 md:py-5 md:text-lg md:px-12 transition-all duration-300 transform hover:scale-105 shadow-xl"
+                aria-label="Get in touch with Wiyar Ahmad Zai"
               >
                 <span className="relative z-10 flex items-center justify-center">
-                  <i className="fas fa-envelope mr-2"></i>
+                  <i className="fas fa-envelope mr-2" aria-hidden="true"></i>
                   Get In Touch
                 </span>
               </Link>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Stats Section */}
-        <div className={`mt-20 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        {/* Enhanced Stats Section */}
+        <section className={`mt-24 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} aria-labelledby="stats-title">
+          <div className="text-center mb-12">
+            <h2 id="stats-title" className="text-3xl md:text-4xl font-bold text-white mb-4">
+              By the Numbers
+            </h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              My journey in numbers - projects completed, contributions made, and experience gained
+            </p>
+          </div>
+          
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat, index) => (
-              <div key={index} className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl p-6 text-center shadow-lg border border-gray-700 transform transition duration-500 hover:scale-105">
-                <h3 className="text-3xl font-bold text-white mb-2">{stat.value}</h3>
-                <p className="text-gray-400">{stat.label}</p>
+              <div 
+                key={index} 
+                className="group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl p-6 text-center shadow-2xl border border-white/10 transform transition-all duration-500 hover:scale-105 hover:shadow-glow"
+                style={{ animationDelay: `${index * 0.1}s` }}
+                role="article"
+                aria-label={`${stat.value} ${stat.label}`}
+              >
+                {/* Background glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-600/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                {/* Content */}
+                <div className="relative z-10">
+                  <div className="mb-4">
+                    <div className="w-16 h-16 mx-auto bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mb-4 group-hover:animate-pulse">
+                      <i className="fas fa-chart-line text-white text-xl"></i>
+                    </div>
+                  </div>
+                  
+                  <h3 className="text-4xl md:text-5xl font-black text-white mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-500 transition-all duration-500">
+                    {stat.value}
+                  </h3>
+                  
+                  <p className="text-gray-300 font-medium text-sm md:text-base group-hover:text-white transition-colors duration-300">
+                    {stat.label}
+                  </p>
+                  
+                  {/* Animated underline */}
+                  <div className="w-0 group-hover:w-full h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mt-3 transition-all duration-500"></div>
+                </div>
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* Skills Section */}
         <div className={`mt-20 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
@@ -496,7 +534,7 @@ const Home = () => {
         </svg>
       </div>
       
-    </div>
+    </main>
   );
 };
 
