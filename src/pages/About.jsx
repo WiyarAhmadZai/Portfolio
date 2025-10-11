@@ -415,7 +415,11 @@ const About = () => {
                     <div key={index} className="bg-gray-900 p-6 rounded-xl shadow-lg border border-gray-700 transform transition duration-500 hover:scale-105">
                       <div className="flex items-center mb-4">
                         <i 
-                          className={`${skill.icon} text-2xl mr-3`}
+                          className={`${skill.icon} text-2xl mr-3 ${
+                            skill.customColor 
+                              ? '' 
+                              : `bg-gradient-to-r ${skill.color} bg-clip-text text-transparent`
+                          }`}
                           style={{ 
                             color: skill.customColor || undefined,
                             background: skill.customColor ? `linear-gradient(to right, ${skill.customColor}, ${skill.customColor})` : undefined,
@@ -428,7 +432,11 @@ const About = () => {
                       </div>
                       <div className="w-full bg-gray-700 rounded-full h-2.5">
                         <div 
-                          className="h-2.5 rounded-full"
+                          className={`h-2.5 rounded-full ${
+                            skill.customColor 
+                              ? '' 
+                              : `bg-gradient-to-r ${skill.color}`
+                          }`}
                           style={{ 
                             width: `${skill.percentage}%`,
                             background: skill.customColor ? `linear-gradient(to right, ${skill.customColor}, ${skill.customColor})` : undefined
