@@ -251,62 +251,114 @@ const Blog = () => {
                   <div className="relative w-full h-full group">
                     {/* Show thumbnail if available, otherwise show video */}
                     {post.image ? (
-                      <div 
-                        className="relative w-full h-full cursor-pointer"
-                        onClick={(e) => {
-                          const video = document.getElementById(`video-${post.id}`);
-                          const overlay = e.currentTarget.querySelector('.play-overlay');
-                          if (video && overlay) {
-                            if (video.paused) {
-                              video.play();
-                              overlay.style.display = 'none';
-                            } else {
-                              video.pause();
-                              overlay.style.display = 'flex';
-                            }
-                          }
-                        }}
-                      >
+                      <div className="relative w-full h-full">
+                        {/* Thumbnail Image */}
                         <img 
                           src={post.image} 
                           alt={post.title} 
                           className="w-full h-full object-cover transition duration-500 hover:scale-110"
+                          id={`thumbnail-${post.id}`}
                         />
-                        <div className="play-overlay absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300">
+                        
+                        {/* Video with full controls */}
+                        <video 
+                          src={post.videoUrl || URL.createObjectURL(post.videoFile)} 
+                          className="absolute inset-0 w-full h-full object-cover transition duration-500 hover:scale-110"
+                          preload="metadata"
+                          id={`video-${post.id}`}
+                          controls
+                          style={{ display: 'none' }}
+                          onPlay={() => {
+                            const thumbnail = document.getElementById(`thumbnail-${post.id}`);
+                            if (thumbnail) {
+                              thumbnail.style.display = 'none';
+                            }
+                          }}
+                          onPause={() => {
+                            const thumbnail = document.getElementById(`thumbnail-${post.id}`);
+                            if (thumbnail) {
+                              thumbnail.style.display = 'block';
+                            }
+                          }}
+                          onEnded={() => {
+                            const thumbnail = document.getElementById(`thumbnail-${post.id}`);
+                            if (thumbnail) {
+                              thumbnail.style.display = 'block';
+                            }
+                          }}
+                        />
+                        
+                        {/* Play button overlay for thumbnail */}
+                        <div 
+                          className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300 cursor-pointer"
+                          id={`play-overlay-${post.id}`}
+                          onClick={() => {
+                            const video = document.getElementById(`video-${post.id}`);
+                            const overlay = document.getElementById(`play-overlay-${post.id}`);
+                            if (video && overlay) {
+                              video.style.display = 'block';
+                              video.play();
+                              overlay.style.display = 'none';
+                            }
+                          }}
+                        >
                           <div className="w-16 h-16 bg-white bg-opacity-90 rounded-full flex items-center justify-center hover:bg-opacity-100 transition-all duration-300 transform hover:scale-110">
                             <i className="fas fa-play text-gray-800 text-2xl ml-1"></i>
                           </div>
                         </div>
-                        <video 
-                          src={post.videoUrl || URL.createObjectURL(post.videoFile)} 
-                          muted 
-                          className="absolute inset-0 w-full h-full object-cover"
-                          preload="metadata"
-                          id={`video-${post.id}`}
-                          style={{ display: 'none' }}
-                        />
                       </div>
                     ) : (
                       <div className="relative w-full h-full">
+                        {/* Video with full controls and play button overlay */}
                         <video 
                           src={post.videoUrl || URL.createObjectURL(post.videoFile)} 
-                          muted 
                           className="w-full h-full object-cover transition duration-500 hover:scale-110"
                           preload="metadata"
                           id={`video-${post.id}`}
+                          controls
+                          style={{ display: 'none' }}
+                          onPlay={() => {
+                            const overlay = document.getElementById(`play-overlay-${post.id}`);
+                            if (overlay) {
+                              overlay.style.display = 'none';
+                            }
+                          }}
+                          onPause={() => {
+                            const overlay = document.getElementById(`play-overlay-${post.id}`);
+                            if (overlay) {
+                              overlay.style.display = 'flex';
+                            }
+                          }}
+                          onEnded={() => {
+                            const overlay = document.getElementById(`play-overlay-${post.id}`);
+                            if (overlay) {
+                              overlay.style.display = 'flex';
+                            }
+                          }}
                         />
+                        
+                        {/* Video frame preview */}
+                        <video 
+                          src={post.videoUrl || URL.createObjectURL(post.videoFile)} 
+                          className="w-full h-full object-cover transition duration-500 hover:scale-110"
+                          preload="metadata"
+                          muted
+                          id={`video-preview-${post.id}`}
+                        />
+                        
+                        {/* Play button overlay */}
                         <div 
                           className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300 cursor-pointer"
-                          onClick={(e) => {
+                          id={`play-overlay-${post.id}`}
+                          onClick={() => {
                             const video = document.getElementById(`video-${post.id}`);
-                            if (video) {
-                              if (video.paused) {
-                                video.play();
-                                e.target.style.opacity = '0';
-                              } else {
-                                video.pause();
-                                e.target.style.opacity = '1';
-                              }
+                            const preview = document.getElementById(`video-preview-${post.id}`);
+                            const overlay = document.getElementById(`play-overlay-${post.id}`);
+                            if (video && preview && overlay) {
+                              video.style.display = 'block';
+                              preview.style.display = 'none';
+                              video.play();
+                              overlay.style.display = 'none';
                             }
                           }}
                         >
