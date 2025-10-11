@@ -19,12 +19,16 @@ const Home = () => {
 
   // Skills data
   const skills = [
-    { name: "Frontend Development", percentage: 90, icon: "fa-brands fa-react", color: "from-blue-500 to-cyan-500" },
-    { name: "Backend Development", percentage: 85, icon: "fa-server", color: "from-purple-500 to-indigo-500" },
-    { name: "Database Design", percentage: 80, icon: "fa-database", color: "from-green-500 to-emerald-500" },
-    { name: "Mobile Development", percentage: 75, icon: "fa-mobile-alt", color: "from-yellow-500 to-amber-500" },
-    { name: "UI/UX Design", percentage: 70, icon: "fa-paint-brush", color: "from-pink-500 to-rose-500" },
-    { name: "Version Control", percentage: 85, icon: "fa-code-branch", color: "from-gray-500 to-slate-500" }
+    { name: "Full Stack Web Development", percentage: 95, icon: "fa-laptop-code", color: "from-blue-500 to-cyan-500" },
+    { name: "HTML & CSS", percentage: 90, icon: "fa-code", color: "from-orange-500 to-red-500" },
+    { name: "JavaScript & React.js", percentage: 90, icon: "fa-brands fa-js-square", color: "from-yellow-500 to-orange-500" },
+    { name: "Next.js & PHP", percentage: 85, icon: "fa-server", color: "from-purple-500 to-indigo-500" },
+    { name: "Laravel & Django", percentage: 80, icon: "fa-cogs", color: "from-red-500 to-pink-500" },
+    { name: "Database Design", percentage: 85, icon: "fa-database", color: "from-green-500 to-emerald-500" },
+    { name: "UI/UX Design", percentage: 80, icon: "fa-paint-brush", color: "from-pink-500 to-rose-500" },
+    { name: "Bootstrap & Tailwind CSS", percentage: 90, icon: "fa-palette", color: "from-cyan-500 to-blue-500" },
+    { name: "Python & MongoDB", percentage: 75, icon: "fa-python", color: "from-green-600 to-green-400" },
+    { name: "Soft Skills", percentage: 85, icon: "fa-users", color: "from-indigo-500 to-purple-500" }
   ];
 
   // Services data
@@ -105,10 +109,10 @@ const Home = () => {
 
   // Stats data
   const stats = [
-    { value: "22+", label: "Projects Completed" },
-    { value: "500+", label: "GitHub Contributions" },
+    { value: "Multiple", label: "Projects Completed" },
+    { value: "Active", label: "GitHub Contributions" },
     { value: "3+", label: "Years Experience" },
-    { value: "15+", label: "Technologies Used" }
+    { value: "15+", label: "Technologies Mastered" }
   ];
 
   // Recent blog posts
@@ -137,7 +141,7 @@ const Home = () => {
   ];
 
   return (
-    <main className="min-h-screen py-20 px-4 sm:px-6 lg:px-8" role="main">
+    <main className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8" role="main">
       <div className="max-w-7xl mx-auto">
         {/* Hero Section */}
         <section className={`relative text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} aria-labelledby="hero-title">
@@ -201,27 +205,27 @@ const Home = () => {
               </p>
             </div>
             
-            {/* Enhanced Tags */}
-            <div className="mt-8 flex flex-wrap justify-center gap-3 animate-slide-in-up" style={{animationDelay: '1.4s'}}>
-              <div className="bg-gradient-to-r from-blue-500/20 to-blue-600/20 backdrop-blur-sm px-6 py-3 rounded-full border border-blue-500/30 hover:border-blue-400/50 transition-all duration-300">
-                <span className="text-blue-300 font-semibold flex items-center">
-                  <i className="fas fa-code mr-2"></i>
-                  22+ Projects
-                </span>
-              </div>
-              <div className="bg-gradient-to-r from-purple-500/20 to-purple-600/20 backdrop-blur-sm px-6 py-3 rounded-full border border-purple-500/30 hover:border-purple-400/50 transition-all duration-300">
-                <span className="text-purple-300 font-semibold flex items-center">
-                  <i className="fas fa-laptop-code mr-2"></i>
-                  Full-Stack Developer
-                </span>
-              </div>
-              <div className="bg-gradient-to-r from-green-500/20 to-green-600/20 backdrop-blur-sm px-6 py-3 rounded-full border border-green-500/30 hover:border-green-400/50 transition-all duration-300">
-                <span className="text-green-300 font-semibold flex items-center">
-                  <i className="fab fa-github mr-2"></i>
-                  Open Source Contributor
-                </span>
-              </div>
-            </div>
+             {/* Enhanced Tags */}
+             <div className="mt-8 flex flex-wrap justify-center gap-3 animate-slide-in-up" style={{animationDelay: '1.4s'}}>
+               <div className="bg-gradient-to-r from-blue-500/20 to-blue-600/20 backdrop-blur-sm px-6 py-3 rounded-full border border-blue-500/30 hover:border-blue-400/50 transition-all duration-300">
+                 <span className="text-blue-300 font-semibold flex items-center">
+                   <i className="fas fa-code mr-2"></i>
+                   Multiple Projects
+                 </span>
+               </div>
+               <div className="bg-gradient-to-r from-purple-500/20 to-purple-600/20 backdrop-blur-sm px-6 py-3 rounded-full border border-purple-500/30 hover:border-purple-400/50 transition-all duration-300">
+                 <span className="text-purple-300 font-semibold flex items-center">
+                   <i className="fas fa-laptop-code mr-2"></i>
+                   Full-Stack Developer
+                 </span>
+               </div>
+               <div className="bg-gradient-to-r from-green-500/20 to-green-600/20 backdrop-blur-sm px-6 py-3 rounded-full border border-green-500/30 hover:border-green-400/50 transition-all duration-300">
+                 <span className="text-green-300 font-semibold flex items-center">
+                   <i className="fab fa-github mr-2"></i>
+                   Active Contributor
+                 </span>
+               </div>
+             </div>
             
             {/* Enhanced CTA Buttons */}
             <div className="mt-12 flex flex-col sm:flex-row justify-center gap-4 animate-slide-in-up" style={{animationDelay: '1.6s'}}>
@@ -327,16 +331,20 @@ const Home = () => {
                   ></div>
                 </div>
                 <p className="text-gray-400 text-right mt-2">{skill.percentage}%</p>
-                <div className="mt-4">
-                  <p className="text-gray-300 text-sm">
-                    {skill.name === "Frontend Development" && "React, Vue.js, Tailwind CSS, Bootstrap"}
-                    {skill.name === "Backend Development" && "Node.js, Express, Python, PHP"}
-                    {skill.name === "Database Design" && "MySQL, MongoDB, PostgreSQL, SQLite"}
-                    {skill.name === "Mobile Development" && "React Native, Flutter, Android"}
-                    {skill.name === "UI/UX Design" && "Figma, Adobe XD, Sketch"}
-                    {skill.name === "Version Control" && "Git, GitHub, GitLab"}
-                  </p>
-                </div>
+                 <div className="mt-4">
+                   <p className="text-gray-300 text-sm">
+                     {skill.name === "Full Stack Web Development" && "Complete web applications from frontend to backend"}
+                     {skill.name === "HTML & CSS" && "Semantic HTML5, CSS3, Responsive Design"}
+                     {skill.name === "JavaScript & React.js" && "ES6+, React Hooks, State Management"}
+                     {skill.name === "Next.js & PHP" && "Server-side rendering, API development"}
+                     {skill.name === "Laravel & Django" && "MVC frameworks, RESTful APIs"}
+                     {skill.name === "Database Design" && "MySQL, MongoDB, Database optimization"}
+                     {skill.name === "UI/UX Design" && "User research, Wireframing, Prototyping"}
+                     {skill.name === "Bootstrap & Tailwind CSS" && "CSS frameworks, Component libraries"}
+                     {skill.name === "Python & MongoDB" && "Data processing, NoSQL databases"}
+                     {skill.name === "Soft Skills" && "Communication, Teamwork, Problem-solving, Leadership"}
+                   </p>
+                 </div>
               </div>
             ))}
           </div>
