@@ -263,12 +263,37 @@ const Blog = () => {
                         {/* Video with full controls */}
                         <video 
                           src={post.videoUrl || URL.createObjectURL(post.videoFile)} 
-                          className="absolute inset-0 w-full h-full object-cover transition duration-500 hover:scale-110"
+                          className="absolute inset-0 w-full h-full transition duration-500 hover:scale-110"
                           preload="metadata"
                           id={`video-${post.id}`}
                           controls
-                          style={{ display: 'none' }}
+                          muted
+                          style={{ display: 'none', objectFit: 'cover' }}
                           onPlay={() => {
+                            // Stop all other videos
+                            const allVideos = document.querySelectorAll('video[id^="video-"]');
+                            allVideos.forEach(video => {
+                              if (video.id !== `video-${post.id}` && !video.paused) {
+                                video.pause();
+                                // Show thumbnails/previews for other videos
+                                const otherPostId = video.id.replace('video-', '');
+                                const otherThumbnail = document.getElementById(`thumbnail-${otherPostId}`);
+                                const otherPreview = document.getElementById(`video-preview-${otherPostId}`);
+                                const otherOverlay = document.getElementById(`play-overlay-${otherPostId}`);
+                                
+                                if (otherThumbnail) {
+                                  otherThumbnail.style.display = 'block';
+                                }
+                                if (otherPreview) {
+                                  otherPreview.style.display = 'block';
+                                }
+                                if (otherOverlay) {
+                                  otherOverlay.style.display = 'flex';
+                                }
+                                video.style.display = 'none';
+                              }
+                            });
+                            
                             const thumbnail = document.getElementById(`thumbnail-${post.id}`);
                             if (thumbnail) {
                               thumbnail.style.display = 'none';
@@ -286,6 +311,21 @@ const Blog = () => {
                               thumbnail.style.display = 'block';
                             }
                           }}
+                          onFullscreenChange={() => {
+                            // Reset video to default size when exiting fullscreen
+                            const video = document.getElementById(`video-${post.id}`);
+                            if (video && !document.fullscreenElement) {
+                              video.style.objectFit = 'cover';
+                            }
+                          }}
+                          onClick={(e) => {
+                            // Reset video to default size when clicked
+                            const video = e.target;
+                            if (video) {
+                              video.style.objectFit = 'contain';
+                              video.style.backgroundColor = 'black';
+                            }
+                          }}
                         />
                         
                         {/* Play button overlay for thumbnail */}
@@ -293,12 +333,44 @@ const Blog = () => {
                           className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300 cursor-pointer"
                           id={`play-overlay-${post.id}`}
                           onClick={() => {
+                            // Stop all other videos first
+                            const allVideos = document.querySelectorAll('video[id^="video-"]');
+                            allVideos.forEach(video => {
+                              if (video.id !== `video-${post.id}` && !video.paused) {
+                                video.pause();
+                                const otherPostId = video.id.replace('video-', '');
+                                const otherThumbnail = document.getElementById(`thumbnail-${otherPostId}`);
+                                const otherPreview = document.getElementById(`video-preview-${otherPostId}`);
+                                const otherOverlay = document.getElementById(`play-overlay-${otherPostId}`);
+                                
+                                if (otherThumbnail) {
+                                  otherThumbnail.style.display = 'block';
+                                }
+                                if (otherPreview) {
+                                  otherPreview.style.display = 'block';
+                                }
+                                if (otherOverlay) {
+                                  otherOverlay.style.display = 'flex';
+                                }
+                                video.style.display = 'none';
+                              }
+                            });
+                            
                             const video = document.getElementById(`video-${post.id}`);
                             const overlay = document.getElementById(`play-overlay-${post.id}`);
+                            console.log('Playing video:', video, 'Overlay:', overlay);
                             if (video && overlay) {
                               video.style.display = 'block';
-                              video.play();
+                              video.style.objectFit = 'contain';
+                              video.style.backgroundColor = 'black';
+                              video.play().then(() => {
+                                console.log('Video started playing');
+                              }).catch(error => {
+                                console.error('Error playing video:', error);
+                              });
                               overlay.style.display = 'none';
+                            } else {
+                              console.error('Video or overlay not found');
                             }
                           }}
                         >
@@ -312,12 +384,36 @@ const Blog = () => {
                         {/* Video with full controls and play button overlay */}
                         <video 
                           src={post.videoUrl || URL.createObjectURL(post.videoFile)} 
-                          className="w-full h-full object-cover transition duration-500 hover:scale-110"
+                          className="w-full h-full transition duration-500 hover:scale-110"
                           preload="metadata"
                           id={`video-${post.id}`}
                           controls
-                          style={{ display: 'none' }}
+                          muted
+                          style={{ display: 'none', objectFit: 'cover' }}
                           onPlay={() => {
+                            // Stop all other videos
+                            const allVideos = document.querySelectorAll('video[id^="video-"]');
+                            allVideos.forEach(video => {
+                              if (video.id !== `video-${post.id}` && !video.paused) {
+                                video.pause();
+                                const otherPostId = video.id.replace('video-', '');
+                                const otherThumbnail = document.getElementById(`thumbnail-${otherPostId}`);
+                                const otherPreview = document.getElementById(`video-preview-${otherPostId}`);
+                                const otherOverlay = document.getElementById(`play-overlay-${otherPostId}`);
+                                
+                                if (otherThumbnail) {
+                                  otherThumbnail.style.display = 'block';
+                                }
+                                if (otherPreview) {
+                                  otherPreview.style.display = 'block';
+                                }
+                                if (otherOverlay) {
+                                  otherOverlay.style.display = 'flex';
+                                }
+                                video.style.display = 'none';
+                              }
+                            });
+                            
                             const overlay = document.getElementById(`play-overlay-${post.id}`);
                             if (overlay) {
                               overlay.style.display = 'none';
@@ -333,6 +429,21 @@ const Blog = () => {
                             const overlay = document.getElementById(`play-overlay-${post.id}`);
                             if (overlay) {
                               overlay.style.display = 'flex';
+                            }
+                          }}
+                          onFullscreenChange={() => {
+                            // Reset video to default size when exiting fullscreen
+                            const video = document.getElementById(`video-${post.id}`);
+                            if (video && !document.fullscreenElement) {
+                              video.style.objectFit = 'cover';
+                            }
+                          }}
+                          onClick={(e) => {
+                            // Reset video to default size when clicked
+                            const video = e.target;
+                            if (video) {
+                              video.style.objectFit = 'contain';
+                              video.style.backgroundColor = 'black';
                             }
                           }}
                         />
@@ -351,14 +462,46 @@ const Blog = () => {
                           className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300 cursor-pointer"
                           id={`play-overlay-${post.id}`}
                           onClick={() => {
+                            // Stop all other videos first
+                            const allVideos = document.querySelectorAll('video[id^="video-"]');
+                            allVideos.forEach(video => {
+                              if (video.id !== `video-${post.id}` && !video.paused) {
+                                video.pause();
+                                const otherPostId = video.id.replace('video-', '');
+                                const otherThumbnail = document.getElementById(`thumbnail-${otherPostId}`);
+                                const otherPreview = document.getElementById(`video-preview-${otherPostId}`);
+                                const otherOverlay = document.getElementById(`play-overlay-${otherPostId}`);
+                                
+                                if (otherThumbnail) {
+                                  otherThumbnail.style.display = 'block';
+                                }
+                                if (otherPreview) {
+                                  otherPreview.style.display = 'block';
+                                }
+                                if (otherOverlay) {
+                                  otherOverlay.style.display = 'flex';
+                                }
+                                video.style.display = 'none';
+                              }
+                            });
+                            
                             const video = document.getElementById(`video-${post.id}`);
                             const preview = document.getElementById(`video-preview-${post.id}`);
                             const overlay = document.getElementById(`play-overlay-${post.id}`);
+                            console.log('Playing video (no thumbnail):', video, 'Preview:', preview, 'Overlay:', overlay);
                             if (video && preview && overlay) {
                               video.style.display = 'block';
                               preview.style.display = 'none';
-                              video.play();
+                              video.style.objectFit = 'contain';
+                              video.style.backgroundColor = 'black';
+                              video.play().then(() => {
+                                console.log('Video started playing (no thumbnail)');
+                              }).catch(error => {
+                                console.error('Error playing video (no thumbnail):', error);
+                              });
                               overlay.style.display = 'none';
+                            } else {
+                              console.error('Video, preview, or overlay not found');
                             }
                           }}
                         >
