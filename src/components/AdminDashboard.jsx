@@ -7,14 +7,21 @@ const AdminDashboard = () => {
   const { 
     projects, 
     blogPosts, 
+    projectCategories,
+    blogCategories,
     addProject, 
     updateProject, 
     deleteProject, 
     addBlogPost, 
     updateBlogPost, 
     deleteBlogPost,
+    addProjectCategory,
+    addBlogCategory,
+    removeProjectCategory,
+    removeBlogCategory,
     logoutAdmin,
     clearAllData,
+    clearBlogPosts,
     exportData
   } = useData();
 
@@ -23,6 +30,9 @@ const AdminDashboard = () => {
   const [showBlogForm, setShowBlogForm] = useState(false);
   const [editingProject, setEditingProject] = useState(null);
   const [editingBlog, setEditingBlog] = useState(null);
+  const [showCategoryManager, setShowCategoryManager] = useState(false);
+  const [newCategory, setNewCategory] = useState('');
+  const [categoryType, setCategoryType] = useState('project'); // project or blog
 
   // Project form state
   const [projectForm, setProjectForm] = useState({
@@ -46,7 +56,13 @@ const AdminDashboard = () => {
     category: 'React',
     tags: '',
     readTime: '',
-    featured: false
+    featured: false,
+    postType: 'text', // text, image, video, youtube
+    image: '',
+    imageFileName: '',
+    videoFile: null,
+    youtubeUrl: '',
+    youtubeThumbnail: ''
   });
 
   const handleImageSelect = (imageUrl, fileName) => {
@@ -55,6 +71,64 @@ const AdminDashboard = () => {
       image: imageUrl,
       imageFileName: fileName
     }));
+  };
+
+  const handleBlogImageSelect = (imageUrl, fileName) => {
+    setBlogForm(prev => ({
+      ...prev,
+      image: imageUrl,
+      imageFileName: fileName
+    }));
+  };
+
+  // Extract YouTube video ID and thumbnail
+  const extractYouTubeInfo = (url) => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    if (match && match[2].length === 11) {
+      const videoId = match[2];
+      return {
+        videoId,
+        thumbnail: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+        embedUrl: `https://www.youtube.com/embed/${videoId}`
+      };
+    }
+    return null;
+  };
+
+  const handleYouTubeUrlChange = (url) => {
+    setBlogForm(prev => ({
+      ...prev,
+      youtubeUrl: url
+    }));
+    
+    const youtubeInfo = extractYouTubeInfo(url);
+    if (youtubeInfo) {
+      setBlogForm(prev => ({
+        ...prev,
+        youtubeUrl: url,
+        youtubeThumbnail: youtubeInfo.thumbnail
+      }));
+    }
+  };
+
+  const handleAddCategory = () => {
+    if (newCategory.trim()) {
+      if (categoryType === 'project') {
+        addProjectCategory(newCategory.trim());
+      } else {
+        addBlogCategory(newCategory.trim());
+      }
+      setNewCategory('');
+    }
+  };
+
+  const handleRemoveCategory = (category, type) => {
+    if (type === 'project') {
+      removeProjectCategory(category);
+    } else {
+      removeBlogCategory(category);
+    }
   };
 
   const handleProjectSubmit = (e) => {
@@ -167,6 +241,14 @@ const AdminDashboard = () => {
             >
               <i className="fas fa-download mr-2"></i>
               Export
+            </button>
+            <button
+              onClick={clearBlogPosts}
+              className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors text-sm"
+              title="Clear all blog posts"
+            >
+              <i className="fas fa-blog mr-2"></i>
+              Clear Blog
             </button>
             <button
               onClick={clearAllData}
@@ -368,10 +450,9 @@ const AdminDashboard = () => {
                       onChange={(e) => setProjectForm({...projectForm, category: e.target.value})}
                       className="w-full px-3 py-2 bg-gray-700 text-white rounded-lg"
                     >
-                      <option value="Web Development">Web Development</option>
-                      <option value="Mobile Development">Mobile Development</option>
-                      <option value="Desktop Application">Desktop Application</option>
-                      <option value="Data Science">Data Science</option>
+                      {projectCategories.map(category => (
+                        <option key={category} value={category}>{category}</option>
+                      ))}
                     </select>
                   </div>
                   <div>
@@ -482,11 +563,9 @@ const AdminDashboard = () => {
                       onChange={(e) => setBlogForm({...blogForm, category: e.target.value})}
                       className="w-full px-3 py-2 bg-gray-700 text-white rounded-lg"
                     >
-                      <option value="React">React</option>
-                      <option value="Node.js">Node.js</option>
-                      <option value="CSS">CSS</option>
-                      <option value="JavaScript">JavaScript</option>
-                      <option value="General">General</option>
+                      {blogCategories.map(category => (
+                        <option key={category} value={category}>{category}</option>
+                      ))}
                     </select>
                   </div>
                   <div>
