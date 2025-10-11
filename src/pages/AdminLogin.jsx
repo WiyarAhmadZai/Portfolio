@@ -28,6 +28,7 @@ const AdminLogin = () => {
     
     if (loginAdmin(password)) {
       setAttempts(0);
+      alert('Login successful! Welcome to the admin dashboard.');
       navigate('/admin/dashboard');
     } else {
       const newAttempts = attempts + 1;
@@ -36,6 +37,7 @@ const AdminLogin = () => {
       if (newAttempts >= 3) {
         setIsBlocked(true);
         setError('Too many failed attempts. Access blocked for 5 minutes.');
+        alert('Too many failed attempts. You have been blocked for 5 minutes.');
         setTimeout(() => {
           setIsBlocked(false);
           setAttempts(0);
@@ -43,6 +45,7 @@ const AdminLogin = () => {
         }, 300000); // 5 minutes
       } else {
         setError(`Invalid password. ${3 - newAttempts} attempts remaining.`);
+        alert(`Invalid password. ${3 - newAttempts} attempts remaining.`);
       }
     }
   };
