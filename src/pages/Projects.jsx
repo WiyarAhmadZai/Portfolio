@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useData } from '../contexts/DataContext';
 
 const Projects = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -6,12 +7,14 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('date');
+  const { projects } = useData();
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
-  // Expanded projects data with more projects
+  // Projects are now loaded from DataContext
+  /*
   const projects = [
     {
       id: 1,
@@ -314,15 +317,16 @@ const Projects = () => {
       technologies: ["React", "Node.js", "MongoDB", "WebRTC", "FFmpeg"]
     }
   ];
+  */
 
   const filteredProjects = activeFilter === 'all' 
     ? projects 
-    : projects.filter(project => project.category === activeFilter);
+    : projects.filter(project => project.category.toLowerCase() === activeFilter);
 
   const searchedProjects = filteredProjects.filter(project =>
     project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    project.tech.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()))
+    project.technologies.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   // Sort projects
@@ -338,9 +342,9 @@ const Projects = () => {
 
   const categories = [
     { id: 'all', name: 'All Projects', count: projects.length },
-    { id: 'web', name: 'Web Apps', count: projects.filter(p => p.category === 'web').length },
-    { id: 'mobile', name: 'Mobile Apps', count: projects.filter(p => p.category === 'mobile').length },
-    { id: 'desktop', name: 'Desktop Apps', count: projects.filter(p => p.category === 'desktop').length }
+    { id: 'web development', name: 'Web Development', count: projects.filter(p => p.category.toLowerCase() === 'web development').length },
+    { id: 'mobile development', name: 'Mobile Development', count: projects.filter(p => p.category.toLowerCase() === 'mobile development').length },
+    { id: 'desktop application', name: 'Desktop Application', count: projects.filter(p => p.category.toLowerCase() === 'desktop application').length }
   ];
 
   const getStatusColor = (status) => {
@@ -444,7 +448,7 @@ const Projects = () => {
                 </div>
                 <p className="text-gray-300 mb-4 text-sm">{project.description}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.slice(0, 3).map((tech, i) => (
+                  {project.technologies.slice(0, 3).map((tech, i) => (
                     <span 
                       key={i} 
                       className="px-3 py-1 bg-gray-700 text-blue-400 text-xs font-medium rounded-full"
@@ -452,9 +456,9 @@ const Projects = () => {
                       {tech}
                     </span>
                   ))}
-                  {project.tech.length > 3 && (
+                  {project.technologies.length > 3 && (
                     <span className="px-3 py-1 bg-gray-700 text-gray-400 text-xs font-medium rounded-full">
-                      +{project.tech.length - 3} more
+                      +{project.technologies.length - 3} more
                     </span>
                   )}
                 </div>
@@ -463,7 +467,7 @@ const Projects = () => {
                     View Details
                   </button>
                   <a 
-                    href={project.github} 
+                    href={project.githubUrl} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="px-4 py-2 bg-gray-700 text-white font-medium rounded-lg hover:bg-gray-600 transition duration-300 flex items-center text-sm"
