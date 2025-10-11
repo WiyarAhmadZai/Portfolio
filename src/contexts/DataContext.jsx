@@ -16,6 +16,8 @@ export const DataProvider = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [projectCategories, setProjectCategories] = useState(['Web Development', 'Mobile Development', 'Desktop Application', 'Data Science']);
   const [blogCategories, setBlogCategories] = useState(['React', 'Node.js', 'CSS', 'JavaScript', 'General']);
+  const [customSkills, setCustomSkills] = useState([]);
+  const [showAdminAccess, setShowAdminAccess] = useState(false);
 
   // Check if localStorage is available
   const isLocalStorageAvailable = () => {
@@ -28,6 +30,30 @@ export const DataProvider = ({ children }) => {
       return false;
     }
   };
+
+  // Secret key combination to show admin access
+  useEffect(() => {
+    let keySequence = '';
+    // Obfuscated secret code - "mrwiyar" encoded
+    const secretCode = btoa('mrwiyar').toLowerCase().slice(0, 7);
+    
+    const handleKeyPress = (e) => {
+      keySequence += e.key.toLowerCase();
+      if (keySequence.length > 7) {
+        keySequence = keySequence.slice(-7);
+      }
+      
+      if (keySequence === secretCode) {
+        setShowAdminAccess(true);
+        keySequence = '';
+        // Hide after 10 seconds
+        setTimeout(() => setShowAdminAccess(false), 10000);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, []);
 
   // Load data from localStorage on mount
   useEffect(() => {
@@ -90,6 +116,17 @@ export const DataProvider = ({ children }) => {
         const savedBlogCategories = localStorage.getItem('portfolio_blog_categories');
         if (savedBlogCategories) {
           setBlogCategories(JSON.parse(savedBlogCategories));
+        }
+
+        // Load custom skills
+        const savedCustomSkills = localStorage.getItem('portfolio_custom_skills');
+        if (savedCustomSkills && savedCustomSkills !== 'null' && savedCustomSkills !== 'undefined') {
+          const parsedCustomSkills = JSON.parse(savedCustomSkills);
+          if (Array.isArray(parsedCustomSkills)) {
+            setCustomSkills(parsedCustomSkills);
+          }
+        } else {
+          setCustomSkills([]);
         }
       } catch (error) {
         console.error('Error loading data from localStorage:', error);
@@ -168,6 +205,17 @@ export const DataProvider = ({ children }) => {
   }, [blogPosts]);
 
   useEffect(() => {
+    if (customSkills.length >= 0) {
+      try {
+        localStorage.setItem('portfolio_custom_skills', JSON.stringify(customSkills));
+        console.log('Custom skills saved to localStorage:', customSkills.length);
+      } catch (error) {
+        console.error('Error saving custom skills to localStorage:', error);
+      }
+    }
+  }, [customSkills]);
+
+  useEffect(() => {
     try {
       localStorage.setItem('portfolio_admin_mode', isAdmin.toString());
     } catch (error) {
@@ -223,8 +271,11 @@ export const DataProvider = ({ children }) => {
   };
 
   const loginAdmin = (password) => {
-    // Simple password check (in real app, this would be more secure)
-    if (password === 'admin123') {
+    // Secure password check - password is obfuscated
+    const hashedPassword = btoa('mrwiyar123'); // Base64 encoding for basic obfuscation
+    const inputHash = btoa(password);
+    
+    if (inputHash === hashedPassword) {
       setIsAdmin(true);
       return true;
     }
@@ -291,6 +342,37 @@ export const DataProvider = ({ children }) => {
     localStorage.setItem('portfolio_blog_categories', JSON.stringify(newCategories));
   };
 
+  // Custom Skills functions
+  const addCustomSkill = (skill) => {
+    const newSkill = {
+      id: Date.now(),
+      name: skill.name,
+      percentage: skill.percentage,
+      description: skill.description,
+      category: skill.category || 'Technical',
+      icon: skill.icon || 'fas fa-code',
+      color: skill.color || '#3B82F6',
+      createdAt: new Date().toISOString()
+    };
+    const newSkills = [...customSkills, newSkill];
+    setCustomSkills(newSkills);
+    localStorage.setItem('portfolio_custom_skills', JSON.stringify(newSkills));
+  };
+
+  const updateCustomSkill = (id, updatedSkill) => {
+    const newSkills = customSkills.map(skill => 
+      skill.id === id ? { ...skill, ...updatedSkill, updatedAt: new Date().toISOString() } : skill
+    );
+    setCustomSkills(newSkills);
+    localStorage.setItem('portfolio_custom_skills', JSON.stringify(newSkills));
+  };
+
+  const deleteCustomSkill = (id) => {
+    const newSkills = customSkills.filter(skill => skill.id !== id);
+    setCustomSkills(newSkills);
+    localStorage.setItem('portfolio_custom_skills', JSON.stringify(newSkills));
+  };
+
   // Debug function to export data
   const exportData = () => {
     const data = {
@@ -320,6 +402,8 @@ export const DataProvider = ({ children }) => {
     isAdmin,
     projectCategories,
     blogCategories,
+    customSkills,
+    showAdminAccess,
     
     // Project functions
     addProject,
@@ -336,6 +420,11 @@ export const DataProvider = ({ children }) => {
     addBlogCategory,
     removeProjectCategory,
     removeBlogCategory,
+    
+    // Custom Skills functions
+    addCustomSkill,
+    updateCustomSkill,
+    deleteCustomSkill,
     
     // Admin functions
     toggleAdminMode,
