@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useData } from '../contexts/DataContext';
 
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('skills');
+  const { customSkills } = useData();
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
-  // Skills data
-  const skills = [
+  // Default skills
+  const defaultSkills = [
     { name: "Full Stack Web Development", percentage: 95, icon: "fa-laptop-code", color: "from-blue-500 to-cyan-500" },
     { name: "HTML & CSS", percentage: 90, icon: "fa-code", color: "from-orange-500 to-red-500" },
     { name: "JavaScript & React.js", percentage: 90, icon: "fa-brands fa-js-square", color: "from-yellow-500 to-orange-500" },
@@ -21,6 +23,19 @@ const About = () => {
     { name: "Python & MongoDB", percentage: 75, icon: "fa-python", color: "from-green-600 to-green-400" },
     { name: "Soft Skills", percentage: 85, icon: "fa-users", color: "from-indigo-500 to-purple-500" }
   ];
+
+  // Convert custom skills to match the format
+  const formattedCustomSkills = customSkills.map(skill => ({
+    name: skill.name,
+    percentage: skill.percentage,
+    icon: skill.icon,
+    color: `from-[${skill.color}] to-[${skill.color}]`,
+    description: skill.description,
+    category: skill.category
+  }));
+
+  // Combine default skills with custom skills
+  const skills = [...defaultSkills, ...formattedCustomSkills];
 
   // Experience data
   const experiences = [
