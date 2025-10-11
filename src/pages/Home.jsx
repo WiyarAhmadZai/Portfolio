@@ -41,7 +41,8 @@ const Home = () => {
     icon: skill.icon,
     color: `from-[${skill.color}] to-[${skill.color}]`,
     description: skill.description,
-    category: skill.category
+    category: skill.category,
+    customColor: skill.color // Store original color for inline styles
   }));
 
   // Combine default skills with custom skills
@@ -337,13 +338,25 @@ const Home = () => {
             {skills.map((skill, index) => (
               <div key={index} className="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 transform transition duration-500 hover:scale-105">
                 <div className="flex items-center mb-4">
-                  <i className={`${skill.icon} text-2xl bg-gradient-to-r ${skill.color} bg-clip-text text-transparent mr-3`}></i>
+                  <i 
+                    className={`${skill.icon} text-2xl mr-3`}
+                    style={{ 
+                      color: skill.customColor || undefined,
+                      background: skill.customColor ? `linear-gradient(to right, ${skill.customColor}, ${skill.customColor})` : undefined,
+                      WebkitBackgroundClip: skill.customColor ? 'text' : undefined,
+                      WebkitTextFillColor: skill.customColor ? 'transparent' : undefined,
+                      backgroundClip: skill.customColor ? 'text' : undefined
+                    }}
+                  ></i>
                   <h3 className="text-xl font-bold text-white">{skill.name}</h3>
                 </div>
                 <div className="w-full bg-gray-700 rounded-full h-2.5">
                   <div 
-                    className={`bg-gradient-to-r ${skill.color} h-2.5 rounded-full`} 
-                    style={{ width: `${skill.percentage}%` }}
+                    className="h-2.5 rounded-full"
+                    style={{ 
+                      width: `${skill.percentage}%`,
+                      background: skill.customColor ? `linear-gradient(to right, ${skill.customColor}, ${skill.customColor})` : undefined
+                    }}
                   ></div>
                 </div>
                 <p className="text-gray-400 text-right mt-2">{skill.percentage}%</p>
