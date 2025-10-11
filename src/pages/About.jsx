@@ -10,12 +10,16 @@ const About = () => {
 
   // Skills data
   const skills = [
-    { name: "Frontend Development", percentage: 90, icon: "fa-brands fa-react", color: "from-blue-500 to-cyan-500" },
-    { name: "Backend Development", percentage: 85, icon: "fa-server", color: "from-purple-500 to-indigo-500" },
-    { name: "Database Design", percentage: 80, icon: "fa-database", color: "from-green-500 to-emerald-500" },
-    { name: "Mobile Development", percentage: 75, icon: "fa-mobile-alt", color: "from-yellow-500 to-amber-500" },
-    { name: "UI/UX Design", percentage: 70, icon: "fa-paint-brush", color: "from-pink-500 to-rose-500" },
-    { name: "Version Control", percentage: 85, icon: "fa-code-branch", color: "from-gray-500 to-slate-500" }
+    { name: "Full Stack Web Development", percentage: 95, icon: "fa-laptop-code", color: "from-blue-500 to-cyan-500" },
+    { name: "HTML & CSS", percentage: 90, icon: "fa-code", color: "from-orange-500 to-red-500" },
+    { name: "JavaScript & React.js", percentage: 90, icon: "fa-brands fa-js-square", color: "from-yellow-500 to-orange-500" },
+    { name: "Next.js & PHP", percentage: 85, icon: "fa-server", color: "from-purple-500 to-indigo-500" },
+    { name: "Laravel & Django", percentage: 80, icon: "fa-cogs", color: "from-red-500 to-pink-500" },
+    { name: "Database Design", percentage: 85, icon: "fa-database", color: "from-green-500 to-emerald-500" },
+    { name: "UI/UX Design", percentage: 80, icon: "fa-paint-brush", color: "from-pink-500 to-rose-500" },
+    { name: "Bootstrap & Tailwind CSS", percentage: 90, icon: "fa-palette", color: "from-cyan-500 to-blue-500" },
+    { name: "Python & MongoDB", percentage: 75, icon: "fa-python", color: "from-green-600 to-green-400" },
+    { name: "Soft Skills", percentage: 85, icon: "fa-users", color: "from-indigo-500 to-purple-500" }
   ];
 
   // Experience data
@@ -342,12 +346,16 @@ const About = () => {
                       <p className="text-gray-400 text-right mt-2">{skill.percentage}%</p>
                       <div className="mt-4">
                         <p className="text-gray-300 text-sm">
-                          {skill.name === "Frontend Development" && "React, Vue.js, Tailwind CSS, Bootstrap"}
-                          {skill.name === "Backend Development" && "Node.js, Express, Python, PHP"}
-                          {skill.name === "Database Design" && "MySQL, MongoDB, PostgreSQL, SQLite"}
-                          {skill.name === "Mobile Development" && "React Native, Flutter, Android"}
-                          {skill.name === "UI/UX Design" && "Figma, Adobe XD, Sketch"}
-                          {skill.name === "Version Control" && "Git, GitHub, GitLab"}
+                          {skill.name === "Full Stack Web Development" && "Complete web applications from frontend to backend"}
+                          {skill.name === "HTML & CSS" && "Semantic HTML5, CSS3, Responsive Design"}
+                          {skill.name === "JavaScript & React.js" && "ES6+, React Hooks, State Management"}
+                          {skill.name === "Next.js & PHP" && "Server-side rendering, API development"}
+                          {skill.name === "Laravel & Django" && "MVC frameworks, RESTful APIs"}
+                          {skill.name === "Database Design" && "MySQL, MongoDB, Database optimization"}
+                          {skill.name === "UI/UX Design" && "User research, Wireframing, Prototyping"}
+                          {skill.name === "Bootstrap & Tailwind CSS" && "CSS frameworks, Component libraries"}
+                          {skill.name === "Python & MongoDB" && "Data processing, NoSQL databases"}
+                          {skill.name === "Soft Skills" && "Communication, Teamwork, Problem-solving, Leadership"}
                         </p>
                       </div>
                     </div>
