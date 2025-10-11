@@ -12,253 +12,322 @@ const Resume = () => {
     setIsVisible(true);
   }, []);
 
-  // Generate PDF Resume using print functionality
+  // Generate PDF Resume using direct print functionality
   const generatePDF = async () => {
     setIsGeneratingPDF(true);
     
     try {
-      // Create a new window for printing
-      const printWindow = window.open('', '_blank', 'width=800,height=600');
-      
-      if (!printWindow) {
-        alert('Popup blocked. Please allow popups for this site and try again.');
-        return;
-      }
+      console.log('Starting PDF generation...');
       
       // Get the current date
       const currentDate = new Date().toLocaleDateString();
+      console.log('Current date:', currentDate);
+      
+      // Check if skills data exists
+      console.log('Skills data:', skills);
+      console.log('Experience data:', experience);
+      console.log('Education data:', education);
+      console.log('Projects data:', projects);
+      
+      if (!skills || !skills.technical || !skills.soft) {
+        throw new Error('Skills data is missing');
+      }
+      
+      if (!experience || !Array.isArray(experience)) {
+        throw new Error('Experience data is missing');
+      }
+      
+      if (!education || !Array.isArray(education)) {
+        throw new Error('Education data is missing');
+      }
+      
+      if (!projects || !Array.isArray(projects)) {
+        throw new Error('Projects data is missing');
+      }
+      
+      console.log('All data validation passed');
+      
+      // Get the base URL for images
+      const baseUrl = window.location.origin;
+      const imagePath = `${baseUrl}/Photos Simples/Wiyar Pic.jpg`;
+      
+      console.log('Image path:', imagePath);
+      
+      // Create a hidden div with the resume content
+      const resumeDiv = document.createElement('div');
+      resumeDiv.id = 'resume-print-content';
+      resumeDiv.style.position = 'absolute';
+      resumeDiv.style.left = '-9999px';
+      resumeDiv.style.top = '-9999px';
+      resumeDiv.style.width = '210mm'; // A4 width
+      resumeDiv.style.minHeight = '297mm'; // A4 height
+      resumeDiv.style.backgroundColor = 'white';
+      resumeDiv.style.padding = '0';
+      resumeDiv.style.fontFamily = 'Arial, sans-serif';
+      resumeDiv.style.lineHeight = '1.4';
+      resumeDiv.style.color = '#333';
+      resumeDiv.style.margin = '0';
       
       // Create the HTML content for the PDF
-      const pdfContent = `
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <title>Wiyar Ahmad Zai - Resume</title>
-          <meta charset="utf-8">
-          <style>
-            @media print {
-              @page {
-                margin: 0.5in;
-                size: A4;
-              }
-              body {
-                font-family: 'Arial', sans-serif;
-                line-height: 1.4;
-                color: #333;
-                margin: 0;
-                padding: 0;
-              }
-            }
-            
-            body {
-              font-family: 'Arial', sans-serif;
-              line-height: 1.4;
-              color: #333;
-              margin: 0;
-              padding: 20px;
-              background: white;
-            }
-            
-            .header {
-              background: linear-gradient(135deg, #3B82F6, #1E40AF);
-              color: white;
-              padding: 30px;
-              margin: -20px -20px 30px -20px;
-              display: flex;
-              align-items: center;
-              gap: 30px;
-            }
-            
-            .profile-img {
-              width: 120px;
-              height: 120px;
-              border-radius: 50%;
-              border: 4px solid white;
-              object-fit: cover;
-            }
-            
-            .header-content h1 {
-              font-size: 32px;
-              margin: 0 0 10px 0;
-              font-weight: bold;
-            }
-            
-            .header-content h2 {
-              font-size: 18px;
-              margin: 0 0 5px 0;
-              opacity: 0.9;
-            }
-            
-            .header-content p {
-              font-size: 14px;
-              margin: 0;
-              opacity: 0.8;
-            }
-            
-            .contact-info {
-              display: flex;
-              flex-wrap: wrap;
-              gap: 20px;
-              margin-top: 15px;
-            }
-            
-            .contact-item {
-              display: flex;
-              align-items: center;
-              gap: 5px;
-              font-size: 12px;
+      resumeDiv.innerHTML = `
+        <style>
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+          
+          @page {
+            margin: 0.5in;
+            size: A4;
+          }
+          
+          body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.4;
+            color: #333;
+            background: white;
+          }
+          
+          .resume-container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            padding: 0;
+          }
+          
+          .header {
+            background: linear-gradient(135deg, #3B82F6, #1E40AF);
+            color: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            page-break-inside: avoid;
+          }
+          
+          .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid white;
+            object-fit: cover;
+            flex-shrink: 0;
+          }
+          
+          .header-content {
+            flex: 1;
+          }
+          
+          .header-content h1 {
+            font-size: 28px;
+            margin: 0 0 8px 0;
+            font-weight: bold;
+          }
+          
+          .header-content h2 {
+            font-size: 16px;
+            margin: 0 0 5px 0;
+            opacity: 0.9;
+          }
+          
+          .header-content p {
+            font-size: 13px;
+            margin: 0 0 10px 0;
+            opacity: 0.8;
+          }
+          
+          .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+          }
+          
+          .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+          }
+          
+          .section {
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+          }
+          
+          .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #3B82F6;
+            border-bottom: 2px solid #3B82F6;
+            padding-bottom: 4px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+          }
+          
+          .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+          }
+          
+          .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+          }
+          
+          .skill-name {
+            font-weight: bold;
+            font-size: 12px;
+            flex: 1;
+          }
+          
+          .skill-level {
+            color: #10B981;
+            font-size: 11px;
+            margin-right: 8px;
+          }
+          
+          .progress-bar {
+            width: 60px;
+            height: 4px;
+            background: #E5E7EB;
+            border-radius: 2px;
+            overflow: hidden;
+          }
+          
+          .progress-fill {
+            height: 100%;
+            background: #10B981;
+            border-radius: 2px;
+          }
+          
+          .experience-item {
+            margin-bottom: 15px;
+            page-break-inside: avoid;
+          }
+          
+          .job-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1F2937;
+            margin: 0;
+          }
+          
+          .company {
+            font-size: 12px;
+            color: #10B981;
+            font-weight: 600;
+            margin: 2px 0;
+          }
+          
+          .period {
+            font-size: 11px;
+            color: #6B7280;
+            margin: 2px 0 6px 0;
+          }
+          
+          .description {
+            font-size: 11px;
+            line-height: 1.4;
+            color: #374151;
+          }
+          
+          .education-item {
+            margin-bottom: 12px;
+          }
+          
+          .degree {
+            font-size: 13px;
+            font-weight: bold;
+            color: #1F2937;
+            margin: 0;
+          }
+          
+          .institution {
+            font-size: 11px;
+            color: #10B981;
+            font-weight: 600;
+            margin: 2px 0;
+          }
+          
+          .gpa {
+            font-size: 10px;
+            color: #6B7280;
+            margin: 2px 0;
+          }
+          
+          .project-item {
+            margin-bottom: 12px;
+          }
+          
+          .project-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #1F2937;
+            margin: 0;
+          }
+          
+          .technologies {
+            font-size: 10px;
+            color: #10B981;
+            margin: 2px 0;
+          }
+          
+          .soft-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+          }
+          
+          .soft-skill {
+            background: #F3F4F6;
+            padding: 3px 6px;
+            border-radius: 8px;
+            font-size: 10px;
+            color: #374151;
+          }
+          
+          .summary-text {
+            font-size: 11px;
+            line-height: 1.4;
+            color: #374151;
+            text-align: justify;
+          }
+          
+          .footer {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #E5E7EB;
+            text-align: center;
+            font-size: 9px;
+            color: #9CA3AF;
+          }
+          
+          @media print {
+            .resume-container {
+              width: 100%;
+              max-width: none;
             }
             
             .section {
-              margin-bottom: 25px;
-            }
-            
-            .section-title {
-              font-size: 18px;
-              font-weight: bold;
-              color: #3B82F6;
-              border-bottom: 2px solid #3B82F6;
-              padding-bottom: 5px;
-              margin-bottom: 15px;
-            }
-            
-            .skills-grid {
-              display: grid;
-              grid-template-columns: 1fr 1fr;
-              gap: 20px;
-            }
-            
-            .skill-item {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              margin-bottom: 8px;
-            }
-            
-            .skill-name {
-              font-weight: bold;
-              font-size: 14px;
-            }
-            
-            .skill-level {
-              color: #10B981;
-              font-size: 12px;
-            }
-            
-            .progress-bar {
-              width: 100px;
-              height: 6px;
-              background: #E5E7EB;
-              border-radius: 3px;
-              overflow: hidden;
-              margin-left: 10px;
-            }
-            
-            .progress-fill {
-              height: 100%;
-              background: #10B981;
-              border-radius: 3px;
-            }
-            
-            .experience-item {
-              margin-bottom: 20px;
               page-break-inside: avoid;
             }
             
-            .job-title {
-              font-size: 16px;
-              font-weight: bold;
-              color: #1F2937;
-              margin: 0;
+            .header {
+              page-break-inside: avoid;
             }
-            
-            .company {
-              font-size: 14px;
-              color: #10B981;
-              font-weight: 600;
-              margin: 2px 0;
-            }
-            
-            .period {
-              font-size: 12px;
-              color: #6B7280;
-              margin: 2px 0 8px 0;
-            }
-            
-            .description {
-              font-size: 13px;
-              line-height: 1.5;
-              color: #374151;
-            }
-            
-            .education-item {
-              margin-bottom: 15px;
-            }
-            
-            .degree {
-              font-size: 15px;
-              font-weight: bold;
-              color: #1F2937;
-              margin: 0;
-            }
-            
-            .institution {
-              font-size: 13px;
-              color: #10B981;
-              font-weight: 600;
-              margin: 2px 0;
-            }
-            
-            .gpa {
-              font-size: 12px;
-              color: #6B7280;
-              margin: 2px 0;
-            }
-            
-            .project-item {
-              margin-bottom: 15px;
-            }
-            
-            .project-title {
-              font-size: 14px;
-              font-weight: bold;
-              color: #1F2937;
-              margin: 0;
-            }
-            
-            .technologies {
-              font-size: 12px;
-              color: #10B981;
-              margin: 2px 0;
-            }
-            
-            .soft-skills {
-              display: flex;
-              flex-wrap: wrap;
-              gap: 10px;
-            }
-            
-            .soft-skill {
-              background: #F3F4F6;
-              padding: 4px 8px;
-              border-radius: 12px;
-              font-size: 12px;
-              color: #374151;
-            }
-            
-            .footer {
-              margin-top: 30px;
-              padding-top: 15px;
-              border-top: 1px solid #E5E7EB;
-              text-align: center;
-              font-size: 10px;
-              color: #9CA3AF;
-            }
-          </style>
-        </head>
-        <body>
+          }
+        </style>
+        
+        <div class="resume-container">
           <div class="header">
-            <img src="/Photos Simples/Wiyar Pic.jpg" alt="Wiyar Ahmad Zai" class="profile-img" />
+            <img src="${imagePath}" alt="Wiyar Ahmad Zai" class="profile-img" onerror="this.style.display='none'" />
             <div class="header-content">
               <h1>Wiyar Ahmad Zai</h1>
               <h2>Full-Stack Web Developer</h2>
@@ -274,21 +343,23 @@ const Resume = () => {
           </div>
 
           <div class="section">
-            <div class="section-title">PROFESSIONAL SUMMARY</div>
-            <p>Dedicated Computer Science student at Kabul Polytechnic University with a strong foundation in both theoretical and practical aspects of computer science. Experienced in full-stack web development with expertise in modern technologies including React, Node.js, and MongoDB. Passionate about creating innovative solutions and building impactful applications. Demonstrated ability to deliver high-quality projects with a focus on user experience and performance optimization. Committed to continuous learning and professional growth in the field of software development.</p>
+            <div class="section-title">Professional Summary</div>
+            <div class="summary-text">
+              Dedicated Computer Science student at Kabul Polytechnic University with a strong foundation in both theoretical and practical aspects of computer science. Experienced in full-stack web development with expertise in modern technologies including React, Node.js, and MongoDB. Passionate about creating innovative solutions and building impactful applications. Demonstrated ability to deliver high-quality projects with a focus on user experience and performance optimization. Committed to continuous learning and professional growth in the field of software development.
+            </div>
           </div>
 
           <div class="section">
-            <div class="section-title">TECHNICAL SKILLS</div>
+            <div class="section-title">Technical Skills</div>
             <div class="skills-grid">
               <div>
                 ${skills.technical.slice(0, Math.ceil(skills.technical.length / 2)).map(skill => `
                   <div class="skill-item">
-                    <span class="skill-name">${skill.name}</span>
+                    <span class="skill-name">${skill.name || 'Skill'}</span>
                     <div style="display: flex; align-items: center;">
-                      <span class="skill-level">${skill.level}%</span>
+                      <span class="skill-level">${skill.level || 0}%</span>
                       <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${skill.level}%"></div>
+                        <div class="progress-fill" style="width: ${skill.level || 0}%"></div>
                       </div>
                     </div>
                   </div>
@@ -297,11 +368,11 @@ const Resume = () => {
               <div>
                 ${skills.technical.slice(Math.ceil(skills.technical.length / 2)).map(skill => `
                   <div class="skill-item">
-                    <span class="skill-name">${skill.name}</span>
+                    <span class="skill-name">${skill.name || 'Skill'}</span>
                     <div style="display: flex; align-items: center;">
-                      <span class="skill-level">${skill.level}%</span>
+                      <span class="skill-level">${skill.level || 0}%</span>
                       <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${skill.level}%"></div>
+                        <div class="progress-fill" style="width: ${skill.level || 0}%"></div>
                       </div>
                     </div>
                   </div>
@@ -311,43 +382,43 @@ const Resume = () => {
           </div>
 
           <div class="section">
-            <div class="section-title">SOFT SKILLS</div>
+            <div class="section-title">Soft Skills</div>
             <div class="soft-skills">
-              ${skills.soft.map(skill => `<span class="soft-skill">${skill}</span>`).join('')}
+              ${skills.soft.map(skill => `<span class="soft-skill">${skill || 'Skill'}</span>`).join('')}
             </div>
           </div>
 
           <div class="section">
-            <div class="section-title">PROFESSIONAL EXPERIENCE</div>
+            <div class="section-title">Professional Experience</div>
             ${experience.map(exp => `
               <div class="experience-item">
-                <h3 class="job-title">${exp.title}</h3>
-                <div class="company">${exp.company}</div>
-                <div class="period">${exp.period} | ${exp.location}</div>
-                <div class="description">${exp.description}</div>
+                <div class="job-title">${exp.title || 'Position'}</div>
+                <div class="company">${exp.company || 'Company'}</div>
+                <div class="period">${exp.period || 'Period'} | ${exp.location || 'Location'}</div>
+                <div class="description">${exp.description || 'No description available'}</div>
               </div>
             `).join('')}
           </div>
 
           <div class="section">
-            <div class="section-title">EDUCATION</div>
+            <div class="section-title">Education</div>
             ${education.map(edu => `
               <div class="education-item">
-                <h3 class="degree">${edu.degree}</h3>
-                <div class="institution">${edu.institution}</div>
-                <div class="gpa">${edu.period} | GPA: ${edu.gpa}</div>
-                ${edu.courses ? `<div style="font-size: 12px; color: #6B7280; margin-top: 5px;">Key Courses: ${edu.courses.slice(0, 5).join(', ')}</div>` : ''}
+                <div class="degree">${edu.degree || 'Degree'}</div>
+                <div class="institution">${edu.institution || 'Institution'}</div>
+                <div class="gpa">${edu.period || 'Period'} | GPA: ${edu.gpa || 'N/A'}</div>
+                ${edu.courses && Array.isArray(edu.courses) ? `<div style="font-size: 10px; color: #6B7280; margin-top: 3px;">Key Courses: ${edu.courses.slice(0, 5).join(', ')}</div>` : ''}
               </div>
             `).join('')}
           </div>
 
           <div class="section">
-            <div class="section-title">KEY PROJECTS</div>
-            ${projects.slice(0, 3).map(project => `
+            <div class="section-title">Key Projects</div>
+            ${projects.slice(0, 4).map(project => `
               <div class="project-item">
-                <h3 class="project-title">${project.title}</h3>
-                <div class="technologies">Technologies: ${project.technologies.join(', ')}</div>
-                <div class="description">${project.description}</div>
+                <div class="project-title">${project.title || 'Untitled Project'}</div>
+                <div class="technologies">Technologies: ${Array.isArray(project.technologies) ? project.technologies.join(', ') : (project.technologies || 'Not specified')}</div>
+                <div class="description">${project.description || 'No description available'}</div>
               </div>
             `).join('')}
           </div>
@@ -355,26 +426,37 @@ const Resume = () => {
           <div class="footer">
             <p>Generated by Wiyar Ahmad Zai Portfolio | ${currentDate}</p>
           </div>
-        </body>
-        </html>
+        </div>
       `;
 
-      // Write content to the new window
-      printWindow.document.write(pdfContent);
-      printWindow.document.close();
+      console.log('HTML content created, length:', resumeDiv.innerHTML.length);
 
-      // Wait for content to load, then trigger print
-      printWindow.onload = () => {
+      // Add the resume div to the document
+      document.body.appendChild(resumeDiv);
+      
+      // Wait for the image to load, then trigger print
+      setTimeout(() => {
+        // Trigger print dialog
+        window.print();
+        
+        // Remove the resume div after printing
         setTimeout(() => {
-          printWindow.print();
-          printWindow.close();
-          alert('PDF generated successfully! Please save as PDF in the print dialog.');
+          document.body.removeChild(resumeDiv);
         }, 1000);
-      };
+      }, 1000); // Wait 1 second for image to load
+      
+      // Show success message
+      alert('Resume PDF generation started! Print dialog will open. Choose "Save as PDF" to save your resume.');
+      console.log('PDF generation initiated');
       
     } catch (error) {
       console.error('Error generating PDF:', error);
-      alert('Error generating PDF. Please try again.');
+      console.error('Error details:', {
+        message: error.message,
+        stack: error.stack,
+        name: error.name
+      });
+      alert(`Error generating PDF: ${error.message}. Please check the console for details.`);
     } finally {
       setIsGeneratingPDF(false);
     }
@@ -919,11 +1001,11 @@ const Resume = () => {
             ) : (
               <>
                 <i className="fas fa-download mr-3"></i>
-                Download Full Resume (PDF)
+                Download Resume (PDF)
               </>
             )}
           </button>
-          <p className="text-gray-400 mt-4">Last updated: {new Date().toLocaleDateString()}</p>
+          <p className="text-gray-400 mt-4">Generate PDF resume with your profile image and all data</p>
         </div>
       </div>
     </div>
