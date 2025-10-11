@@ -361,7 +361,7 @@ const Projects = () => {
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Here are some of the projects I've worked on during my studies and personal development. 
-            I have approximately 22 projects hosted on my GitHub profile.
+            Each project represents a unique challenge and learning opportunity.
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full mt-4"></div>
         </div>
