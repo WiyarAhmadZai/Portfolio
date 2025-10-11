@@ -542,6 +542,17 @@ const Home = () => {
         </svg>
       </div>
       
+      {/* Floating Admin Access Button */}
+      <div className="fixed top-20 right-4 z-40">
+        <Link
+          to="/admin"
+          className="group bg-gray-800/80 backdrop-blur-sm border border-gray-600/50 rounded-full p-3 text-gray-400 hover:text-blue-400 hover:border-blue-400/50 transition-all duration-300 transform hover:scale-110 shadow-lg"
+          title="Admin Access"
+        >
+          <i className="fas fa-cog text-lg group-hover:animate-spin"></i>
+        </Link>
+      </div>
+      
     </main>
   );
 };
