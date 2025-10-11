@@ -1,13 +1,377 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useData } from '../contexts/DataContext';
 
 const Resume = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeSection, setActiveSection] = useState('summary');
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
+  const { customSkills } = useData();
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  // Generate PDF Resume using print functionality
+  const generatePDF = async () => {
+    setIsGeneratingPDF(true);
+    
+    try {
+      // Create a new window for printing
+      const printWindow = window.open('', '_blank');
+      
+      // Get the current date
+      const currentDate = new Date().toLocaleDateString();
+      
+      // Create the HTML content for the PDF
+      const pdfContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Wiyar Ahmad Zai - Resume</title>
+          <style>
+            @media print {
+              @page {
+                margin: 0.5in;
+                size: A4;
+              }
+              body {
+                font-family: 'Arial', sans-serif;
+                line-height: 1.4;
+                color: #333;
+                margin: 0;
+                padding: 0;
+              }
+            }
+            
+            body {
+              font-family: 'Arial', sans-serif;
+              line-height: 1.4;
+              color: #333;
+              margin: 0;
+              padding: 20px;
+              background: white;
+            }
+            
+            .header {
+              background: linear-gradient(135deg, #3B82F6, #1E40AF);
+              color: white;
+              padding: 30px;
+              margin: -20px -20px 30px -20px;
+              display: flex;
+              align-items: center;
+              gap: 30px;
+            }
+            
+            .profile-img {
+              width: 120px;
+              height: 120px;
+              border-radius: 50%;
+              border: 4px solid white;
+              object-fit: cover;
+            }
+            
+            .header-content h1 {
+              font-size: 32px;
+              margin: 0 0 10px 0;
+              font-weight: bold;
+            }
+            
+            .header-content h2 {
+              font-size: 18px;
+              margin: 0 0 5px 0;
+              opacity: 0.9;
+            }
+            
+            .header-content p {
+              font-size: 14px;
+              margin: 0;
+              opacity: 0.8;
+            }
+            
+            .contact-info {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 20px;
+              margin-top: 15px;
+            }
+            
+            .contact-item {
+              display: flex;
+              align-items: center;
+              gap: 5px;
+              font-size: 12px;
+            }
+            
+            .section {
+              margin-bottom: 25px;
+            }
+            
+            .section-title {
+              font-size: 18px;
+              font-weight: bold;
+              color: #3B82F6;
+              border-bottom: 2px solid #3B82F6;
+              padding-bottom: 5px;
+              margin-bottom: 15px;
+            }
+            
+            .skills-grid {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 20px;
+            }
+            
+            .skill-item {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 8px;
+            }
+            
+            .skill-name {
+              font-weight: bold;
+              font-size: 14px;
+            }
+            
+            .skill-level {
+              color: #10B981;
+              font-size: 12px;
+            }
+            
+            .progress-bar {
+              width: 100px;
+              height: 6px;
+              background: #E5E7EB;
+              border-radius: 3px;
+              overflow: hidden;
+              margin-left: 10px;
+            }
+            
+            .progress-fill {
+              height: 100%;
+              background: #10B981;
+              border-radius: 3px;
+            }
+            
+            .experience-item {
+              margin-bottom: 20px;
+              page-break-inside: avoid;
+            }
+            
+            .job-title {
+              font-size: 16px;
+              font-weight: bold;
+              color: #1F2937;
+              margin: 0;
+            }
+            
+            .company {
+              font-size: 14px;
+              color: #10B981;
+              font-weight: 600;
+              margin: 2px 0;
+            }
+            
+            .period {
+              font-size: 12px;
+              color: #6B7280;
+              margin: 2px 0 8px 0;
+            }
+            
+            .description {
+              font-size: 13px;
+              line-height: 1.5;
+              color: #374151;
+            }
+            
+            .education-item {
+              margin-bottom: 15px;
+            }
+            
+            .degree {
+              font-size: 15px;
+              font-weight: bold;
+              color: #1F2937;
+              margin: 0;
+            }
+            
+            .institution {
+              font-size: 13px;
+              color: #10B981;
+              font-weight: 600;
+              margin: 2px 0;
+            }
+            
+            .gpa {
+              font-size: 12px;
+              color: #6B7280;
+              margin: 2px 0;
+            }
+            
+            .project-item {
+              margin-bottom: 15px;
+            }
+            
+            .project-title {
+              font-size: 14px;
+              font-weight: bold;
+              color: #1F2937;
+              margin: 0;
+            }
+            
+            .technologies {
+              font-size: 12px;
+              color: #10B981;
+              margin: 2px 0;
+            }
+            
+            .soft-skills {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 10px;
+            }
+            
+            .soft-skill {
+              background: #F3F4F6;
+              padding: 4px 8px;
+              border-radius: 12px;
+              font-size: 12px;
+              color: #374151;
+            }
+            
+            .footer {
+              margin-top: 30px;
+              padding-top: 15px;
+              border-top: 1px solid #E5E7EB;
+              text-align: center;
+              font-size: 10px;
+              color: #9CA3AF;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <img src="/Photos Simples/Wiyar Pic.jpg" alt="Wiyar Ahmad Zai" class="profile-img" />
+            <div class="header-content">
+              <h1>Wiyar Ahmad Zai</h1>
+              <h2>Full-Stack Web Developer</h2>
+              <p>Computer Science Student | Kabul Polytechnic University</p>
+              <div class="contact-info">
+                <div class="contact-item">📧 wiyar.ahmadzai@email.com</div>
+                <div class="contact-item">📱 +93 70 123 4567</div>
+                <div class="contact-item">📍 Kabul, Afghanistan</div>
+                <div class="contact-item">🔗 linkedin.com/in/wiyar-ahmadzai</div>
+                <div class="contact-item">💻 github.com/WiyarAhmadZai</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">PROFESSIONAL SUMMARY</div>
+            <p>Dedicated Computer Science student at Kabul Polytechnic University with a strong foundation in both theoretical and practical aspects of computer science. Experienced in full-stack web development with expertise in modern technologies including React, Node.js, and MongoDB. Passionate about creating innovative solutions and building impactful applications. Demonstrated ability to deliver high-quality projects with a focus on user experience and performance optimization. Committed to continuous learning and professional growth in the field of software development.</p>
+          </div>
+
+          <div class="section">
+            <div class="section-title">TECHNICAL SKILLS</div>
+            <div class="skills-grid">
+              <div>
+                ${skills.technical.slice(0, Math.ceil(skills.technical.length / 2)).map(skill => `
+                  <div class="skill-item">
+                    <span class="skill-name">${skill.name}</span>
+                    <div style="display: flex; align-items: center;">
+                      <span class="skill-level">${skill.level}%</span>
+                      <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${skill.level}%"></div>
+                      </div>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+              <div>
+                ${skills.technical.slice(Math.ceil(skills.technical.length / 2)).map(skill => `
+                  <div class="skill-item">
+                    <span class="skill-name">${skill.name}</span>
+                    <div style="display: flex; align-items: center;">
+                      <span class="skill-level">${skill.level}%</span>
+                      <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${skill.level}%"></div>
+                      </div>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">SOFT SKILLS</div>
+            <div class="soft-skills">
+              ${skills.soft.map(skill => `<span class="soft-skill">${skill}</span>`).join('')}
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">PROFESSIONAL EXPERIENCE</div>
+            ${experience.map(exp => `
+              <div class="experience-item">
+                <h3 class="job-title">${exp.title}</h3>
+                <div class="company">${exp.company}</div>
+                <div class="period">${exp.period} | ${exp.location}</div>
+                <div class="description">${exp.description}</div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="section">
+            <div class="section-title">EDUCATION</div>
+            ${education.map(edu => `
+              <div class="education-item">
+                <h3 class="degree">${edu.degree}</h3>
+                <div class="institution">${edu.institution}</div>
+                <div class="gpa">${edu.period} | GPA: ${edu.gpa}</div>
+                ${edu.courses ? `<div style="font-size: 12px; color: #6B7280; margin-top: 5px;">Key Courses: ${edu.courses.slice(0, 5).join(', ')}</div>` : ''}
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="section">
+            <div class="section-title">KEY PROJECTS</div>
+            ${projects.slice(0, 3).map(project => `
+              <div class="project-item">
+                <h3 class="project-title">${project.title}</h3>
+                <div class="technologies">Technologies: ${project.technologies.join(', ')}</div>
+                <div class="description">${project.description}</div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="footer">
+            <p>Generated by Wiyar Ahmad Zai Portfolio | ${currentDate}</p>
+          </div>
+        </body>
+        </html>
+      `;
+
+      // Write content to the new window
+      printWindow.document.write(pdfContent);
+      printWindow.document.close();
+
+      // Wait for content to load, then trigger print
+      printWindow.onload = () => {
+        setTimeout(() => {
+          printWindow.print();
+          printWindow.close();
+        }, 500);
+      };
+      
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Error generating PDF. Please try again.');
+    } finally {
+      setIsGeneratingPDF(false);
+    }
+  };
 
   // Professional summary
   const professionalSummary = `
@@ -18,26 +382,44 @@ const Resume = () => {
     Committed to continuous learning and professional growth in the field of software development.
   `;
 
-  // Skills data
-  const skills = {
+  // Skills data - combine default and custom skills
+  const defaultSkills = {
     technical: [
-      { name: "JavaScript", level: 90 },
-      { name: "React", level: 85 },
-      { name: "Node.js", level: 80 },
-      { name: "Python", level: 75 },
-      { name: "HTML/CSS", level: 95 },
-      { name: "MongoDB", level: 80 },
-      { name: "SQL", level: 75 },
-      { name: "Git", level: 85 }
+      { name: "Full Stack Web Development", level: 95 },
+      { name: "HTML & CSS", level: 90 },
+      { name: "JavaScript & React.js", level: 90 },
+      { name: "Next.js & PHP", level: 85 },
+      { name: "Laravel & Django", level: 80 },
+      { name: "Database Design", level: 85 },
+      { name: "UI/UX Design", level: 80 },
+      { name: "Bootstrap & Tailwind CSS", level: 90 },
+      { name: "Python & MongoDB", level: 75 },
+      { name: "Soft Skills", level: 85 }
     ],
     soft: [
       "Problem Solving",
-      "Team Collaboration",
+      "Team Collaboration", 
       "Communication",
       "Time Management",
       "Adaptability",
-      "Critical Thinking"
+      "Critical Thinking",
+      "Leadership",
+      "Project Management"
     ]
+  };
+
+  // Add custom skills to technical skills
+  const customTechnicalSkills = customSkills
+    .filter(skill => skill.category === 'Technical' || skill.category === 'Tools' || skill.category === 'Frameworks' || skill.category === 'Languages')
+    .map(skill => ({ name: skill.name, level: skill.percentage }));
+
+  const customSoftSkills = customSkills
+    .filter(skill => skill.category === 'Soft Skills')
+    .map(skill => skill.name);
+
+  const skills = {
+    technical: [...defaultSkills.technical, ...customTechnicalSkills],
+    soft: [...defaultSkills.soft, ...customSoftSkills]
   };
 
   // Experience data
@@ -201,10 +583,44 @@ const Resume = () => {
           <h1 className="text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600 mb-4">
             Professional Resume
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
             Full-Stack Developer | Computer Science Student
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full mt-4"></div>
+          
+          {/* Download PDF Button */}
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
+            <button
+              onClick={generatePDF}
+              disabled={isGeneratingPDF}
+              className={`group relative px-8 py-4 text-base font-semibold rounded-xl text-white transition-all duration-300 transform hover:scale-105 shadow-2xl ${
+                isGeneratingPDF 
+                  ? 'bg-gray-600 cursor-not-allowed' 
+                  : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:shadow-blue-500/25'
+              }`}
+            >
+              <span className="relative z-10 flex items-center justify-center">
+                {isGeneratingPDF ? (
+                  <>
+                    <i className="fas fa-spinner fa-spin mr-2"></i>
+                    Generating PDF...
+                  </>
+                ) : (
+                  <>
+                    <i className="fas fa-download mr-2"></i>
+                    Download Full Resume PDF
+                  </>
+                )}
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </button>
+            
+            <div className="text-sm text-gray-400 flex items-center">
+              <i className="fas fa-info-circle mr-2"></i>
+              PDF includes all skills, experience, and projects
+            </div>
+          </div>
+          
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
         </div>
 
         {/* Resume Header */}
