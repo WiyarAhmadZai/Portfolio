@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useData } from '../contexts/DataContext';
 
 const Blog = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const { blogPosts } = useData();
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
   // Blog posts data
+  // Blog posts are now loaded from DataContext
+  /*
   const blogPosts = [
     {
       id: 1,
@@ -160,15 +164,17 @@ const Blog = () => {
       image: "/Photos Simples/1716636073552.jpg"
     }
   ];
+  */
 
-  // Categories for filtering
+  // Categories for filtering - dynamic based on actual blog posts
   const categories = [
-    { id: 'all', name: 'All Posts' },
-    { id: 'React', name: 'React' },
-    { id: 'Node.js', name: 'Node.js' },
-    { id: 'CSS', name: 'CSS' },
-    { id: 'Database', name: 'Database' },
-    { id: 'Web Development', name: 'Web Development' }
+    { id: 'all', name: 'All Posts', count: blogPosts.length },
+    ...Array.from(new Set(blogPosts.map(post => post.category)))
+      .map(category => ({
+        id: category,
+        name: category,
+        count: blogPosts.filter(post => post.category === category).length
+      }))
   ];
 
   // Filter posts by category and search term
@@ -219,7 +225,7 @@ const Blog = () => {
                     : 'text-gray-300 hover:text-white hover:bg-gray-700'
                 }`}
               >
-                {category.name}
+                {category.name} {category.count !== undefined && `(${category.count})`}
               </button>
             ))}
           </div>
@@ -273,9 +279,26 @@ const Blog = () => {
         {/* No Posts Found */}
         {filteredPosts.length === 0 && (
           <div className={`text-center py-12 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <i className="fas fa-search text-5xl text-gray-600 mb-4"></i>
-            <h3 className="text-2xl font-bold text-white mb-2">No Articles Found</h3>
-            <p className="text-gray-400">Try adjusting your search or filter criteria</p>
+            {blogPosts.length === 0 ? (
+              <>
+                <i className="fas fa-blog text-5xl text-gray-600 mb-4"></i>
+                <h3 className="text-2xl font-bold text-white mb-2">No Blog Posts Yet</h3>
+                <p className="text-gray-400 mb-4">Blog posts will appear here once they are added through the admin dashboard.</p>
+                <Link
+                  to="/admin"
+                  className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
+                >
+                  <i className="fas fa-plus mr-2"></i>
+                  Add First Post
+                </Link>
+              </>
+            ) : (
+              <>
+                <i className="fas fa-search text-5xl text-gray-600 mb-4"></i>
+                <h3 className="text-2xl font-bold text-white mb-2">No Articles Found</h3>
+                <p className="text-gray-400">Try adjusting your search or filter criteria</p>
+              </>
+            )}
           </div>
         )}
 
