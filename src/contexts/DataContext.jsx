@@ -14,6 +14,8 @@ export const DataProvider = ({ children }) => {
   const [projects, setProjects] = useState([]);
   const [blogPosts, setBlogPosts] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [projectCategories, setProjectCategories] = useState(['Web Development', 'Mobile Development', 'Desktop Application', 'Data Science']);
+  const [blogCategories, setBlogCategories] = useState(['React', 'Node.js', 'CSS', 'JavaScript', 'General']);
 
   // Check if localStorage is available
   const isLocalStorageAvailable = () => {
@@ -78,6 +80,17 @@ export const DataProvider = ({ children }) => {
         const adminStatus = localStorage.getItem('portfolio_admin_mode');
         setIsAdmin(adminStatus === 'true');
         console.log('Admin mode:', adminStatus === 'true');
+
+        // Load categories
+        const savedProjectCategories = localStorage.getItem('portfolio_project_categories');
+        if (savedProjectCategories) {
+          setProjectCategories(JSON.parse(savedProjectCategories));
+        }
+
+        const savedBlogCategories = localStorage.getItem('portfolio_blog_categories');
+        if (savedBlogCategories) {
+          setBlogCategories(JSON.parse(savedBlogCategories));
+        }
       } catch (error) {
         console.error('Error loading data from localStorage:', error);
         // Initialize with defaults if there's an error
@@ -122,32 +135,8 @@ export const DataProvider = ({ children }) => {
     };
 
     const initializeDefaultBlogPosts = () => {
-      const defaultBlogPosts = [
-        {
-          id: 1,
-          title: "Understanding React Hooks",
-          excerpt: "A deep dive into React Hooks and how they can simplify your functional components.",
-          content: "React Hooks revolutionized the way we write functional components...",
-          date: "2024-05-15",
-          readTime: "5 min read",
-          category: "React",
-          tags: ["React", "JavaScript", "Hooks"],
-          featured: true,
-          published: true
-        },
-        {
-          id: 2,
-          title: "Building Scalable APIs with Node.js",
-          excerpt: "Best practices for creating robust and scalable REST APIs using Node.js and Express.",
-          content: "Building scalable APIs is crucial for modern web applications...",
-          date: "2024-04-22",
-          readTime: "8 min read",
-          category: "Node.js",
-          tags: ["Node.js", "API", "Backend"],
-          featured: true,
-          published: true
-        }
-      ];
+      // Start with empty blog posts - only show posts added through admin
+      const defaultBlogPosts = [];
       setBlogPosts(defaultBlogPosts);
       localStorage.setItem('portfolio_blog_posts', JSON.stringify(defaultBlogPosts));
     };
@@ -253,11 +242,53 @@ export const DataProvider = ({ children }) => {
       localStorage.removeItem('portfolio_blog_posts');
       localStorage.removeItem('portfolio_images');
       localStorage.removeItem('portfolio_admin_mode');
+      localStorage.removeItem('portfolio_project_categories');
+      localStorage.removeItem('portfolio_blog_categories');
       setProjects([]);
       setBlogPosts([]);
       setIsAdmin(false);
+      setProjectCategories(['Web Development', 'Mobile Development', 'Desktop Application', 'Data Science']);
+      setBlogCategories(['React', 'Node.js', 'CSS', 'JavaScript', 'General']);
       console.log('All data cleared');
     }
+  };
+
+  // Function to clear only blog posts
+  const clearBlogPosts = () => {
+    if (window.confirm('Are you sure you want to clear all blog posts? This cannot be undone.')) {
+      setBlogPosts([]);
+      localStorage.setItem('portfolio_blog_posts', JSON.stringify([]));
+      console.log('Blog posts cleared');
+    }
+  };
+
+  // Category management functions
+  const addProjectCategory = (category) => {
+    if (!projectCategories.includes(category)) {
+      const newCategories = [...projectCategories, category];
+      setProjectCategories(newCategories);
+      localStorage.setItem('portfolio_project_categories', JSON.stringify(newCategories));
+    }
+  };
+
+  const addBlogCategory = (category) => {
+    if (!blogCategories.includes(category)) {
+      const newCategories = [...blogCategories, category];
+      setBlogCategories(newCategories);
+      localStorage.setItem('portfolio_blog_categories', JSON.stringify(newCategories));
+    }
+  };
+
+  const removeProjectCategory = (category) => {
+    const newCategories = projectCategories.filter(cat => cat !== category);
+    setProjectCategories(newCategories);
+    localStorage.setItem('portfolio_project_categories', JSON.stringify(newCategories));
+  };
+
+  const removeBlogCategory = (category) => {
+    const newCategories = blogCategories.filter(cat => cat !== category);
+    setBlogCategories(newCategories);
+    localStorage.setItem('portfolio_blog_categories', JSON.stringify(newCategories));
   };
 
   // Debug function to export data
@@ -265,6 +296,8 @@ export const DataProvider = ({ children }) => {
     const data = {
       projects,
       blogPosts,
+      projectCategories,
+      blogCategories,
       images: getAllImages(),
       adminMode: isAdmin,
       exportDate: new Date().toISOString()
@@ -285,6 +318,8 @@ export const DataProvider = ({ children }) => {
     projects,
     blogPosts,
     isAdmin,
+    projectCategories,
+    blogCategories,
     
     // Project functions
     addProject,
@@ -296,6 +331,12 @@ export const DataProvider = ({ children }) => {
     updateBlogPost,
     deleteBlogPost,
     
+    // Category functions
+    addProjectCategory,
+    addBlogCategory,
+    removeProjectCategory,
+    removeBlogCategory,
+    
     // Admin functions
     toggleAdminMode,
     loginAdmin,
@@ -303,6 +344,7 @@ export const DataProvider = ({ children }) => {
     
     // Debug functions
     clearAllData,
+    clearBlogPosts,
     exportData
   };
 
