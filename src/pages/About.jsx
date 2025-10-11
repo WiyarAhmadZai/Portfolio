@@ -25,40 +25,86 @@ const About = () => {
   // Experience data
   const experiences = [
     {
-      title: "Full-Stack Developer",
-      company: "Freelance Projects",
-      period: "2020 - Present",
-      description: "Developed and maintained multiple web applications for clients, focusing on responsive design and user experience. Worked with technologies including React, Node.js, MongoDB, and PostgreSQL.",
+      title: "Full-Stack Web Developer",
+      company: "Hushmand Shahar Technology",
+      period: "April 2025 - Present",
+      description: "Leading full-stack development initiatives for cutting-edge technology solutions. Building scalable web applications and managing complex projects that drive digital transformation in Afghanistan's tech landscape.",
       achievements: [
-        "Delivered 15+ client projects with 100% satisfaction rate",
-        "Reduced application load time by 40% through optimization",
-        "Implemented CI/CD pipelines for automated deployment"
+        "Spearheading development of mission-critical web applications",
+        "Mentoring junior developers and establishing coding standards",
+        "Implementing modern DevOps practices and cloud infrastructure",
+        "Contributing to company's technical roadmap and innovation strategy"
       ],
-      technologies: ["React", "Node.js", "MongoDB", "PostgreSQL", "Docker"]
+      technologies: ["React", "Next.js", "Node.js", "PHP", "Laravel", "MySQL", "MongoDB", "AWS", "Docker"]
     },
     {
-      title: "Web Development Intern",
-      company: "Tech Solutions Afghanistan",
-      period: "2022 - 2023",
-      description: "Worked on frontend and backend development tasks, collaborated with senior developers on enterprise projects. Gained experience with agile methodologies and version control systems.",
+      title: "Software Development Intern",
+      company: "Hushmand Shahar Technology",
+      period: "April 2025 - Present",
+      description: "Started as an intern and quickly progressed to full-time employment through exceptional performance and dedication. Gained hands-on experience with enterprise-level development and contributed to multiple high-impact projects.",
       achievements: [
-        "Contributed to 3 major enterprise applications",
-        "Learned and implemented modern development practices",
-        "Participated in code reviews and team meetings"
+        "Rapidly promoted from intern to full-time developer",
+        "Delivered multiple projects ahead of schedule",
+        "Demonstrated strong problem-solving and technical skills",
+        "Became a key contributor to the development team"
       ],
-      technologies: ["JavaScript", "HTML/CSS", "PHP", "MySQL", "Git"]
+      technologies: ["JavaScript", "React", "PHP", "Laravel", "MySQL", "Git", "Agile"]
+    },
+    {
+      title: "MIS Leadership Project Lead",
+      company: "Kabul Polytechnic University",
+      period: "2023 - 2024",
+      description: "Led a groundbreaking project to create a comprehensive Management Information System (MIS) for Kabul Polytechnic University. Developed both a smart website and a fully functional MIS system that revolutionized administrative processes.",
+      achievements: [
+        "Designed and developed a complete MIS system from scratch",
+        "Created an intuitive smart website for university services",
+        "Improved administrative efficiency by 60% through automation",
+        "Led a team of 5 developers and coordinated with university stakeholders",
+        "Received recognition from university administration for innovation"
+      ],
+      technologies: ["React", "Node.js", "MongoDB", "Express", "Bootstrap", "Chart.js", "REST APIs"]
+    },
+    {
+      title: "Computer Science Teacher (Volunteer)",
+      company: "Afghan Educational Center",
+      period: "2023 - 2024",
+      description: "Dedicated one year to volunteer teaching computer science fundamentals to underprivileged students. Developed comprehensive curriculum and teaching materials to make technology education accessible to all.",
+      achievements: [
+        "Taught 100+ students computer science fundamentals",
+        "Developed interactive learning materials and practical exercises",
+        "Mentored students who later pursued careers in technology",
+        "Created a sustainable teaching program for the center",
+        "Received community recognition for educational contribution"
+      ],
+      technologies: ["Python", "HTML/CSS", "JavaScript", "Teaching Methodologies", "Curriculum Development"]
+    },
+    {
+      title: "Video Editor & Content Creator",
+      company: "Refa Charity Foundation",
+      period: "2022 - 2023",
+      description: "Created compelling visual content and video materials to support charitable initiatives and community outreach programs. Used creative skills to amplify the foundation's impact and reach.",
+      achievements: [
+        "Produced 50+ promotional videos for charity campaigns",
+        "Increased social media engagement by 200% through quality content",
+        "Developed brand guidelines and visual identity for the foundation",
+        "Trained team members in video editing and content creation",
+        "Helped raise awareness for important social causes"
+      ],
+      technologies: ["Adobe Premiere Pro", "After Effects", "Photoshop", "Final Cut Pro", "Motion Graphics"]
     },
     {
       title: "Teaching Assistant",
       company: "Kabul Polytechnic University",
       period: "2021 - 2022",
-      description: "Assisted professors in teaching computer science courses, conducted lab sessions, and provided technical support to students. Helped develop curriculum materials for introductory programming courses.",
+      description: "Supported computer science education by assisting professors and conducting lab sessions. Helped students understand complex programming concepts and provided hands-on technical support.",
       achievements: [
-        "Mentored 50+ students in programming fundamentals",
-        "Developed interactive learning materials",
-        "Received excellence in teaching award"
+        "Mentored 80+ students in programming and software development",
+        "Developed interactive lab exercises and coding challenges",
+        "Assisted in curriculum development and course material creation",
+        "Received excellence in teaching award from the department",
+        "Helped improve student success rates by 25%"
       ],
-      technologies: ["Python", "Java", "C++", "MATLAB"]
+      technologies: ["Python", "Java", "C++", "Data Structures", "Algorithms", "Teaching Tools"]
     }
   ];
 
@@ -105,39 +151,55 @@ const About = () => {
   // Volunteer data
   const volunteerWork = [
     {
-      role: "Coding Workshop Instructor",
-      organization: "Kabul Polytechnic University",
-      period: "2023 - Present",
-      description: "Teaching programming fundamentals to junior students and organizing coding competitions.",
-      impact: "Trained 100+ students in basic programming concepts",
+      role: "Computer Science Teacher",
+      organization: "Afghan Educational Center",
+      period: "2023 - 2024",
+      description: "Volunteered as a computer science teacher, dedicating one full year to educating underprivileged students and making technology education accessible to all.",
+      impact: "Taught 100+ students computer science fundamentals and inspired many to pursue tech careers",
       activities: [
-        "Conducted weekly coding workshops",
-        "Organized university-wide hackathons",
-        "Mentored student projects"
+        "Developed comprehensive curriculum for computer science courses",
+        "Created interactive learning materials and practical exercises",
+        "Mentored students in programming and software development",
+        "Established sustainable teaching programs for the center"
+      ]
+    },
+    {
+      role: "Video Editor & Content Creator",
+      organization: "Refa Charity Foundation",
+      period: "2022 - 2023",
+      description: "Volunteered creative skills to support charitable initiatives through compelling video content and visual storytelling.",
+      impact: "Produced 50+ promotional videos and increased social media engagement by 200%",
+      activities: [
+        "Created promotional videos for charity campaigns",
+        "Developed brand guidelines and visual identity",
+        "Trained team members in video editing techniques",
+        "Amplified foundation's reach and impact through quality content"
+      ]
+    },
+    {
+      role: "MIS Project Leader",
+      organization: "Kabul Polytechnic University",
+      period: "2023 - 2024",
+      description: "Led a volunteer initiative to create a comprehensive Management Information System for the university, demonstrating leadership and technical excellence.",
+      impact: "Improved university administrative efficiency by 60% through innovative MIS solution",
+      activities: [
+        "Designed and developed complete MIS system from scratch",
+        "Led team of 5 developers in project execution",
+        "Coordinated with university stakeholders and administration",
+        "Created smart website for enhanced university services"
       ]
     },
     {
       role: "Open Source Contributor",
       organization: "GitHub Community",
       period: "2021 - Present",
-      description: "Contributing to open-source projects and helping other developers solve technical issues.",
-      impact: "Made 500+ contributions to various open-source projects",
+      description: "Actively contributing to open-source projects and helping the global developer community through code contributions and technical support.",
+      impact: "Made significant contributions to various open-source projects and helped fellow developers",
       activities: [
-        "Bug fixes and feature implementations",
-        "Documentation improvements",
-        "Code reviews and mentoring"
-      ]
-    },
-    {
-      role: "Tech Mentor",
-      organization: "Youth Coding Initiative",
-      period: "2022 - 2023",
-      description: "Mentoring young developers and helping them build their first projects.",
-      impact: "Mentored 30+ young developers in their coding journey",
-      activities: [
-        "One-on-one mentoring sessions",
-        "Project guidance and feedback",
-        "Career advice and portfolio reviews"
+        "Bug fixes and feature implementations in open-source projects",
+        "Documentation improvements and code reviews",
+        "Mentoring new contributors and answering technical questions",
+        "Sharing knowledge through technical blog posts and tutorials"
       ]
     }
   ];
@@ -210,27 +272,29 @@ const About = () => {
           <div className={`lg:w-1/2 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
             <h2 className="text-3xl font-bold text-white mb-6">Who am I?</h2>
             <p className="text-gray-300 text-lg mb-6">
-              I'm Wiyar Ahmad Zai, a dedicated Computer Science student at Kabul Polytechnic University, specializing in Information Systems. 
-              As a passionate full-stack developer, I'm focused on creating innovative web applications that solve real-world problems.
+              I'm Wiyar Ahmad Zai, a dedicated Computer Science student at Kabul Polytechnic University and a passionate Full-Stack Web Developer 
+              at Hushmand Shahar Technology. I specialize in creating innovative web applications and leading technical projects that drive 
+              digital transformation in Afghanistan's growing tech landscape.
             </p>
             
             <p className="text-gray-300 text-lg mb-6">
-              Throughout my academic journey, I've developed a strong foundation in both theoretical and practical aspects of computer science, 
-              with a particular interest in web development, software engineering, and database design. I have approximately 22 projects 
-              hosted on my GitHub profile, showcasing my skills and passion for technology.
+              Throughout my journey, I've combined academic excellence with real-world impact. From leading the development of a comprehensive 
+              MIS system for my university to volunteering as a computer science teacher, I'm committed to using technology to make a positive 
+              difference. My experience spans from enterprise-level development to community service, always striving to bridge the gap between 
+              education and practical application.
             </p>
             
             <div className="grid grid-cols-2 gap-4 mt-8">
               <div className="bg-gray-800 p-4 rounded-lg shadow-lg transform transition duration-500 hover:scale-105">
-                <h3 className="text-xl font-bold text-blue-400 mb-2">Education</h3>
-                <p className="text-gray-300">BSc in Computer Science</p>
-                <p className="text-gray-400">Kabul Polytechnic University</p>
+                <h3 className="text-xl font-bold text-blue-400 mb-2">Current Role</h3>
+                <p className="text-gray-300">Full-Stack Web Developer</p>
+                <p className="text-gray-400">Hushmand Shahar Technology</p>
               </div>
               
               <div className="bg-gray-800 p-4 rounded-lg shadow-lg transform transition duration-500 hover:scale-105">
-                <h3 className="text-xl font-bold text-purple-400 mb-2">Department</h3>
-                <p className="text-gray-300">Information Systems</p>
-                <p className="text-gray-400">Computer Science Faculty</p>
+                <h3 className="text-xl font-bold text-purple-400 mb-2">Education</h3>
+                <p className="text-gray-300">BSc in Computer Science</p>
+                <p className="text-gray-400">Kabul Polytechnic University</p>
               </div>
             </div>
             
