@@ -240,17 +240,107 @@ const Blog = () => {
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <div className="h-48 overflow-hidden">
-                <img 
-                  src={post.image} 
-                  alt={post.title} 
-                  className="w-full h-full object-cover transition duration-500 hover:scale-110"
-                />
+                {post.postType === 'image' && post.image && (
+                  <img 
+                    src={post.image} 
+                    alt={post.title} 
+                    className="w-full h-full object-cover transition duration-500 hover:scale-110"
+                  />
+                )}
+                {post.postType === 'video' && (post.videoUrl || post.videoFile) && (
+                  <div className="relative w-full h-full group">
+                    {/* Show thumbnail if available, otherwise show video */}
+                    {post.image ? (
+                      <div 
+                        className="relative w-full h-full cursor-pointer"
+                        onClick={(e) => {
+                          const video = document.getElementById(`video-${post.id}`);
+                          const overlay = e.currentTarget.querySelector('.play-overlay');
+                          if (video && overlay) {
+                            if (video.paused) {
+                              video.play();
+                              overlay.style.display = 'none';
+                            } else {
+                              video.pause();
+                              overlay.style.display = 'flex';
+                            }
+                          }
+                        }}
+                      >
+                        <img 
+                          src={post.image} 
+                          alt={post.title} 
+                          className="w-full h-full object-cover transition duration-500 hover:scale-110"
+                        />
+                        <div className="play-overlay absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300">
+                          <div className="w-16 h-16 bg-white bg-opacity-90 rounded-full flex items-center justify-center hover:bg-opacity-100 transition-all duration-300 transform hover:scale-110">
+                            <i className="fas fa-play text-gray-800 text-2xl ml-1"></i>
+                          </div>
+                        </div>
+                        <video 
+                          src={post.videoUrl || URL.createObjectURL(post.videoFile)} 
+                          muted 
+                          className="absolute inset-0 w-full h-full object-cover"
+                          preload="metadata"
+                          id={`video-${post.id}`}
+                          style={{ display: 'none' }}
+                        />
+                      </div>
+                    ) : (
+                      <div className="relative w-full h-full">
+                        <video 
+                          src={post.videoUrl || URL.createObjectURL(post.videoFile)} 
+                          muted 
+                          className="w-full h-full object-cover transition duration-500 hover:scale-110"
+                          preload="metadata"
+                          id={`video-${post.id}`}
+                        />
+                        <div 
+                          className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300 cursor-pointer"
+                          onClick={(e) => {
+                            const video = document.getElementById(`video-${post.id}`);
+                            if (video) {
+                              if (video.paused) {
+                                video.play();
+                                e.target.style.opacity = '0';
+                              } else {
+                                video.pause();
+                                e.target.style.opacity = '1';
+                              }
+                            }
+                          }}
+                        >
+                          <div className="w-16 h-16 bg-white bg-opacity-90 rounded-full flex items-center justify-center hover:bg-opacity-100 transition-all duration-300 transform hover:scale-110">
+                            <i className="fas fa-play text-gray-800 text-2xl ml-1"></i>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+                {post.postType === 'youtube' && post.youtubeThumbnail && (
+                  <img 
+                    src={post.youtubeThumbnail} 
+                    alt={post.title} 
+                    className="w-full h-full object-cover transition duration-500 hover:scale-110"
+                  />
+                )}
+                {(!post.postType || post.postType === 'text') && (
+                  <div className="w-full h-full bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">
+                    <i className="fas fa-blog text-4xl text-gray-500"></i>
+                  </div>
+                )}
               </div>
               <div className="p-6">
                 <div className="flex justify-between items-center mb-3">
-                  <span className="px-2 py-1 bg-gray-700 text-blue-400 text-xs font-medium rounded">
-                    {post.category}
-                  </span>
+                  <div className="flex items-center space-x-2">
+                    <span className="px-2 py-1 bg-gray-700 text-blue-400 text-xs font-medium rounded">
+                      {post.category}
+                    </span>
+                    <span className="px-2 py-1 bg-purple-600 text-white text-xs font-medium rounded">
+                      {post.postType || 'text'}
+                    </span>
+                  </div>
                   <span className="text-gray-400 text-sm">{post.readTime}</span>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">{post.title}</h3>
