@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useData } from '../contexts/DataContext';
+import ImageUpload from './ImageUpload';
+import { deleteImage } from '../utils/imageUpload';
 
 const AdminDashboard = () => {
   const { 
@@ -25,6 +27,7 @@ const AdminDashboard = () => {
     title: '',
     description: '',
     image: '',
+    imageFileName: '',
     technologies: '',
     category: 'Web Development',
     status: 'Completed',
@@ -44,6 +47,14 @@ const AdminDashboard = () => {
     featured: false
   });
 
+  const handleImageSelect = (imageUrl, fileName) => {
+    setProjectForm(prev => ({
+      ...prev,
+      image: imageUrl,
+      imageFileName: fileName
+    }));
+  };
+
   const handleProjectSubmit = (e) => {
     e.preventDefault();
     const projectData = {
@@ -53,6 +64,10 @@ const AdminDashboard = () => {
     };
 
     if (editingProject) {
+      // Delete old image if it exists and is different
+      if (editingProject.imageFileName && editingProject.imageFileName !== projectForm.imageFileName) {
+        deleteImage(editingProject.imageFileName);
+      }
       updateProject(editingProject.id, projectData);
       setEditingProject(null);
     } else {
@@ -63,6 +78,7 @@ const AdminDashboard = () => {
       title: '',
       description: '',
       image: '',
+      imageFileName: '',
       technologies: '',
       category: 'Web Development',
       status: 'Completed',
@@ -104,7 +120,8 @@ const AdminDashboard = () => {
     setEditingProject(project);
     setProjectForm({
       ...project,
-      technologies: project.technologies.join(', ')
+      technologies: project.technologies.join(', '),
+      imageFileName: project.imageFileName || ''
     });
     setShowProjectForm(true);
   };
@@ -120,6 +137,10 @@ const AdminDashboard = () => {
 
   const handleDeleteProject = (id) => {
     if (window.confirm('Are you sure you want to delete this project?')) {
+      const project = projects.find(p => p.id === id);
+      if (project && project.imageFileName) {
+        deleteImage(project.imageFileName);
+      }
       deleteProject(id);
     }
   };
@@ -303,16 +324,11 @@ const AdminDashboard = () => {
                     required
                   />
                 </div>
-                <div>
-                  <label className="block text-white mb-2">Image URL</label>
-                  <input
-                    type="url"
-                    value={projectForm.image}
-                    onChange={(e) => setProjectForm({...projectForm, image: e.target.value})}
-                    className="w-full px-3 py-2 bg-gray-700 text-white rounded-lg"
-                    required
-                  />
-                </div>
+                <ImageUpload
+                  onImageSelect={handleImageSelect}
+                  currentImage={projectForm.image}
+                  label="Project Image"
+                />
                 <div>
                   <label className="block text-white mb-2">Technologies (comma-separated)</label>
                   <input
