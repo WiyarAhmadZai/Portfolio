@@ -68,12 +68,12 @@ const Navbar = () => {
                   }`}
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <span className="flex items-center space-x-2">
+                  <span className="relative z-10 flex items-center space-x-2">
                     <i className={`${link.icon} text-xs`}></i>
                     <span>{link.name}</span>
                   </span>
                   {location.pathname === link.path && (
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   )}
                 </Link>
               ))}
