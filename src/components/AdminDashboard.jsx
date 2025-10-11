@@ -9,6 +9,7 @@ const AdminDashboard = () => {
     blogPosts, 
     projectCategories,
     blogCategories,
+    customSkills,
     addProject, 
     updateProject, 
     deleteProject, 
@@ -19,6 +20,9 @@ const AdminDashboard = () => {
     addBlogCategory,
     removeProjectCategory,
     removeBlogCategory,
+    addCustomSkill,
+    updateCustomSkill,
+    deleteCustomSkill,
     logoutAdmin,
     clearAllData,
     clearBlogPosts,
@@ -33,6 +37,16 @@ const AdminDashboard = () => {
   const [showCategoryManager, setShowCategoryManager] = useState(false);
   const [newCategory, setNewCategory] = useState('');
   const [categoryType, setCategoryType] = useState('project'); // project or blog
+  const [showSkillForm, setShowSkillForm] = useState(false);
+  const [editingSkill, setEditingSkill] = useState(null);
+  const [skillForm, setSkillForm] = useState({
+    name: '',
+    percentage: 80,
+    description: '',
+    category: 'Technical',
+    icon: 'fas fa-code',
+    color: '#3B82F6'
+  });
 
   // Project form state
   const [projectForm, setProjectForm] = useState({
@@ -128,6 +142,45 @@ const AdminDashboard = () => {
       removeProjectCategory(category);
     } else {
       removeBlogCategory(category);
+    }
+  };
+
+  // Skill form handlers
+  const handleSkillSubmit = (e) => {
+    e.preventDefault();
+    if (editingSkill) {
+      updateCustomSkill(editingSkill.id, skillForm);
+      setEditingSkill(null);
+    } else {
+      addCustomSkill(skillForm);
+    }
+    setSkillForm({
+      name: '',
+      percentage: 80,
+      description: '',
+      category: 'Technical',
+      icon: 'fas fa-code',
+      color: '#3B82F6'
+    });
+    setShowSkillForm(false);
+  };
+
+  const handleEditSkill = (skill) => {
+    setEditingSkill(skill);
+    setSkillForm({
+      name: skill.name,
+      percentage: skill.percentage,
+      description: skill.description,
+      category: skill.category,
+      icon: skill.icon,
+      color: skill.color
+    });
+    setShowSkillForm(true);
+  };
+
+  const handleDeleteSkill = (id) => {
+    if (window.confirm('Are you sure you want to delete this skill?')) {
+      deleteCustomSkill(id);
     }
   };
 
@@ -302,6 +355,16 @@ const AdminDashboard = () => {
           >
             Blog Posts ({blogPosts.length})
           </button>
+          <button
+            onClick={() => setActiveTab('skills')}
+            className={`px-6 py-3 rounded-lg font-medium transition-colors ${
+              activeTab === 'skills'
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+            }`}
+          >
+            Skills ({customSkills.length})
+          </button>
         </div>
 
         {/* Projects Tab */}
@@ -438,6 +501,98 @@ const AdminDashboard = () => {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        )}
+
+        {/* Skills Tab */}
+        {activeTab === 'skills' && (
+          <div>
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-white">Manage Custom Skills</h2>
+              <button
+                onClick={() => {
+                  setEditingSkill(null);
+                  setShowSkillForm(true);
+                }}
+                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+              >
+                <i className="fas fa-plus mr-2"></i>
+                Add New Skill
+              </button>
+            </div>
+
+            {/* Skills List */}
+            <div className="space-y-4">
+              {customSkills.map((skill) => (
+                <div key={skill.id} className="bg-gray-800 rounded-lg p-6">
+                  <div className="flex justify-between items-start">
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-3 mb-3">
+                        <div 
+                          className="w-12 h-12 rounded-full flex items-center justify-center"
+                          style={{ backgroundColor: skill.color + '20' }}
+                        >
+                          <i className={`${skill.icon} text-xl`} style={{ color: skill.color }}></i>
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-bold text-white">{skill.name}</h3>
+                          <p className="text-gray-400 text-sm">{skill.category}</p>
+                        </div>
+                      </div>
+                      
+                      <p className="text-gray-300 mb-3">{skill.description}</p>
+                      
+                      <div className="flex items-center space-x-4">
+                        <div className="flex-1">
+                          <div className="flex justify-between text-sm text-gray-400 mb-1">
+                            <span>Proficiency</span>
+                            <span>{skill.percentage}%</span>
+                          </div>
+                          <div className="w-full bg-gray-700 rounded-full h-2">
+                            <div 
+                              className="h-2 rounded-full transition-all duration-300"
+                              style={{ 
+                                width: `${skill.percentage}%`,
+                                backgroundColor: skill.color
+                              }}
+                            ></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex space-x-2 ml-4">
+                      <button
+                        onClick={() => handleEditSkill(skill)}
+                        className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition-colors"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDeleteSkill(skill.id)}
+                        className="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition-colors"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              
+              {customSkills.length === 0 && (
+                <div className="text-center py-12">
+                  <i className="fas fa-code text-5xl text-gray-600 mb-4"></i>
+                  <h3 className="text-2xl font-bold text-white mb-2">No Custom Skills Yet</h3>
+                  <p className="text-gray-400 mb-4">Add your custom skills to showcase your expertise</p>
+                  <button
+                    onClick={() => setShowSkillForm(true)}
+                    className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                  >
+                    <i className="fas fa-plus mr-2"></i>
+                    Add First Skill
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -908,6 +1063,121 @@ const AdminDashboard = () => {
                     onClick={() => {
                       setShowBlogForm(false);
                       setEditingBlog(null);
+                    }}
+                    className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {/* Skills Form Modal */}
+        {showSkillForm && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-gray-800 rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+              <h3 className="text-2xl font-bold text-white mb-4">
+                {editingSkill ? 'Edit Skill' : 'Add New Skill'}
+              </h3>
+              <form onSubmit={handleSkillSubmit} className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-white mb-2 font-semibold">Skill Name</label>
+                    <input
+                      type="text"
+                      value={skillForm.name}
+                      onChange={(e) => setSkillForm({...skillForm, name: e.target.value})}
+                      className="w-full px-3 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300"
+                      placeholder="e.g., React.js"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-white mb-2 font-semibold">Proficiency (%)</label>
+                    <input
+                      type="number"
+                      min="1"
+                      max="100"
+                      value={skillForm.percentage}
+                      onChange={(e) => setSkillForm({...skillForm, percentage: parseInt(e.target.value)})}
+                      className="w-full px-3 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-white mb-2 font-semibold">Description</label>
+                  <textarea
+                    value={skillForm.description}
+                    onChange={(e) => setSkillForm({...skillForm, description: e.target.value})}
+                    className="w-full px-3 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 h-20"
+                    placeholder="Brief description of your expertise in this skill"
+                    required
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-white mb-2 font-semibold">Category</label>
+                    <select
+                      value={skillForm.category}
+                      onChange={(e) => setSkillForm({...skillForm, category: e.target.value})}
+                      className="w-full px-3 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300"
+                    >
+                      <option value="Technical">Technical</option>
+                      <option value="Soft Skills">Soft Skills</option>
+                      <option value="Tools">Tools</option>
+                      <option value="Languages">Languages</option>
+                      <option value="Frameworks">Frameworks</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-white mb-2 font-semibold">Icon Class</label>
+                    <input
+                      type="text"
+                      value={skillForm.icon}
+                      onChange={(e) => setSkillForm({...skillForm, icon: e.target.value})}
+                      className="w-full px-3 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300"
+                      placeholder="e.g., fab fa-react"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-white mb-2 font-semibold">Color</label>
+                  <div className="flex items-center space-x-4">
+                    <input
+                      type="color"
+                      value={skillForm.color}
+                      onChange={(e) => setSkillForm({...skillForm, color: e.target.value})}
+                      className="w-12 h-10 rounded border border-gray-600 cursor-pointer"
+                    />
+                    <input
+                      type="text"
+                      value={skillForm.color}
+                      onChange={(e) => setSkillForm({...skillForm, color: e.target.value})}
+                      className="flex-1 px-3 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300"
+                      placeholder="#3B82F6"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex justify-end space-x-4 pt-4">
+                  <button
+                    type="submit"
+                    className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    {editingSkill ? 'Update Skill' : 'Add Skill'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowSkillForm(false);
+                      setEditingSkill(null);
                     }}
                     className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
                   >
