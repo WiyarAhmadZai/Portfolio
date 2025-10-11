@@ -301,6 +301,7 @@ export const DataProvider = ({ children }) => {
       setProjectCategories(['Web Development', 'Mobile Development', 'Desktop Application', 'Data Science']);
       setBlogCategories(['React', 'Node.js', 'CSS', 'JavaScript', 'General']);
       console.log('All data cleared');
+      alert('All data has been cleared successfully!');
     }
   };
 
@@ -310,6 +311,7 @@ export const DataProvider = ({ children }) => {
       setBlogPosts([]);
       localStorage.setItem('portfolio_blog_posts', JSON.stringify([]));
       console.log('Blog posts cleared');
+      alert('All blog posts have been cleared successfully!');
     }
   };
 
