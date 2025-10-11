@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useData } from '../contexts/DataContext';
 
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [currentSkillIndex, setCurrentSkillIndex] = useState(0);
+  const { showAdminAccess, customSkills } = useData();
 
   useEffect(() => {
     setIsVisible(true);
@@ -18,7 +20,8 @@ const Home = () => {
   }, []);
 
   // Skills data
-  const skills = [
+  // Default skills
+  const defaultSkills = [
     { name: "Full Stack Web Development", percentage: 95, icon: "fa-laptop-code", color: "from-blue-500 to-cyan-500" },
     { name: "HTML & CSS", percentage: 90, icon: "fa-code", color: "from-orange-500 to-red-500" },
     { name: "JavaScript & React.js", percentage: 90, icon: "fa-brands fa-js-square", color: "from-yellow-500 to-orange-500" },
@@ -30,6 +33,19 @@ const Home = () => {
     { name: "Python & MongoDB", percentage: 75, icon: "fa-python", color: "from-green-600 to-green-400" },
     { name: "Soft Skills", percentage: 85, icon: "fa-users", color: "from-indigo-500 to-purple-500" }
   ];
+
+  // Convert custom skills to match the format
+  const formattedCustomSkills = customSkills.map(skill => ({
+    name: skill.name,
+    percentage: skill.percentage,
+    icon: skill.icon,
+    color: `from-[${skill.color}] to-[${skill.color}]`,
+    description: skill.description,
+    category: skill.category
+  }));
+
+  // Combine default skills with custom skills
+  const skills = [...defaultSkills, ...formattedCustomSkills];
 
   // Services data
   const services = [
@@ -542,16 +558,18 @@ const Home = () => {
         </svg>
       </div>
       
-      {/* Floating Admin Access Button */}
-      <div className="fixed top-20 right-4 z-40">
-        <Link
-          to="/admin"
-          className="group bg-gray-800/80 backdrop-blur-sm border border-gray-600/50 rounded-full p-3 text-gray-400 hover:text-blue-400 hover:border-blue-400/50 transition-all duration-300 transform hover:scale-110 shadow-lg"
-          title="Admin Access"
-        >
-          <i className="fas fa-cog text-lg group-hover:animate-spin"></i>
-        </Link>
-      </div>
+      {/* Floating Admin Access Button - Only visible with secret code */}
+      {showAdminAccess && (
+        <div className="fixed top-20 right-4 z-40">
+          <Link
+            to="/admin"
+            className="group bg-gray-800/80 backdrop-blur-sm border border-gray-600/50 rounded-full p-3 text-gray-400 hover:text-blue-400 hover:border-blue-400/50 transition-all duration-300 transform hover:scale-110 shadow-lg"
+            title="Admin Access"
+          >
+            <i className="fas fa-cog text-lg group-hover:animate-spin"></i>
+          </Link>
+        </div>
+      )}
       
     </main>
   );
