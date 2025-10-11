@@ -6,6 +6,8 @@ const AdminLogin = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isVisible, setIsVisible] = useState(false);
+  const [attempts, setAttempts] = useState(0);
+  const [isBlocked, setIsBlocked] = useState(false);
   const { loginAdmin, isAdmin } = useData();
   const navigate = useNavigate();
 
@@ -18,10 +20,30 @@ const AdminLogin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    if (isBlocked) {
+      setError('Too many failed attempts. Please wait before trying again.');
+      return;
+    }
+    
     if (loginAdmin(password)) {
+      setAttempts(0);
       navigate('/admin/dashboard');
     } else {
-      setError('Invalid password. Please try again.');
+      const newAttempts = attempts + 1;
+      setAttempts(newAttempts);
+      
+      if (newAttempts >= 3) {
+        setIsBlocked(true);
+        setError('Too many failed attempts. Access blocked for 5 minutes.');
+        setTimeout(() => {
+          setIsBlocked(false);
+          setAttempts(0);
+          setError('');
+        }, 300000); // 5 minutes
+      } else {
+        setError(`Invalid password. ${3 - newAttempts} attempts remaining.`);
+      }
     }
   };
 
@@ -67,19 +89,17 @@ const AdminLogin = () => {
 
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-4 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 transform hover:scale-105"
+              disabled={isBlocked}
+              className={`w-full py-3 px-4 rounded-lg font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 transform ${
+                isBlocked 
+                  ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
+                  : 'bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 hover:scale-105'
+              }`}
             >
               <i className="fas fa-sign-in-alt mr-2"></i>
-              Access Dashboard
+              {isBlocked ? 'Access Blocked' : 'Access Dashboard'}
             </button>
           </form>
-
-          <div className="mt-6 text-center">
-            <p className="text-gray-400 text-sm">
-              <i className="fas fa-info-circle mr-1"></i>
-              Default password: <code className="bg-gray-700 px-2 py-1 rounded text-blue-400">admin123</code>
-            </p>
-          </div>
 
           <div className="mt-8 pt-6 border-t border-gray-700">
             <div className="text-center">
