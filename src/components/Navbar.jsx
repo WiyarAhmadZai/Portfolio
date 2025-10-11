@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useData } from '../contexts/DataContext';
 import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
@@ -7,6 +8,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const location = useLocation();
+  const { isAdmin } = useData();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,6 +36,11 @@ const Navbar = () => {
     { name: 'Resume', path: '/resume', icon: 'fas fa-file-alt' },
     { name: 'Contact', path: '/contact', icon: 'fas fa-envelope' }
   ];
+
+  // Add admin link if user is in admin mode
+  if (isAdmin) {
+    navLinks.push({ name: 'Admin', path: '/admin/dashboard', icon: 'fas fa-cog' });
+  }
 
   return (
     <nav className={`fixed w-full z-50 transition-all duration-500 ${
@@ -81,6 +88,17 @@ const Navbar = () => {
               {/* Theme Toggle */}
               <div className="ml-4">
                 <ThemeToggle />
+              </div>
+              
+              {/* Admin Access Link */}
+              <div className="ml-2">
+                <Link
+                  to="/admin"
+                  className="text-gray-400 hover:text-blue-400 text-sm opacity-60 hover:opacity-100 transition-all duration-300 transform hover:scale-110"
+                  title="Admin Access"
+                >
+                  <i className="fas fa-cog"></i>
+                </Link>
               </div>
             </div>
           </div>
@@ -155,8 +173,19 @@ const Navbar = () => {
             </Link>
           ))}
           
+          {/* Mobile Admin Access */}
+          <div className="flex justify-center pt-2">
+            <Link
+              to="/admin"
+              className="flex items-center space-x-2 px-4 py-2 text-gray-400 hover:text-blue-400 transition-colors duration-300"
+            >
+              <i className="fas fa-cog"></i>
+              <span className="text-sm">Admin Access</span>
+            </Link>
+          </div>
+          
           {/* Mobile Theme Toggle */}
-          <div className="flex justify-center pt-4 border-t border-white/10">
+          <div className="flex justify-center pt-2 border-t border-white/10">
             <ThemeToggle />
           </div>
         </div>
