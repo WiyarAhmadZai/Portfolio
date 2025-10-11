@@ -31,6 +31,7 @@ export const DataProvider = ({ children }) => {
           title: "E-Commerce Platform",
           description: "A full-featured online shopping platform with payment integration, user authentication, and admin dashboard.",
           image: "/Photos Simples/1716635911147.jpg",
+          imageFileName: "",
           technologies: ["React", "Node.js", "MongoDB", "Stripe"],
           category: "Web Development",
           status: "Completed",
@@ -44,6 +45,7 @@ export const DataProvider = ({ children }) => {
           title: "Task Management App",
           description: "A collaborative task management application with real-time updates and team collaboration features.",
           image: "/Photos Simples/Cute Photo.jpg",
+          imageFileName: "",
           technologies: ["React", "Firebase", "Material-UI"],
           category: "Web Development",
           status: "Completed",
@@ -114,7 +116,8 @@ export const DataProvider = ({ children }) => {
     const newProject = {
       ...project,
       id: Date.now(),
-      date: new Date().toISOString().split('T')[0]
+      date: new Date().toISOString().split('T')[0],
+      imageFileName: project.imageFileName || ''
     };
     setProjects(prev => [newProject, ...prev]);
   };
