@@ -18,7 +18,12 @@ const Resume = () => {
     
     try {
       // Create a new window for printing
-      const printWindow = window.open('', '_blank');
+      const printWindow = window.open('', '_blank', 'width=800,height=600');
+      
+      if (!printWindow) {
+        alert('Popup blocked. Please allow popups for this site and try again.');
+        return;
+      }
       
       // Get the current date
       const currentDate = new Date().toLocaleDateString();
@@ -29,6 +34,7 @@ const Resume = () => {
         <html>
         <head>
           <title>Wiyar Ahmad Zai - Resume</title>
+          <meta charset="utf-8">
           <style>
             @media print {
               @page {
@@ -362,7 +368,8 @@ const Resume = () => {
         setTimeout(() => {
           printWindow.print();
           printWindow.close();
-        }, 500);
+          alert('PDF generated successfully! Please save as PDF in the print dialog.');
+        }, 1000);
       };
       
     } catch (error) {
@@ -583,44 +590,10 @@ const Resume = () => {
           <h1 className="text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600 mb-4">
             Professional Resume
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Full-Stack Developer | Computer Science Student
           </p>
-          
-          {/* Download PDF Button */}
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
-            <button
-              onClick={generatePDF}
-              disabled={isGeneratingPDF}
-              className={`group relative px-8 py-4 text-base font-semibold rounded-xl text-white transition-all duration-300 transform hover:scale-105 shadow-2xl ${
-                isGeneratingPDF 
-                  ? 'bg-gray-600 cursor-not-allowed' 
-                  : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:shadow-blue-500/25'
-              }`}
-            >
-              <span className="relative z-10 flex items-center justify-center">
-                {isGeneratingPDF ? (
-                  <>
-                    <i className="fas fa-spinner fa-spin mr-2"></i>
-                    Generating PDF...
-                  </>
-                ) : (
-                  <>
-                    <i className="fas fa-download mr-2"></i>
-                    Download Full Resume PDF
-                  </>
-                )}
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </button>
-            
-            <div className="text-sm text-gray-400 flex items-center">
-              <i className="fas fa-info-circle mr-2"></i>
-              PDF includes all skills, experience, and projects
-            </div>
-          </div>
-          
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full mt-4"></div>
         </div>
 
         {/* Resume Header */}
@@ -929,11 +902,28 @@ const Resume = () => {
 
         {/* Download Resume */}
         <div className={`mt-12 text-center transition-all duration-1000 delay-900 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <button className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-lg hover:from-blue-600 hover:to-purple-700 transition duration-300 transform hover:scale-105 shadow-lg">
-            <i className="fas fa-download mr-3"></i>
-            Download Full Resume (PDF)
+          <button 
+            onClick={generatePDF}
+            disabled={isGeneratingPDF}
+            className={`inline-flex items-center px-8 py-4 text-white font-bold rounded-lg transition duration-300 transform hover:scale-105 shadow-lg ${
+              isGeneratingPDF 
+                ? 'bg-gray-600 cursor-not-allowed' 
+                : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700'
+            }`}
+          >
+            {isGeneratingPDF ? (
+              <>
+                <i className="fas fa-spinner fa-spin mr-3"></i>
+                Generating PDF...
+              </>
+            ) : (
+              <>
+                <i className="fas fa-download mr-3"></i>
+                Download Full Resume (PDF)
+              </>
+            )}
           </button>
-          <p className="text-gray-400 mt-4">Last updated: September 2025</p>
+          <p className="text-gray-400 mt-4">Last updated: {new Date().toLocaleDateString()}</p>
         </div>
       </div>
     </div>
