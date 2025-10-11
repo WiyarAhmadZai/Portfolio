@@ -52,7 +52,6 @@ const AdminDashboard = () => {
   const [blogForm, setBlogForm] = useState({
     title: '',
     excerpt: '',
-    content: '',
     category: 'React',
     tags: '',
     readTime: '',
@@ -184,7 +183,6 @@ const AdminDashboard = () => {
     setBlogForm({
       title: '',
       excerpt: '',
-      content: '',
       category: 'React',
       tags: '',
       readTime: '',
@@ -605,15 +603,6 @@ const AdminDashboard = () => {
                   </select>
                 </div>
 
-                <div>
-                  <label className="block text-white mb-2">Content</label>
-                  <textarea
-                    value={blogForm.content}
-                    onChange={(e) => setBlogForm({...blogForm, content: e.target.value})}
-                    className="w-full px-3 py-2 bg-gray-700 text-white rounded-lg h-32"
-                    required
-                  />
-                </div>
 
                 {/* Image Upload for Image Posts */}
                 {blogForm.postType === 'image' && (
