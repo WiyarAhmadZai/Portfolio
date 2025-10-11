@@ -141,7 +141,7 @@ const About = () => {
         "English Literature"
       ],
       achievements: [
-        "Top 5% of Class",
+        "First Position in Class",
         "Mathematics Olympiad Participant",
         "Science Fair Winner"
       ]
