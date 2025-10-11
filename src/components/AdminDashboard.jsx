@@ -13,7 +13,9 @@ const AdminDashboard = () => {
     addBlogPost, 
     updateBlogPost, 
     deleteBlogPost,
-    logoutAdmin 
+    logoutAdmin,
+    clearAllData,
+    exportData
   } = useData();
 
   const [activeTab, setActiveTab] = useState('projects');
@@ -157,12 +159,30 @@ const AdminDashboard = () => {
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold text-white">Admin Dashboard</h1>
-          <button
-            onClick={logoutAdmin}
-            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-          >
-            Logout
-          </button>
+          <div className="flex space-x-2">
+            <button
+              onClick={exportData}
+              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm"
+              title="Export all data"
+            >
+              <i className="fas fa-download mr-2"></i>
+              Export
+            </button>
+            <button
+              onClick={clearAllData}
+              className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm"
+              title="Clear all data (debug)"
+            >
+              <i className="fas fa-trash mr-2"></i>
+              Clear All
+            </button>
+            <button
+              onClick={logoutAdmin}
+              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+            >
+              Logout
+            </button>
+          </div>
         </div>
 
         {/* Tabs */}
