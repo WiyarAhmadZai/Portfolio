@@ -61,6 +61,7 @@ const AdminDashboard = () => {
     image: '',
     imageFileName: '',
     videoFile: null,
+    videoUrl: '',
     youtubeUrl: '',
     youtubeThumbnail: ''
   });
@@ -187,7 +188,14 @@ const AdminDashboard = () => {
       category: 'React',
       tags: '',
       readTime: '',
-      featured: false
+      featured: false,
+      postType: 'text',
+      image: '',
+      imageFileName: '',
+      videoFile: null,
+      videoUrl: '',
+      youtubeUrl: '',
+      youtubeThumbnail: ''
     });
     setShowBlogForm(false);
   };
@@ -206,7 +214,14 @@ const AdminDashboard = () => {
     setEditingBlog(blog);
     setBlogForm({
       ...blog,
-      tags: blog.tags.join(', ')
+      tags: blog.tags.join(', '),
+      postType: blog.postType || 'text',
+      image: blog.image || '',
+      imageFileName: blog.imageFileName || '',
+      videoFile: blog.videoFile || null,
+      videoUrl: blog.videoUrl || '',
+      youtubeUrl: blog.youtubeUrl || '',
+      youtubeThumbnail: blog.youtubeThumbnail || ''
     });
     setShowBlogForm(true);
   };
@@ -367,8 +382,38 @@ const AdminDashboard = () => {
                 <div key={post.id} className="bg-gray-800 rounded-lg p-6">
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-white mb-2">{post.title}</h3>
+                      <div className="flex items-center space-x-2 mb-2">
+                        <h3 className="text-xl font-bold text-white">{post.title}</h3>
+                        <span className="px-2 py-1 bg-blue-600 text-white text-xs rounded">
+                          {post.postType || 'text'}
+                        </span>
+                      </div>
                       <p className="text-gray-300 mb-2">{post.excerpt}</p>
+                      
+                      {/* Show media preview based on post type */}
+                      {post.postType === 'image' && post.image && (
+                        <div className="mb-2">
+                          <img src={post.image} alt="Post preview" className="w-32 h-20 object-cover rounded" />
+                        </div>
+                      )}
+                      
+                      {post.postType === 'video' && (post.videoUrl || post.videoFile) && (
+                        <div className="mb-2">
+                          <video 
+                            src={post.videoUrl || URL.createObjectURL(post.videoFile)} 
+                            muted 
+                            className="w-32 h-20 object-cover rounded"
+                            preload="metadata"
+                          />
+                        </div>
+                      )}
+                      
+                      {post.postType === 'youtube' && post.youtubeThumbnail && (
+                        <div className="mb-2">
+                          <img src={post.youtubeThumbnail} alt="YouTube preview" className="w-32 h-20 object-cover rounded" />
+                        </div>
+                      )}
+                      
                       <div className="flex items-center space-x-4 text-sm text-gray-400">
                         <span>{post.category}</span>
                         <span>{post.readTime}</span>
@@ -547,6 +592,20 @@ const AdminDashboard = () => {
                   />
                 </div>
                 <div>
+                  <label className="block text-white mb-2 font-semibold">Post Type</label>
+                  <select
+                    value={blogForm.postType}
+                    onChange={(e) => setBlogForm({...blogForm, postType: e.target.value})}
+                    className="w-full px-4 py-3 bg-gray-700 text-white rounded-xl border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300"
+                  >
+                    <option value="text">📝 Text Post</option>
+                    <option value="image">🖼️ Image Post</option>
+                    <option value="video">🎥 Video Post</option>
+                    <option value="youtube">📺 YouTube Post</option>
+                  </select>
+                </div>
+
+                <div>
                   <label className="block text-white mb-2">Content</label>
                   <textarea
                     value={blogForm.content}
@@ -555,6 +614,253 @@ const AdminDashboard = () => {
                     required
                   />
                 </div>
+
+                {/* Image Upload for Image Posts */}
+                {blogForm.postType === 'image' && (
+                  <div className="bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl p-6 border border-gray-600">
+                    <div className="flex items-center mb-4">
+                      <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3">
+                        <i className="fas fa-image text-white"></i>
+                      </div>
+                      <div>
+                        <h3 className="text-white font-semibold text-lg">Image Upload</h3>
+                        <p className="text-gray-400 text-sm">Upload an image to accompany your post</p>
+                      </div>
+                    </div>
+                    
+                    <div className="border-2 border-dashed border-gray-500 rounded-xl p-8 text-center hover:border-blue-400 transition-colors duration-300">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                          const file = e.target.files[0];
+                          if (file) {
+                            handleBlogImageSelect(URL.createObjectURL(file), file.name);
+                          }
+                        }}
+                        className="hidden"
+                        id="image-upload"
+                      />
+                      <label htmlFor="image-upload" className="cursor-pointer">
+                        <div className="text-6xl text-gray-400 mb-4">
+                          <i className="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <h4 className="text-white font-semibold text-lg mb-2">Choose Image File</h4>
+                        <p className="text-gray-400 mb-4">PNG, JPG, GIF up to 5MB</p>
+                        <div className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300">
+                          <i className="fas fa-upload mr-2"></i>
+                          Browse Files
+                        </div>
+                      </label>
+                    </div>
+                    
+                    {blogForm.image && (
+                      <div className="mt-6">
+                        <h4 className="text-white font-semibold mb-3 flex items-center">
+                          <i className="fas fa-eye mr-2"></i>
+                          Image Preview
+                        </h4>
+                        <div className="relative">
+                          <img src={blogForm.image} alt="Preview" className="w-full max-h-64 object-cover rounded-lg shadow-lg" />
+                          <button
+                            type="button"
+                            onClick={() => setBlogForm({...blogForm, image: '', imageFileName: ''})}
+                            className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-2 hover:bg-red-700 transition-colors"
+                          >
+                            <i className="fas fa-times"></i>
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Video Upload for Video Posts */}
+                {blogForm.postType === 'video' && (
+                  <div className="space-y-6">
+                    {/* Video File Upload */}
+                    <div className="bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl p-6 border border-gray-600">
+                      <div className="flex items-center mb-4">
+                        <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center mr-3">
+                          <i className="fas fa-video text-white"></i>
+                        </div>
+                        <div>
+                          <h3 className="text-white font-semibold text-lg">Video Upload</h3>
+                          <p className="text-gray-400 text-sm">Upload the video file for your post</p>
+                        </div>
+                      </div>
+                      
+                      <div className="border-2 border-dashed border-gray-500 rounded-xl p-8 text-center hover:border-purple-400 transition-colors duration-300">
+                        <input
+                          type="file"
+                          accept="video/*"
+                          onChange={(e) => {
+                            const file = e.target.files[0];
+                            if (file) {
+                              setBlogForm({...blogForm, videoFile: file, videoUrl: URL.createObjectURL(file)});
+                            }
+                          }}
+                          className="hidden"
+                          id="video-upload"
+                        />
+                        <label htmlFor="video-upload" className="cursor-pointer">
+                          <div className="text-6xl text-gray-400 mb-4">
+                            <i className="fas fa-video"></i>
+                          </div>
+                          <h4 className="text-white font-semibold text-lg mb-2">Choose Video File</h4>
+                          <p className="text-gray-400 mb-4">MP4, MOV, AVI up to 50MB</p>
+                          <div className="inline-flex items-center px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors duration-300">
+                            <i className="fas fa-upload mr-2"></i>
+                            Browse Video
+                          </div>
+                        </label>
+                      </div>
+                      
+                      {blogForm.videoUrl && (
+                        <div className="mt-6">
+                          <h4 className="text-white font-semibold mb-3 flex items-center">
+                            <i className="fas fa-play mr-2"></i>
+                            Video Preview
+                          </h4>
+                          <div className="relative">
+                            <video 
+                              src={blogForm.videoUrl} 
+                              controls 
+                              muted 
+                              className="w-full max-h-64 rounded-lg shadow-lg"
+                              preload="metadata"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => setBlogForm({...blogForm, videoFile: null, videoUrl: ''})}
+                              className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-2 hover:bg-red-700 transition-colors"
+                            >
+                              <i className="fas fa-times"></i>
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Video Thumbnail Upload */}
+                    <div className="bg-gradient-to-r from-green-800 to-green-700 rounded-xl p-6 border border-green-600">
+                      <div className="flex items-center mb-4">
+                        <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                          <i className="fas fa-image text-white"></i>
+                        </div>
+                        <div>
+                          <h3 className="text-white font-semibold text-lg">Video Thumbnail</h3>
+                          <p className="text-gray-400 text-sm">Upload a thumbnail image for the video (optional)</p>
+                        </div>
+                      </div>
+                      
+                      <div className="border-2 border-dashed border-gray-500 rounded-xl p-8 text-center hover:border-green-400 transition-colors duration-300">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => {
+                            const file = e.target.files[0];
+                            if (file) {
+                              handleBlogImageSelect(URL.createObjectURL(file), file.name);
+                            }
+                          }}
+                          className="hidden"
+                          id="thumbnail-upload"
+                        />
+                        <label htmlFor="thumbnail-upload" className="cursor-pointer">
+                          <div className="text-6xl text-gray-400 mb-4">
+                            <i className="fas fa-image"></i>
+                          </div>
+                          <h4 className="text-white font-semibold text-lg mb-2">Choose Thumbnail Image</h4>
+                          <p className="text-gray-400 mb-4">PNG, JPG, GIF up to 5MB</p>
+                          <div className="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300">
+                            <i className="fas fa-upload mr-2"></i>
+                            Browse Thumbnail
+                          </div>
+                        </label>
+                      </div>
+                      
+                      {blogForm.image && (
+                        <div className="mt-6">
+                          <h4 className="text-white font-semibold mb-3 flex items-center">
+                            <i className="fas fa-eye mr-2"></i>
+                            Thumbnail Preview
+                          </h4>
+                          <div className="relative">
+                            <img src={blogForm.image} alt="Thumbnail Preview" className="w-full max-h-64 object-cover rounded-lg shadow-lg" />
+                            <button
+                              type="button"
+                              onClick={() => setBlogForm({...blogForm, image: '', imageFileName: ''})}
+                              className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-2 hover:bg-red-700 transition-colors"
+                            >
+                              <i className="fas fa-times"></i>
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* YouTube URL for YouTube Posts */}
+                {blogForm.postType === 'youtube' && (
+                  <div className="bg-gradient-to-r from-red-900/20 to-red-800/20 rounded-xl p-6 border border-red-500/30">
+                    <div className="flex items-center mb-4">
+                      <div className="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center mr-3">
+                        <i className="fab fa-youtube text-white text-xl"></i>
+                      </div>
+                      <div>
+                        <h3 className="text-white font-semibold text-lg">YouTube Video</h3>
+                        <p className="text-gray-400 text-sm">Add a YouTube video to your post</p>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-white mb-2 font-semibold">YouTube URL</label>
+                        <input
+                          type="url"
+                          value={blogForm.youtubeUrl}
+                          onChange={(e) => handleYouTubeUrlChange(e.target.value)}
+                          placeholder="https://www.youtube.com/watch?v=..."
+                          className="w-full px-4 py-3 bg-gray-700 text-white rounded-xl border border-gray-600 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all duration-300"
+                        />
+                        <p className="text-gray-400 text-sm mt-2">
+                          <i className="fas fa-info-circle mr-1"></i>
+                          Paste any YouTube URL (watch, youtu.be, embed, etc.)
+                        </p>
+                      </div>
+                      
+                      {blogForm.youtubeThumbnail && (
+                        <div className="mt-6">
+                          <h4 className="text-white font-semibold mb-3 flex items-center">
+                            <i className="fas fa-play mr-2"></i>
+                            Video Preview
+                          </h4>
+                          <div className="relative">
+                            <img
+                              src={blogForm.youtubeThumbnail}
+                              alt="YouTube Thumbnail"
+                              className="w-full max-w-md rounded-lg shadow-lg"
+                            />
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center opacity-90 hover:opacity-100 transition-opacity">
+                                <i className="fas fa-play text-white text-xl ml-1"></i>
+                              </div>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => setBlogForm({...blogForm, youtubeUrl: '', youtubeThumbnail: ''})}
+                              className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-2 hover:bg-red-700 transition-colors"
+                            >
+                              <i className="fas fa-times"></i>
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-white mb-2">Category</label>
