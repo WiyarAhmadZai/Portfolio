@@ -130,9 +130,9 @@ const About = () => {
       ]
     },
     {
-      degree: "Higher Secondary Certificate",
-      institution: "Kabul Education Institute",
-      period: "2018 - 2020",
+      degree: "High School Graduation",
+      institution: "Hazrat Qais Bin Saad High School",
+      period: "2019 - 2021",
       gpa: "3.9/4.0",
       courses: [
         "Mathematics",
