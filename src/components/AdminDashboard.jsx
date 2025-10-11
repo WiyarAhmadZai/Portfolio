@@ -223,6 +223,7 @@ const AdminDashboard = () => {
   const handleDeleteSkill = (id) => {
     if (window.confirm('Are you sure you want to delete this skill?')) {
       deleteCustomSkill(id);
+      alert('Skill deleted successfully!');
     }
   };
 
@@ -326,12 +327,14 @@ const AdminDashboard = () => {
         deleteImage(project.imageFileName);
       }
       deleteProject(id);
+      alert('Project deleted successfully!');
     }
   };
 
   const handleDeleteBlog = (id) => {
     if (window.confirm('Are you sure you want to delete this blog post?')) {
       deleteBlogPost(id);
+      alert('Blog post deleted successfully!');
     }
   };
 
