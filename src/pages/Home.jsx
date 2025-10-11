@@ -140,67 +140,122 @@ const Home = () => {
     <div className="min-h-screen py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Hero Section */}
-        <div className={`text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="mb-8 animate-bounce">
-            <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-full w-48 h-48 mx-auto overflow-hidden border-4 border-white shadow-2xl">
-              <img 
-                src="/Photos Simples/Wiyar Pic.jpg" 
-                alt="Wiyar Ahmad Zai" 
-                className="w-full h-full object-cover"
-              />
+        <div className={`relative text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          {/* Background Elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-full blur-3xl animate-pulse-slow"></div>
+            <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-purple-500/20 to-pink-600/20 rounded-full blur-3xl animate-pulse-slow" style={{animationDelay: '1s'}}></div>
+          </div>
+          
+          {/* Profile Image with Enhanced Animation */}
+          <div className="relative mb-12">
+            <div className="relative inline-block">
+              {/* Glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full blur-xl opacity-75 animate-pulse"></div>
+              
+              {/* Main image container */}
+              <div className="relative bg-gradient-to-br from-blue-500 to-purple-600 rounded-full w-56 h-56 mx-auto overflow-hidden border-4 border-white/20 shadow-2xl transform transition-all duration-500 hover:scale-105 hover:rotate-3">
+                <img 
+                  src="/Photos Simples/.jpg" 
+                  alt="Wiyar Ahmad Zai" 
+                  className="w-full h-full object-cover"
+                />
+                
+                {/* Overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              </div>
+              
+              {/* Floating elements */}
+              <div className="absolute -top-4 -right-4 w-8 h-8 bg-blue-500 rounded-full animate-bounce" style={{animationDelay: '0.5s'}}></div>
+              <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-purple-500 rounded-full animate-bounce" style={{animationDelay: '1s'}}></div>
+              <div className="absolute top-1/2 -right-8 w-4 h-4 bg-pink-500 rounded-full animate-bounce" style={{animationDelay: '1.5s'}}></div>
             </div>
           </div>
           
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600 mb-4 animate-pulse">
-            Wiyar Ahmad Zai
-          </h1>
-          
-          <p className="mt-4 text-xl text-gray-300 max-w-2xl mx-auto animate-fade-in">
-            Computer Science Student at Kabul Polytechnic University
-          </p>
-          
-          <p className="mt-2 text-lg text-gray-400 max-w-2xl mx-auto">
-            Information Systems Department
-          </p>
-          
-          <div className="mt-6 bg-gray-800 rounded-lg p-4 max-w-2xl mx-auto">
-            <p className="text-gray-300">
-              Full-Stack Developer with expertise in modern web technologies. 
-              Passionate about creating innovative solutions and building impactful applications.
-            </p>
-          </div>
-          
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <div className="bg-gray-800 px-4 py-2 rounded-full">
-              <span className="text-blue-400 font-medium">22+ Projects</span>
+          {/* Enhanced Typography */}
+          <div className="relative z-10">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 mb-6 leading-tight">
+              <span className="inline-block animate-fade-in">Wiyar</span>
+              <span className="inline-block animate-fade-in" style={{animationDelay: '0.2s'}}> Ahmad</span>
+              <span className="inline-block animate-fade-in" style={{animationDelay: '0.4s'}}> Zai</span>
+            </h1>
+            
+            <div className="space-y-3 mb-8">
+              <p className="text-2xl sm:text-3xl text-gray-200 font-light animate-slide-in-up" style={{animationDelay: '0.6s'}}>
+                Computer Science Student
+              </p>
+              <p className="text-lg sm:text-xl text-blue-300 font-medium animate-slide-in-up" style={{animationDelay: '0.8s'}}>
+                Kabul Polytechnic University
+              </p>
+              <p className="text-base sm:text-lg text-gray-400 animate-slide-in-up" style={{animationDelay: '1s'}}>
+                Information Systems Department
+              </p>
             </div>
-            <div className="bg-gray-800 px-4 py-2 rounded-full">
-              <span className="text-purple-400 font-medium">Full-Stack Developer</span>
+            
+            {/* Enhanced Description Card */}
+            <div className="mt-8 bg-gradient-to-r from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl p-6 max-w-3xl mx-auto border border-white/10 shadow-2xl animate-slide-in-up" style={{animationDelay: '1.2s'}}>
+              <p className="text-gray-200 text-lg leading-relaxed">
+                Full-Stack Developer with expertise in modern web technologies. 
+                Passionate about creating innovative solutions and building impactful applications 
+                that make a difference in people's lives.
+              </p>
             </div>
-            <div className="bg-gray-800 px-4 py-2 rounded-full">
-              <span className="text-green-400 font-medium">Open Source Contributor</span>
+            
+            {/* Enhanced Tags */}
+            <div className="mt-8 flex flex-wrap justify-center gap-3 animate-slide-in-up" style={{animationDelay: '1.4s'}}>
+              <div className="bg-gradient-to-r from-blue-500/20 to-blue-600/20 backdrop-blur-sm px-6 py-3 rounded-full border border-blue-500/30 hover:border-blue-400/50 transition-all duration-300">
+                <span className="text-blue-300 font-semibold flex items-center">
+                  <i className="fas fa-code mr-2"></i>
+                  22+ Projects
+                </span>
+              </div>
+              <div className="bg-gradient-to-r from-purple-500/20 to-purple-600/20 backdrop-blur-sm px-6 py-3 rounded-full border border-purple-500/30 hover:border-purple-400/50 transition-all duration-300">
+                <span className="text-purple-300 font-semibold flex items-center">
+                  <i className="fas fa-laptop-code mr-2"></i>
+                  Full-Stack Developer
+                </span>
+              </div>
+              <div className="bg-gradient-to-r from-green-500/20 to-green-600/20 backdrop-blur-sm px-6 py-3 rounded-full border border-green-500/30 hover:border-green-400/50 transition-all duration-300">
+                <span className="text-green-300 font-semibold flex items-center">
+                  <i className="fab fa-github mr-2"></i>
+                  Open Source Contributor
+                </span>
+              </div>
             </div>
-          </div>
-          
-          <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-            <Link 
-              to="/about" 
-              className="px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 md:py-4 md:text-lg md:px-10 transition-all duration-300 transform hover:scale-105 shadow-lg"
-            >
-              Learn More
-            </Link>
-            <Link 
-              to="/projects" 
-              className="px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-700 md:py-4 md:text-lg md:px-10 transition-all duration-300 transform hover:scale-105 shadow-lg"
-            >
-              View Projects
-            </Link>
-            <Link 
-              to="/contact" 
-              className="px-8 py-3 border border-gray-600 text-base font-medium rounded-md text-white hover:bg-gray-700 md:py-4 md:text-lg md:px-10 transition-all duration-300 transform hover:scale-105 shadow-lg"
-            >
-              Get In Touch
-            </Link>
+            
+            {/* Enhanced CTA Buttons */}
+            <div className="mt-12 flex flex-col sm:flex-row justify-center gap-4 animate-slide-in-up" style={{animationDelay: '1.6s'}}>
+              <Link 
+                to="/about" 
+                className="group relative px-8 py-4 text-base font-semibold rounded-xl text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 md:py-5 md:text-lg md:px-12 transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-blue-500/25"
+              >
+                <span className="relative z-10 flex items-center justify-center">
+                  <i className="fas fa-user mr-2"></i>
+                  Learn More
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </Link>
+              
+              <Link 
+                to="/projects" 
+                className="group relative px-8 py-4 text-base font-semibold rounded-xl text-white bg-gray-800/50 backdrop-blur-sm border border-gray-600/50 hover:border-gray-500/50 hover:bg-gray-700/50 md:py-5 md:text-lg md:px-12 transition-all duration-300 transform hover:scale-105 shadow-xl"
+              >
+                <span className="relative z-10 flex items-center justify-center">
+                  <i className="fas fa-folder-open mr-2"></i>
+                  View Projects
+                </span>
+              </Link>
+              
+              <Link 
+                to="/contact" 
+                className="group relative px-8 py-4 text-base font-semibold rounded-xl text-white border-2 border-transparent bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 md:py-5 md:text-lg md:px-12 transition-all duration-300 transform hover:scale-105 shadow-xl"
+              >
+                <span className="relative z-10 flex items-center justify-center">
+                  <i className="fas fa-envelope mr-2"></i>
+                  Get In Touch
+                </span>
+              </Link>
+            </div>
           </div>
         </div>
 
