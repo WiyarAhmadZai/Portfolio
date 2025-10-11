@@ -639,7 +639,21 @@ const AdminDashboard = () => {
                   <h3 className="text-2xl font-bold text-white mb-2">No Custom Skills Yet</h3>
                   <p className="text-gray-400 mb-4">Add your custom skills to showcase your expertise</p>
                   <button
-                    onClick={() => setShowSkillForm(true)}
+                    onClick={() => {
+                      // Set random defaults for new skill
+                      const randomIcon = defaultSkillIcons[Math.floor(Math.random() * defaultSkillIcons.length)];
+                      const randomColor = defaultSkillColors[Math.floor(Math.random() * defaultSkillColors.length)];
+                      
+                      setSkillForm({
+                        name: '',
+                        percentage: 80,
+                        description: '',
+                        category: 'Technical',
+                        icon: randomIcon,
+                        color: randomColor
+                      });
+                      setShowSkillForm(true);
+                    }}
                     className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
                   >
                     <i className="fas fa-plus mr-2"></i>
