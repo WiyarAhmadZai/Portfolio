@@ -95,7 +95,7 @@ const About = () => {
     {
       title: "Teaching Assistant",
       company: "Kabul Polytechnic University",
-      period: "2021 - 2022",
+      period: "2023 - 2024",
       description: "Supported computer science education by assisting professors and conducting lab sessions. Helped students understand complex programming concepts and provided hands-on technical support.",
       achievements: [
         "Mentored 80+ students in programming and software development",
