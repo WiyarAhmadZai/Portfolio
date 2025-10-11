@@ -48,6 +48,43 @@ const AdminDashboard = () => {
     color: '#3B82F6'
   });
 
+  // Default skill icons and colors
+  const defaultSkillIcons = [
+    'fas fa-code',
+    'fas fa-laptop-code',
+    'fas fa-server',
+    'fas fa-database',
+    'fas fa-paint-brush',
+    'fas fa-palette',
+    'fas fa-cogs',
+    'fas fa-tools',
+    'fas fa-mobile-alt',
+    'fas fa-cloud',
+    'fas fa-shield-alt',
+    'fas fa-rocket',
+    'fas fa-lightbulb',
+    'fas fa-star',
+    'fas fa-gem'
+  ];
+
+  const defaultSkillColors = [
+    '#3B82F6', // Blue
+    '#10B981', // Green
+    '#F59E0B', // Yellow
+    '#EF4444', // Red
+    '#8B5CF6', // Purple
+    '#06B6D4', // Cyan
+    '#F97316', // Orange
+    '#EC4899', // Pink
+    '#84CC16', // Lime
+    '#6366F1', // Indigo
+    '#14B8A6', // Teal
+    '#F43F5E', // Rose
+    '#A855F7', // Violet
+    '#0EA5E9', // Sky
+    '#22C55E'  // Emerald
+  ];
+
   // Project form state
   const [projectForm, setProjectForm] = useState({
     title: '',
@@ -154,13 +191,18 @@ const AdminDashboard = () => {
     } else {
       addCustomSkill(skillForm);
     }
+    
+    // Reset form with random defaults
+    const randomIcon = defaultSkillIcons[Math.floor(Math.random() * defaultSkillIcons.length)];
+    const randomColor = defaultSkillColors[Math.floor(Math.random() * defaultSkillColors.length)];
+    
     setSkillForm({
       name: '',
       percentage: 80,
       description: '',
       category: 'Technical',
-      icon: 'fas fa-code',
-      color: '#3B82F6'
+      icon: randomIcon,
+      color: randomColor
     });
     setShowSkillForm(false);
   };
@@ -513,6 +555,18 @@ const AdminDashboard = () => {
               <button
                 onClick={() => {
                   setEditingSkill(null);
+                  // Set random defaults for new skill
+                  const randomIcon = defaultSkillIcons[Math.floor(Math.random() * defaultSkillIcons.length)];
+                  const randomColor = defaultSkillColors[Math.floor(Math.random() * defaultSkillColors.length)];
+                  
+                  setSkillForm({
+                    name: '',
+                    percentage: 80,
+                    description: '',
+                    category: 'Technical',
+                    icon: randomIcon,
+                    color: randomColor
+                  });
                   setShowSkillForm(true);
                 }}
                 className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
@@ -1136,33 +1190,59 @@ const AdminDashboard = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-white mb-2 font-semibold">Icon Class</label>
-                    <input
-                      type="text"
+                    <label className="block text-white mb-2 font-semibold">Icon</label>
+                    <select
                       value={skillForm.icon}
                       onChange={(e) => setSkillForm({...skillForm, icon: e.target.value})}
                       className="w-full px-3 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300"
-                      placeholder="e.g., fab fa-react"
-                    />
+                    >
+                      {defaultSkillIcons.map((icon, index) => (
+                        <option key={index} value={icon}>
+                          {icon.replace('fas fa-', '').replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-white mb-2 font-semibold">Color</label>
-                  <div className="flex items-center space-x-4">
-                    <input
-                      type="color"
-                      value={skillForm.color}
-                      onChange={(e) => setSkillForm({...skillForm, color: e.target.value})}
-                      className="w-12 h-10 rounded border border-gray-600 cursor-pointer"
-                    />
-                    <input
-                      type="text"
-                      value={skillForm.color}
-                      onChange={(e) => setSkillForm({...skillForm, color: e.target.value})}
-                      className="flex-1 px-3 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300"
-                      placeholder="#3B82F6"
-                    />
+                  <div className="space-y-3">
+                    {/* Color Palette */}
+                    <div className="grid grid-cols-5 gap-2">
+                      {defaultSkillColors.map((color, index) => (
+                        <button
+                          key={index}
+                          type="button"
+                          onClick={() => setSkillForm({...skillForm, color: color})}
+                          className={`w-10 h-10 rounded-lg border-2 transition-all duration-300 ${
+                            skillForm.color === color 
+                              ? 'border-white scale-110 shadow-lg' 
+                              : 'border-gray-600 hover:border-gray-400 hover:scale-105'
+                          }`}
+                          style={{ backgroundColor: color }}
+                          title={color}
+                        />
+                      ))}
+                    </div>
+                    
+                    {/* Custom Color Input */}
+                    <div className="flex items-center space-x-4">
+                      <input
+                        type="color"
+                        value={skillForm.color}
+                        onChange={(e) => setSkillForm({...skillForm, color: e.target.value})}
+                        className="w-12 h-10 rounded border border-gray-600 cursor-pointer"
+                        title="Custom Color"
+                      />
+                      <input
+                        type="text"
+                        value={skillForm.color}
+                        onChange={(e) => setSkillForm({...skillForm, color: e.target.value})}
+                        className="flex-1 px-3 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300"
+                        placeholder="#3B82F6"
+                      />
+                    </div>
                   </div>
                 </div>
 
