@@ -277,16 +277,16 @@ const Home = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               
               {/* Left Side - Content */}
-              <div className="space-y-8 animate-slide-in-left">
+              <div className="space-y-6 animate-slide-in-left">
                 {/* Animated greeting */}
                 <div className="inline-block">
-                  <span className="text-lg sm:text-xl text-blue-400 font-medium animate-fade-in">
+                  <span className="text-base sm:text-lg text-blue-400 font-medium animate-fade-in">
                     Hello, I'm
                   </span>
                 </div>
                 
                 {/* Enhanced Name with typing effect */}
-                <h1 id="hero-title" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight">
+                <h1 id="hero-title" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight">
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 animate-gradient-x">
                     <span className="inline-block animate-fade-in">Wiyar</span>
                     <span className="inline-block animate-fade-in" style={{animationDelay: '0.2s'}}> Ahmad</span>
@@ -295,46 +295,45 @@ const Home = () => {
                 </h1>
                 
                 {/* Dynamic role display with typing effect */}
-                <div className="space-y-2">
-                  <div className="text-2xl sm:text-3xl text-gray-200 font-light animate-slide-in-up min-h-[2.5rem] flex items-center" style={{animationDelay: '0.6s'}}>
+                <div className="space-y-1">
+                  <div className="text-lg sm:text-xl text-gray-200 font-light animate-slide-in-up min-h-[1.5rem] flex items-center" style={{animationDelay: '0.6s'}}>
                     <span className="inline-block">
                       {typingText}
                       <span className="animate-pulse text-blue-400">|</span>
                     </span>
                   </div>
-                  <div className="text-lg sm:text-xl text-blue-300 font-medium animate-slide-in-up" style={{animationDelay: '0.8s'}}>
+                  <div className="text-sm sm:text-base text-blue-300 font-medium animate-slide-in-up" style={{animationDelay: '0.8s'}}>
                     <span className="inline-block">Kabul Polytechnic University</span>
                   </div>
-                  <div className="text-base sm:text-lg text-gray-400 animate-slide-in-up" style={{animationDelay: '1s'}}>
+                  <div className="text-xs sm:text-sm text-gray-400 animate-slide-in-up" style={{animationDelay: '1s'}}>
                     <span className="inline-block">Information Systems Department</span>
                   </div>
                 </div>
                 
                 {/* Enhanced Description */}
-                <div className="bg-gradient-to-r from-gray-800/60 to-gray-900/60 backdrop-blur-sm rounded-2xl p-6 border border-white/10 shadow-2xl animate-slide-in-up" style={{animationDelay: '1.2s'}}>
-                  <p className="text-gray-200 text-lg leading-relaxed">
+                <div className="bg-gradient-to-r from-gray-800/60 to-gray-900/60 backdrop-blur-sm rounded-xl p-4 border border-white/10 shadow-2xl animate-slide-in-up" style={{animationDelay: '1.2s'}}>
+                  <p className="text-gray-200 text-sm sm:text-base leading-relaxed">
                     Full-Stack Developer with expertise in modern web technologies. 
-                    Passionate about creating innovative solutions and building impactful applications 
-                    that make a difference in people's lives.
+                    Passionate about creating innovative solutions and building impactful applications.
                   </p>
                 </div>
                 
                 {/* Interactive skill tags */}
-                <div className="flex flex-wrap gap-3 animate-slide-in-up" style={{animationDelay: '1.4s'}}>
-                  <div className="group bg-gradient-to-r from-blue-500/20 to-blue-600/20 backdrop-blur-sm px-6 py-3 rounded-full border border-blue-500/30 hover:border-blue-400/50 transition-all duration-300 hover:scale-105 cursor-pointer">
-                    <span className="text-blue-300 font-semibold flex items-center">
+                <div className="flex flex-wrap gap-2 animate-slide-in-up" style={{animationDelay: '1.4s'}}>
+                  <div className="group bg-gradient-to-r from-blue-500/20 to-blue-600/20 backdrop-blur-sm px-4 py-2 rounded-full border border-blue-500/30 hover:border-blue-400/50 transition-all duration-300 hover:scale-105 cursor-pointer">
+                    <span className="text-blue-300 font-medium text-sm flex items-center">
                       <i className="fas fa-code mr-2 group-hover:animate-spin"></i>
                       Multiple Projects
                     </span>
                   </div>
-                  <div className="group bg-gradient-to-r from-purple-500/20 to-purple-600/20 backdrop-blur-sm px-6 py-3 rounded-full border border-purple-500/30 hover:border-purple-400/50 transition-all duration-300 hover:scale-105 cursor-pointer">
-                    <span className="text-purple-300 font-semibold flex items-center">
+                  <div className="group bg-gradient-to-r from-purple-500/20 to-purple-600/20 backdrop-blur-sm px-4 py-2 rounded-full border border-purple-500/30 hover:border-purple-400/50 transition-all duration-300 hover:scale-105 cursor-pointer">
+                    <span className="text-purple-300 font-medium text-sm flex items-center">
                       <i className="fas fa-laptop-code mr-2 group-hover:animate-bounce"></i>
-                      Full-Stack Developer
+                      Full-Stack Dev
                     </span>
                   </div>
-                  <div className="group bg-gradient-to-r from-green-500/20 to-green-600/20 backdrop-blur-sm px-6 py-3 rounded-full border border-green-500/30 hover:border-green-400/50 transition-all duration-300 hover:scale-105 cursor-pointer">
-                    <span className="text-green-300 font-semibold flex items-center">
+                  <div className="group bg-gradient-to-r from-green-500/20 to-green-600/20 backdrop-blur-sm px-4 py-2 rounded-full border border-green-500/30 hover:border-green-400/50 transition-all duration-300 hover:scale-105 cursor-pointer">
+                    <span className="text-green-300 font-medium text-sm flex items-center">
                       <i className="fab fa-github mr-2 group-hover:animate-pulse"></i>
                       Active Contributor
                     </span>
@@ -342,22 +341,22 @@ const Home = () => {
                 </div>
                 
                 {/* Enhanced CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 animate-slide-in-up" style={{animationDelay: '1.6s'}}>
+                <div className="flex flex-col sm:flex-row gap-3 animate-slide-in-up" style={{animationDelay: '1.6s'}}>
                   <Link 
                     to="/about" 
-                    className="group relative px-8 py-4 text-base font-semibold rounded-xl text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 md:py-5 md:text-lg md:px-12 transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-blue-500/25"
+                    className="group relative px-6 py-3 text-sm font-semibold rounded-lg text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 md:py-4 md:text-base md:px-8 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-blue-500/25"
                     aria-label="Learn more about Wiyar Ahmad Zai"
                   >
                     <span className="relative z-10 flex items-center justify-center">
                       <i className="fas fa-user mr-2 group-hover:animate-bounce" aria-hidden="true"></i>
                       Learn More
                     </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </Link>
                   
                   <Link 
                     to="/projects" 
-                    className="group relative px-8 py-4 text-base font-semibold rounded-xl text-white bg-gray-800/50 backdrop-blur-sm border border-gray-600/50 hover:border-gray-500/50 hover:bg-gray-700/50 md:py-5 md:text-lg md:px-12 transition-all duration-300 transform hover:scale-105 shadow-xl"
+                    className="group relative px-6 py-3 text-sm font-semibold rounded-lg text-white bg-gray-800/50 backdrop-blur-sm border border-gray-600/50 hover:border-gray-500/50 hover:bg-gray-700/50 md:py-4 md:text-base md:px-8 transition-all duration-300 transform hover:scale-105 shadow-lg"
                     aria-label="View Wiyar's projects and portfolio"
                   >
                     <span className="relative z-10 flex items-center justify-center">
@@ -368,7 +367,7 @@ const Home = () => {
                   
                   <Link 
                     to="/contact" 
-                    className="group relative px-8 py-4 text-base font-semibold rounded-xl text-white border-2 border-transparent bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 md:py-5 md:text-lg md:px-12 transition-all duration-300 transform hover:scale-105 shadow-xl"
+                    className="group relative px-6 py-3 text-sm font-semibold rounded-lg text-white border-2 border-transparent bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 md:py-4 md:text-base md:px-8 transition-all duration-300 transform hover:scale-105 shadow-lg"
                     aria-label="Get in touch with Wiyar Ahmad Zai"
                   >
                     <span className="relative z-10 flex items-center justify-center">
