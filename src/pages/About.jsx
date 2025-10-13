@@ -266,10 +266,17 @@ const About = () => {
     <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h1 className="text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600 mb-4">
-            About Me
+          <div className="inline-block mb-4">
+            <span className="text-xs text-blue-400 font-medium tracking-wide uppercase">About</span>
+          </div>
+          <h1 className="text-3xl md:text-4xl font-black text-white mb-6 tracking-tight">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
+              About Me
+            </span>
           </h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
+          <p className="text-gray-300 text-sm max-w-3xl mx-auto leading-relaxed">
+            Discover my journey, skills, and passion for technology and innovation
+          </p>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-12 items-center">
@@ -286,14 +293,14 @@ const About = () => {
           </div>
 
           <div className={`lg:w-1/2 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-            <h2 className="text-3xl font-bold text-white mb-6">Who am I?</h2>
-            <p className="text-gray-300 text-lg mb-6">
+            <h2 className="text-2xl font-bold text-white mb-6 tracking-tight">Who am I?</h2>
+            <p className="text-gray-300 text-sm mb-6 leading-relaxed">
               I'm Wiyar Ahmad Zai, a dedicated Computer Science student at Kabul Polytechnic University and a passionate Full-Stack Web Developer 
               at Hushmand Shahar Technology. I specialize in creating innovative web applications and leading technical projects that drive 
               digital transformation in Afghanistan's growing tech landscape.
             </p>
             
-            <p className="text-gray-300 text-lg mb-6">
+            <p className="text-gray-300 text-sm mb-6 leading-relaxed">
               Throughout my journey, I've combined academic excellence with real-world impact. From leading the development of a comprehensive 
               MIS system for my university to volunteering as a computer science teacher, I'm committed to using technology to make a positive 
               difference. My experience spans from enterprise-level development to community service, always striving to bridge the gap between 
@@ -302,27 +309,27 @@ const About = () => {
             
             <div className="grid grid-cols-2 gap-4 mt-8">
               <div className="bg-gray-800 p-4 rounded-lg shadow-lg transform transition duration-500 hover:scale-105">
-                <h3 className="text-xl font-bold text-blue-400 mb-2">Current Role</h3>
-                <p className="text-gray-300">Full-Stack Web Developer</p>
-                <p className="text-gray-400">Hushmand Shahar Technology</p>
+                <h3 className="text-lg font-bold text-blue-400 mb-2">Current Role</h3>
+                <p className="text-gray-300 text-sm">Full-Stack Web Developer</p>
+                <p className="text-gray-400 text-xs">Hushmand Shahar Technology</p>
               </div>
               
               <div className="bg-gray-800 p-4 rounded-lg shadow-lg transform transition duration-500 hover:scale-105">
-                <h3 className="text-xl font-bold text-purple-400 mb-2">Education</h3>
-                <p className="text-gray-300">BSc in Computer Science</p>
-                <p className="text-gray-400">Kabul Polytechnic University</p>
+                <h3 className="text-lg font-bold text-purple-400 mb-2">Education</h3>
+                <p className="text-gray-300 text-sm">BSc in Computer Science</p>
+                <p className="text-gray-400 text-xs">Kabul Polytechnic University</p>
               </div>
             </div>
             
             {/* Languages Section */}
             <div className="mt-8">
-              <h3 className="text-xl font-bold text-white mb-4">Languages</h3>
+              <h3 className="text-lg font-bold text-white mb-4 tracking-tight">Languages</h3>
               <div className="space-y-3">
                 {languages.map((language, index) => (
                   <div key={index}>
                     <div className="flex justify-between mb-1">
-                      <span className="text-gray-300">{language.name}</span>
-                      <span className="text-gray-400">{language.proficiency}</span>
+                      <span className="text-gray-300 text-xs">{language.name}</span>
+                      <span className="text-gray-400 text-xs">{language.proficiency}</span>
                     </div>
                     <div className="w-full bg-gray-700 rounded-full h-2">
                       <div 
@@ -337,12 +344,12 @@ const About = () => {
             
             {/* Interests Section */}
             <div className="mt-8">
-              <h3 className="text-xl font-bold text-white mb-4">Interests</h3>
+              <h3 className="text-lg font-bold text-white mb-4 tracking-tight">Interests</h3>
               <div className="flex flex-wrap gap-2">
                 {interests.map((interest, index) => (
                   <div key={index} className="bg-gray-800 px-3 py-2 rounded-full flex items-center">
                     <i className={`fas ${interest.icon} text-blue-400 mr-2`}></i>
-                    <span className="text-gray-300">{interest.name}</span>
+                    <span className="text-gray-300 text-xs">{interest.name}</span>
                   </div>
                 ))}
               </div>
