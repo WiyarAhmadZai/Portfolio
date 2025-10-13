@@ -331,58 +331,96 @@ const Home = () => {
                 </div>
               </div>
               
-              {/* Right Side - Clean Visual */}
+              {/* Right Side - Animated Visual */}
               <div className="relative animate-slide-in-right">
                 {/* Main Profile Image Container */}
                 <div className="relative mx-auto max-w-sm">
-                  {/* Subtle glow effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500 rounded-full blur-xl opacity-40 animate-pulse"></div>
+                  {/* Enhanced glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500 rounded-full blur-2xl opacity-60 animate-pulse"></div>
                   
-                  {/* Main image container */}
-                  <div className="relative bg-gradient-to-br from-blue-500 to-purple-600 rounded-full w-64 h-64 mx-auto overflow-hidden border-4 border-white/20 shadow-2xl transform transition-all duration-500 hover:scale-105">
+                  {/* Rotating border */}
+                  <div className="absolute inset-0 rounded-full border-4 border-transparent bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 animate-spin-slow" style={{animationDuration: '8s'}}></div>
+                  
+                  {/* Main image container with enhanced animations */}
+                  <div className="relative bg-gradient-to-br from-blue-500 to-purple-600 rounded-full w-64 h-64 mx-auto overflow-hidden border-4 border-white/20 shadow-2xl transform transition-all duration-500 hover:scale-110 hover:rotate-3 group">
                     <img 
                       src="/Photos Simples/Smile.jpg" 
                       alt="Wiyar Ahmad Zai" 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     
                     {/* Overlay gradient */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                    
+                    {/* Floating particles overlay */}
+                    <div className="absolute inset-0">
+                      <div className="absolute top-4 right-4 w-2 h-2 bg-blue-400 rounded-full animate-bounce opacity-80" style={{animationDelay: '0.5s'}}></div>
+                      <div className="absolute bottom-6 left-6 w-3 h-3 bg-purple-400 rounded-full animate-bounce opacity-80" style={{animationDelay: '1s'}}></div>
+                      <div className="absolute top-1/2 right-8 w-1.5 h-1.5 bg-pink-400 rounded-full animate-bounce opacity-80" style={{animationDelay: '1.5s'}}></div>
+                      <div className="absolute bottom-1/3 left-8 w-2.5 h-2.5 bg-cyan-400 rounded-full animate-bounce opacity-80" style={{animationDelay: '2s'}}></div>
+                    </div>
                   </div>
                   
-                  {/* Minimal floating tech icons */}
-                  <div className="absolute -top-6 -right-6 w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg animate-float" style={{animationDelay: '0.5s'}}>
-                    <i className="fas fa-code text-white text-sm"></i>
+                  {/* Enhanced floating tech icons */}
+                  <div className="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg animate-float hover:scale-110 transition-transform duration-300 cursor-pointer" style={{animationDelay: '0.5s'}}>
+                    <i className="fas fa-code text-white text-lg group-hover:animate-spin"></i>
                   </div>
-                  <div className="absolute -bottom-6 -left-6 w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg animate-float" style={{animationDelay: '1s'}}>
-                    <i className="fas fa-laptop-code text-white text-sm"></i>
+                  <div className="absolute -bottom-6 -left-6 w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg animate-float hover:scale-110 transition-transform duration-300 cursor-pointer" style={{animationDelay: '1s'}}>
+                    <i className="fas fa-laptop-code text-white text-lg group-hover:animate-bounce"></i>
                   </div>
-                  <div className="absolute top-1/2 -right-8 w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center shadow-lg animate-float" style={{animationDelay: '1.5s'}}>
-                    <i className="fab fa-github text-white text-xs"></i>
+                  <div className="absolute top-1/2 -right-8 w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center shadow-lg animate-float hover:scale-110 transition-transform duration-300 cursor-pointer" style={{animationDelay: '1.5s'}}>
+                    <i className="fab fa-github text-white group-hover:animate-pulse"></i>
+                  </div>
+                  <div className="absolute top-1/2 -left-8 w-10 h-10 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full flex items-center justify-center shadow-lg animate-float hover:scale-110 transition-transform duration-300 cursor-pointer" style={{animationDelay: '2s'}}>
+                    <i className="fas fa-paint-brush text-white group-hover:animate-bounce"></i>
                   </div>
                 </div>
                 
-                {/* Essential stats cards */}
-                <div className="absolute -bottom-6 -left-6 bg-gradient-to-r from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-lg p-3 border border-white/10 shadow-xl animate-slide-in-up hover:scale-105 transition-transform duration-300" style={{animationDelay: '2s'}}>
+                {/* Enhanced stats cards with animations */}
+                <div className="absolute -bottom-6 -left-6 bg-gradient-to-r from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-lg p-3 border border-white/10 shadow-xl animate-slide-in-up hover:scale-110 hover:shadow-2xl transition-all duration-300 cursor-pointer group" style={{animationDelay: '2s'}}>
                   <div className="flex items-center space-x-2">
-                    <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                    <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center group-hover:animate-pulse">
                       <i className="fas fa-project-diagram text-white text-xs"></i>
                     </div>
                     <div>
-                      <div className="text-white font-bold text-sm">{animatedCounters.projects}+</div>
-                      <div className="text-gray-400 text-xs">Projects</div>
+                      <div className="text-white font-bold text-sm group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-500 transition-all duration-300">{animatedCounters.projects}+</div>
+                      <div className="text-gray-400 text-xs group-hover:text-white transition-colors duration-300">Projects</div>
                     </div>
                   </div>
                 </div>
                 
-                <div className="absolute -top-6 -right-6 bg-gradient-to-r from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-lg p-3 border border-white/10 shadow-xl animate-slide-in-up hover:scale-105 transition-transform duration-300" style={{animationDelay: '2.2s'}}>
+                <div className="absolute -top-6 -right-6 bg-gradient-to-r from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-lg p-3 border border-white/10 shadow-xl animate-slide-in-up hover:scale-110 hover:shadow-2xl transition-all duration-300 cursor-pointer group" style={{animationDelay: '2.2s'}}>
                   <div className="flex items-center space-x-2">
-                    <div className="w-6 h-6 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center">
+                    <div className="w-6 h-6 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center group-hover:animate-pulse">
                       <i className="fas fa-code-branch text-white text-xs"></i>
                     </div>
                     <div>
-                      <div className="text-white font-bold text-sm">{animatedCounters.experience}+</div>
-                      <div className="text-gray-400 text-xs">Years</div>
+                      <div className="text-white font-bold text-sm group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-green-400 group-hover:to-emerald-500 transition-all duration-300">{animatedCounters.experience}+</div>
+                      <div className="text-gray-400 text-xs group-hover:text-white transition-colors duration-300">Years</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="absolute -bottom-6 -right-6 bg-gradient-to-r from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-lg p-3 border border-white/10 shadow-xl animate-slide-in-up hover:scale-110 hover:shadow-2xl transition-all duration-300 cursor-pointer group" style={{animationDelay: '2.4s'}}>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center group-hover:animate-pulse">
+                      <i className="fas fa-tools text-white text-xs"></i>
+                    </div>
+                    <div>
+                      <div className="text-white font-bold text-sm group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-500 transition-all duration-300">{animatedCounters.technologies}+</div>
+                      <div className="text-gray-400 text-xs group-hover:text-white transition-colors duration-300">Technologies</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="absolute -top-6 -left-6 bg-gradient-to-r from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-lg p-3 border border-white/10 shadow-xl animate-slide-in-up hover:scale-110 hover:shadow-2xl transition-all duration-300 cursor-pointer group" style={{animationDelay: '2.6s'}}>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-6 h-6 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex items-center justify-center group-hover:animate-pulse">
+                      <i className="fas fa-code text-white text-xs"></i>
+                    </div>
+                    <div>
+                      <div className="text-white font-bold text-sm group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-blue-500 transition-all duration-300">{animatedCounters.contributions}+</div>
+                      <div className="text-gray-400 text-xs group-hover:text-white transition-colors duration-300">Contributions</div>
                     </div>
                   </div>
                 </div>
