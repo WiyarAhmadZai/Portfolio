@@ -273,13 +273,13 @@ const Home = () => {
               <div className="space-y-6 animate-slide-in-left">
                 {/* Simple greeting */}
                 <div className="inline-block">
-                  <span className="text-sm text-blue-400 font-medium animate-fade-in">
+                  <span className="text-xs text-blue-400 font-medium animate-fade-in tracking-wide uppercase">
                     Hello, I'm
                   </span>
                 </div>
                 
                 {/* Clean Name */}
-                <h1 id="hero-title" className="text-4xl sm:text-5xl md:text-6xl font-black leading-tight">
+                <h1 id="hero-title" className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight tracking-tight">
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
                     Wiyar Ahmad Zai
                   </span>
@@ -287,20 +287,20 @@ const Home = () => {
                 
                 {/* Simple role display */}
                 <div className="space-y-1">
-                  <div className="text-xl sm:text-2xl text-gray-200 font-light animate-slide-in-up" style={{animationDelay: '0.6s'}}>
+                  <div className="text-lg sm:text-xl text-gray-200 font-light animate-slide-in-up min-h-[1.5rem] flex items-center" style={{animationDelay: '0.6s'}}>
                     <span className="inline-block">
                       {typingText}
                       <span className="animate-pulse text-blue-400">|</span>
                     </span>
                   </div>
-                  <div className="text-sm text-blue-300 font-medium animate-slide-in-up" style={{animationDelay: '0.8s'}}>
+                  <div className="text-xs text-blue-300 font-medium animate-slide-in-up" style={{animationDelay: '0.8s'}}>
                     <span className="inline-block">Kabul Polytechnic University</span>
                   </div>
                 </div>
                 
                 {/* Clean Description */}
                 <div className="bg-gradient-to-r from-gray-800/40 to-gray-900/40 backdrop-blur-sm rounded-lg p-4 border border-white/5 shadow-lg animate-slide-in-up" style={{animationDelay: '1s'}}>
-                  <p className="text-gray-200 text-sm leading-relaxed">
+                  <p className="text-gray-200 text-xs leading-relaxed">
                     Full-Stack Developer passionate about creating innovative solutions and building impactful applications.
                   </p>
                 </div>
@@ -309,7 +309,7 @@ const Home = () => {
                 <div className="flex flex-col sm:flex-row gap-3 animate-slide-in-up" style={{animationDelay: '1.2s'}}>
                   <Link 
                     to="/about" 
-                    className="group relative px-6 py-3 text-sm font-semibold rounded-lg text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                    className="group relative px-5 py-2.5 text-xs font-semibold rounded-lg text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
                     aria-label="Learn more about Wiyar Ahmad Zai"
                   >
                     <span className="relative z-10 flex items-center justify-center">
@@ -320,7 +320,7 @@ const Home = () => {
                   
                   <Link 
                     to="/projects" 
-                    className="group relative px-6 py-3 text-sm font-semibold rounded-lg text-white bg-gray-800/50 backdrop-blur-sm border border-gray-600/50 hover:border-gray-500/50 hover:bg-gray-700/50 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                    className="group relative px-5 py-2.5 text-xs font-semibold rounded-lg text-white bg-gray-800/50 backdrop-blur-sm border border-gray-600/50 hover:border-gray-500/50 hover:bg-gray-700/50 transition-all duration-300 transform hover:scale-105 shadow-lg"
                     aria-label="View Wiyar's projects and portfolio"
                   >
                     <span className="relative z-10 flex items-center justify-center">
@@ -433,14 +433,14 @@ const Home = () => {
         <section className={`mt-32 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} aria-labelledby="stats-title">
           <div className="text-center mb-16">
             <div className="inline-block mb-4">
-              <span className="text-sm text-blue-400 font-medium">Achievements</span>
+              <span className="text-xs text-blue-400 font-medium tracking-wide uppercase">Achievements</span>
             </div>
-            <h2 id="stats-title" className="text-4xl md:text-5xl font-black text-white mb-6">
+            <h2 id="stats-title" className="text-3xl md:text-4xl font-black text-white mb-6 tracking-tight">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
                 By the Numbers
               </span>
             </h2>
-            <p className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
+            <p className="text-gray-300 text-sm max-w-3xl mx-auto leading-relaxed">
               My journey in numbers - projects completed, contributions made, and experience gained through dedication and passion
             </p>
           </div>
@@ -469,11 +469,11 @@ const Home = () => {
                     </div>
                   </div>
                   
-                  <h3 className="text-5xl md:text-6xl font-black text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:via-purple-500 group-hover:to-pink-500 transition-all duration-700">
+                  <h3 className="text-3xl md:text-4xl font-black text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:via-purple-500 group-hover:to-pink-500 transition-all duration-700 tracking-tight">
                     {stat.value}
                   </h3>
                   
-                  <p className="text-gray-300 font-semibold text-base md:text-lg group-hover:text-white transition-colors duration-500 mb-4">
+                  <p className="text-gray-300 font-semibold text-sm group-hover:text-white transition-colors duration-500 mb-4">
                     {stat.label}
                   </p>
                   
@@ -491,14 +491,14 @@ const Home = () => {
         <section className={`mt-32 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} aria-labelledby="skills-title">
           <div className="text-center mb-16">
             <div className="inline-block mb-4">
-              <span className="text-sm text-purple-400 font-medium">Expertise</span>
+              <span className="text-xs text-purple-400 font-medium tracking-wide uppercase">Expertise</span>
             </div>
-            <h2 id="skills-title" className="text-4xl md:text-5xl font-black text-white mb-6">
+            <h2 id="skills-title" className="text-3xl md:text-4xl font-black text-white mb-6 tracking-tight">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
                 Technical Skills
               </span>
             </h2>
-            <p className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
+            <p className="text-gray-300 text-sm max-w-3xl mx-auto leading-relaxed">
               A comprehensive range of technologies and frameworks I work with to create exceptional digital experiences
             </p>
           </div>
@@ -527,7 +527,7 @@ const Home = () => {
                         }}
                       ></i>
                     </div>
-                    <h3 className="text-xl font-bold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:via-pink-500 group-hover:to-red-500 transition-all duration-700">
+                    <h3 className="text-lg font-bold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:via-pink-500 group-hover:to-red-500 transition-all duration-700 tracking-tight">
                       {skill.name}
                     </h3>
                   </div>
@@ -535,8 +535,8 @@ const Home = () => {
                   {/* Enhanced progress bar */}
                   <div className="mb-6">
                     <div className="flex justify-between items-center mb-3">
-                      <span className="text-gray-400 text-sm font-medium">Proficiency</span>
-                      <span className="text-white font-bold text-lg group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-500 transition-all duration-500">
+                      <span className="text-gray-400 text-xs font-medium">Proficiency</span>
+                      <span className="text-white font-bold text-sm group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-500 transition-all duration-500">
                         {skill.percentage}%
                       </span>
                     </div>
@@ -557,7 +557,7 @@ const Home = () => {
                   
                   {/* Skill description */}
                   <div className="mb-6">
-                    <p className="text-gray-300 text-sm leading-relaxed group-hover:text-white transition-colors duration-500">
+                    <p className="text-gray-300 text-xs leading-relaxed group-hover:text-white transition-colors duration-500">
                       {skill.name === "Full Stack Web Development" && "Complete web applications from frontend to backend with modern frameworks"}
                       {skill.name === "HTML & CSS" && "Semantic HTML5, CSS3, Responsive Design, and modern CSS features"}
                       {skill.name === "JavaScript & React.js" && "ES6+, React Hooks, State Management, and modern JavaScript patterns"}
@@ -586,7 +586,7 @@ const Home = () => {
                         ></div>
                       ))}
                     </div>
-                    <div className="text-xs text-gray-400 group-hover:text-white transition-colors duration-300">
+                    <div className="text-xs text-gray-400 group-hover:text-white transition-colors duration-300 font-medium">
                       Expert Level
                     </div>
                   </div>
@@ -600,14 +600,14 @@ const Home = () => {
         <section className={`mt-32 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} aria-labelledby="services-title">
           <div className="text-center mb-16">
             <div className="inline-block mb-4">
-              <span className="text-sm text-green-400 font-medium">Services</span>
+              <span className="text-xs text-green-400 font-medium tracking-wide uppercase">Services</span>
             </div>
-            <h2 id="services-title" className="text-4xl md:text-5xl font-black text-white mb-6">
+            <h2 id="services-title" className="text-3xl md:text-4xl font-black text-white mb-6 tracking-tight">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-blue-500 to-cyan-500">
                 What I Offer
               </span>
             </h2>
-            <p className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
+            <p className="text-gray-300 text-sm max-w-3xl mx-auto leading-relaxed">
               Comprehensive solutions tailored to meet your digital needs and drive your business forward
             </p>
           </div>
@@ -631,12 +631,12 @@ const Home = () => {
                   </div>
                   
                   {/* Service title */}
-                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-green-400 group-hover:via-blue-500 group-hover:to-cyan-500 transition-all duration-700">
+                  <h3 className="text-lg font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-green-400 group-hover:via-blue-500 group-hover:to-cyan-500 transition-all duration-700 tracking-tight">
                     {service.title}
                   </h3>
                   
                   {/* Service description */}
-                  <p className="text-gray-300 mb-6 leading-relaxed group-hover:text-white transition-colors duration-500">
+                  <p className="text-gray-300 mb-6 leading-relaxed text-xs group-hover:text-white transition-colors duration-500">
                     {service.description}
                   </p>
                   
@@ -647,7 +647,7 @@ const Home = () => {
                         <div className="w-6 h-6 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center mr-3 group-hover:animate-pulse">
                           <i className="fas fa-check text-white text-xs"></i>
                         </div>
-                        <span className="text-gray-300 text-sm group-hover:text-white transition-colors duration-300">
+                        <span className="text-gray-300 text-xs group-hover:text-white transition-colors duration-300">
                           {feature}
                         </span>
                       </div>
@@ -656,7 +656,7 @@ const Home = () => {
                   
                   {/* Call to action */}
                   <div className="pt-4 border-t border-gray-700 group-hover:border-green-500/30 transition-colors duration-500">
-                    <button className="w-full bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-lg">
+                    <button className="w-full bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white font-semibold py-2.5 px-4 rounded-xl transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-lg text-xs">
                       Learn More
                     </button>
                   </div>
