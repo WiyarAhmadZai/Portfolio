@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { getAllImages } from '../utils/imageUpload';
 
 const DataContext = createContext();
 
@@ -120,19 +121,30 @@ export const DataProvider = ({ children }) => {
 
         // Load custom skills
         const savedCustomSkills = localStorage.getItem('portfolio_custom_skills');
+        console.log('Loading custom skills from localStorage:', savedCustomSkills);
         if (savedCustomSkills && savedCustomSkills !== 'null' && savedCustomSkills !== 'undefined') {
           const parsedCustomSkills = JSON.parse(savedCustomSkills);
+          console.log('Parsed custom skills:', parsedCustomSkills);
           if (Array.isArray(parsedCustomSkills)) {
             setCustomSkills(parsedCustomSkills);
+            console.log('Custom skills loaded successfully:', parsedCustomSkills.length);
+          } else {
+            console.log('Custom skills is not an array, setting empty array');
+            setCustomSkills([]);
           }
         } else {
+          console.log('No saved custom skills found, setting empty array');
           setCustomSkills([]);
         }
+        
+        // Mark data as loaded after all loading is complete
+        setDataLoaded(true);
       } catch (error) {
         console.error('Error loading data from localStorage:', error);
         // Initialize with defaults if there's an error
         initializeDefaultProjects();
         initializeDefaultBlogPosts();
+        setDataLoaded(true);
       }
     };
 
@@ -204,8 +216,12 @@ export const DataProvider = ({ children }) => {
     }
   }, [blogPosts]);
 
+  // Track if data has been loaded to prevent overwriting on initial load
+  const [dataLoaded, setDataLoaded] = useState(false);
+
   useEffect(() => {
-    if (customSkills.length >= 0) {
+    // Only save to localStorage if data has been loaded and there are changes
+    if (dataLoaded && customSkills.length >= 0) {
       try {
         localStorage.setItem('portfolio_custom_skills', JSON.stringify(customSkills));
         console.log('Custom skills saved to localStorage:', customSkills.length);
@@ -213,7 +229,7 @@ export const DataProvider = ({ children }) => {
         console.error('Error saving custom skills to localStorage:', error);
       }
     }
-  }, [customSkills]);
+  }, [customSkills, dataLoaded]);
 
   useEffect(() => {
     try {
@@ -295,14 +311,35 @@ export const DataProvider = ({ children }) => {
       localStorage.removeItem('portfolio_admin_mode');
       localStorage.removeItem('portfolio_project_categories');
       localStorage.removeItem('portfolio_blog_categories');
+      localStorage.removeItem('portfolio_custom_skills');
       setProjects([]);
       setBlogPosts([]);
+      setCustomSkills([]);
       setIsAdmin(false);
       setProjectCategories(['Web Development', 'Mobile Development', 'Desktop Application', 'Data Science']);
       setBlogCategories(['React', 'Node.js', 'CSS', 'JavaScript', 'General']);
       console.log('All data cleared');
       alert('All data has been cleared successfully!');
     }
+  };
+
+  // Debug function to clear only custom skills
+  const clearCustomSkills = () => {
+    if (window.confirm('Are you sure you want to clear all custom skills? This cannot be undone.')) {
+      setCustomSkills([]);
+      localStorage.removeItem('portfolio_custom_skills');
+      console.log('Custom skills cleared');
+      alert('All custom skills have been cleared successfully!');
+    }
+  };
+
+  // Debug function to check localStorage contents
+  const debugLocalStorage = () => {
+    const skills = localStorage.getItem('portfolio_custom_skills');
+    console.log('Current localStorage custom skills:', skills);
+    console.log('Current React state custom skills:', customSkills);
+    console.log('Data loaded status:', dataLoaded);
+    alert(`localStorage skills: ${skills ? JSON.parse(skills).length : 0}\nReact state skills: ${customSkills.length}\nData loaded: ${dataLoaded}`);
   };
 
   // Function to clear only blog posts
@@ -346,6 +383,7 @@ export const DataProvider = ({ children }) => {
 
   // Custom Skills functions
   const addCustomSkill = (skill) => {
+    console.log('Adding custom skill:', skill);
     const newSkill = {
       id: Date.now(),
       name: skill.name,
@@ -356,23 +394,33 @@ export const DataProvider = ({ children }) => {
       color: skill.color || '#3B82F6',
       createdAt: new Date().toISOString()
     };
+    console.log('New skill object:', newSkill);
     const newSkills = [...customSkills, newSkill];
+    console.log('Updated skills array:', newSkills);
     setCustomSkills(newSkills);
+    // Save immediately to localStorage when adding
     localStorage.setItem('portfolio_custom_skills', JSON.stringify(newSkills));
+    console.log('Custom skill saved to localStorage');
   };
 
   const updateCustomSkill = (id, updatedSkill) => {
+    console.log('Updating custom skill:', id, updatedSkill);
     const newSkills = customSkills.map(skill => 
       skill.id === id ? { ...skill, ...updatedSkill, updatedAt: new Date().toISOString() } : skill
     );
     setCustomSkills(newSkills);
+    // Save immediately to localStorage when updating
     localStorage.setItem('portfolio_custom_skills', JSON.stringify(newSkills));
+    console.log('Custom skill updated and saved to localStorage');
   };
 
   const deleteCustomSkill = (id) => {
+    console.log('Deleting custom skill:', id);
     const newSkills = customSkills.filter(skill => skill.id !== id);
     setCustomSkills(newSkills);
+    // Save immediately to localStorage when deleting
     localStorage.setItem('portfolio_custom_skills', JSON.stringify(newSkills));
+    console.log('Custom skill deleted and saved to localStorage');
   };
 
   // Debug function to export data
@@ -436,6 +484,8 @@ export const DataProvider = ({ children }) => {
     // Debug functions
     clearAllData,
     clearBlogPosts,
+    clearCustomSkills,
+    debugLocalStorage,
     exportData
   };
 
