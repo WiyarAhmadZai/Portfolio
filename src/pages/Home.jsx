@@ -430,277 +430,524 @@ const Home = () => {
         </section>
 
         {/* Enhanced Stats Section */}
-        <section className={`mt-24 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} aria-labelledby="stats-title">
-          <div className="text-center mb-12">
-            <h2 id="stats-title" className="text-3xl md:text-4xl font-bold text-white mb-4">
-              By the Numbers
+        <section className={`mt-32 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} aria-labelledby="stats-title">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4">
+              <span className="text-sm text-blue-400 font-medium">Achievements</span>
+            </div>
+            <h2 id="stats-title" className="text-4xl md:text-5xl font-black text-white mb-6">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
+                By the Numbers
+              </span>
             </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              My journey in numbers - projects completed, contributions made, and experience gained
+            <p className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
+              My journey in numbers - projects completed, contributions made, and experience gained through dedication and passion
             </p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div 
                 key={index} 
-                className="group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl p-6 text-center shadow-2xl border border-white/10 transform transition-all duration-500 hover:scale-105 hover:shadow-glow"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="group relative bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm rounded-3xl p-8 text-center shadow-2xl border border-white/10 transform transition-all duration-700 hover:scale-110 hover:shadow-blue-500/20 hover:border-blue-500/30"
+                style={{ animationDelay: `${index * 0.2}s` }}
                 role="article"
                 aria-label={`${stat.value} ${stat.label}`}
               >
-                {/* Background glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-600/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                {/* Animated background gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-600/20 to-pink-500/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                
+                {/* Floating particles */}
+                <div className="absolute top-4 right-4 w-2 h-2 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-bounce transition-all duration-500" style={{animationDelay: '0.5s'}}></div>
+                <div className="absolute bottom-4 left-4 w-1.5 h-1.5 bg-purple-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-bounce transition-all duration-500" style={{animationDelay: '1s'}}></div>
                 
                 {/* Content */}
                 <div className="relative z-10">
-                  <div className="mb-4">
-                    <div className="w-16 h-16 mx-auto bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mb-4 group-hover:animate-pulse">
-                      <i className="fas fa-chart-line text-white text-xl"></i>
+                  <div className="mb-6">
+                    <div className="w-20 h-20 mx-auto bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500 rounded-full flex items-center justify-center mb-6 group-hover:animate-pulse group-hover:scale-110 transition-transform duration-500">
+                      <i className="fas fa-chart-line text-white text-2xl"></i>
                     </div>
                   </div>
                   
-                  <h3 className="text-4xl md:text-5xl font-black text-white mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-500 transition-all duration-500">
+                  <h3 className="text-5xl md:text-6xl font-black text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:via-purple-500 group-hover:to-pink-500 transition-all duration-700">
                     {stat.value}
                   </h3>
                   
-                  <p className="text-gray-300 font-medium text-sm md:text-base group-hover:text-white transition-colors duration-300">
+                  <p className="text-gray-300 font-semibold text-base md:text-lg group-hover:text-white transition-colors duration-500 mb-4">
                     {stat.label}
                   </p>
                   
-                  {/* Animated underline */}
-                  <div className="w-0 group-hover:w-full h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mt-3 transition-all duration-500"></div>
+                  {/* Animated progress bar */}
+                  <div className="w-full h-1 bg-gray-700 rounded-full overflow-hidden">
+                    <div className="w-0 h-full bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 group-hover:w-full transition-all duration-1000 ease-out"></div>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Skills Section */}
-        <div className={`mt-20 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-3xl font-bold text-white text-center mb-12">My Skills</h2>
+        {/* Enhanced Skills Section */}
+        <section className={`mt-32 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} aria-labelledby="skills-title">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4">
+              <span className="text-sm text-purple-400 font-medium">Expertise</span>
+            </div>
+            <h2 id="skills-title" className="text-4xl md:text-5xl font-black text-white mb-6">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
+                Technical Skills
+              </span>
+            </h2>
+            <p className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
+              A comprehensive range of technologies and frameworks I work with to create exceptional digital experiences
+            </p>
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {skills.map((skill, index) => (
-              <div key={index} className="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 transform transition duration-500 hover:scale-105">
-                <div className="flex items-center mb-4">
-                  <i 
-                    className={`${skill.icon} text-2xl mr-3 ${
-                      skill.customColor 
-                        ? '' 
-                        : `bg-gradient-to-r ${skill.color} bg-clip-text text-transparent`
-                    }`}
-                    style={{ 
-                      color: skill.customColor || undefined,
-                      background: skill.customColor ? `linear-gradient(to right, ${skill.customColor}, ${skill.customColor})` : undefined,
-                      WebkitBackgroundClip: skill.customColor ? 'text' : undefined,
-                      WebkitTextFillColor: skill.customColor ? 'transparent' : undefined,
-                      backgroundClip: skill.customColor ? 'text' : undefined
-                    }}
-                  ></i>
-                  <h3 className="text-xl font-bold text-white">{skill.name}</h3>
+              <div key={index} className="group relative bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/10 transform transition-all duration-700 hover:scale-105 hover:shadow-purple-500/20 hover:border-purple-500/30">
+                {/* Animated background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-pink-600/10 to-red-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                
+                {/* Floating particles */}
+                <div className="absolute top-6 right-6 w-2 h-2 bg-purple-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-bounce transition-all duration-500" style={{animationDelay: '0.5s'}}></div>
+                <div className="absolute bottom-6 left-6 w-1.5 h-1.5 bg-pink-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-bounce transition-all duration-500" style={{animationDelay: '1s'}}></div>
+                
+                <div className="relative z-10">
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-purple-500 via-pink-600 to-red-500 rounded-2xl flex items-center justify-center mr-4 group-hover:animate-pulse group-hover:scale-110 transition-transform duration-500">
+                      <i 
+                        className={`${skill.icon} text-2xl text-white`}
+                        style={{ 
+                          color: skill.customColor || undefined,
+                          background: skill.customColor ? `linear-gradient(to right, ${skill.customColor}, ${skill.customColor})` : undefined,
+                          WebkitBackgroundClip: skill.customColor ? 'text' : undefined,
+                          WebkitTextFillColor: skill.customColor ? 'transparent' : undefined,
+                          backgroundClip: skill.customColor ? 'text' : undefined
+                        }}
+                      ></i>
+                    </div>
+                    <h3 className="text-xl font-bold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:via-pink-500 group-hover:to-red-500 transition-all duration-700">
+                      {skill.name}
+                    </h3>
+                  </div>
+                  
+                  {/* Enhanced progress bar */}
+                  <div className="mb-6">
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="text-gray-400 text-sm font-medium">Proficiency</span>
+                      <span className="text-white font-bold text-lg group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-500 transition-all duration-500">
+                        {skill.percentage}%
+                      </span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+                      <div 
+                        className={`h-3 rounded-full transition-all duration-1000 ease-out ${
+                          skill.customColor 
+                            ? '' 
+                            : `bg-gradient-to-r ${skill.color}`
+                        }`}
+                        style={{ 
+                          width: `${skill.percentage}%`,
+                          background: skill.customColor ? `linear-gradient(to right, ${skill.customColor}, ${skill.customColor})` : undefined
+                        }}
+                      ></div>
+                    </div>
+                  </div>
+                  
+                  {/* Skill description */}
+                  <div className="mb-6">
+                    <p className="text-gray-300 text-sm leading-relaxed group-hover:text-white transition-colors duration-500">
+                      {skill.name === "Full Stack Web Development" && "Complete web applications from frontend to backend with modern frameworks"}
+                      {skill.name === "HTML & CSS" && "Semantic HTML5, CSS3, Responsive Design, and modern CSS features"}
+                      {skill.name === "JavaScript & React.js" && "ES6+, React Hooks, State Management, and modern JavaScript patterns"}
+                      {skill.name === "Next.js & PHP" && "Server-side rendering, API development, and full-stack solutions"}
+                      {skill.name === "Laravel & Django" && "MVC frameworks, RESTful APIs, and robust backend development"}
+                      {skill.name === "Database Design" && "MySQL, MongoDB, Database optimization, and data modeling"}
+                      {skill.name === "UI/UX Design" && "User research, Wireframing, Prototyping, and design systems"}
+                      {skill.name === "Bootstrap & Tailwind CSS" && "CSS frameworks, Component libraries, and utility-first styling"}
+                      {skill.name === "Python & MongoDB" && "Data processing, NoSQL databases, and Python scripting"}
+                      {skill.name === "Soft Skills" && "Communication, Teamwork, Problem-solving, Leadership, and project management"}
+                    </p>
+                  </div>
+                  
+                  {/* Animated progress indicator */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex space-x-1">
+                      {[...Array(5)].map((_, i) => (
+                        <div 
+                          key={i} 
+                          className={`w-2 h-2 rounded-full transition-all duration-500 ${
+                            i < Math.floor(skill.percentage / 20) 
+                              ? 'bg-gradient-to-r from-purple-500 to-pink-500' 
+                              : 'bg-gray-600'
+                          }`}
+                          style={{animationDelay: `${i * 0.1}s`}}
+                        ></div>
+                      ))}
+                    </div>
+                    <div className="text-xs text-gray-400 group-hover:text-white transition-colors duration-300">
+                      Expert Level
+                    </div>
+                  </div>
                 </div>
-                <div className="w-full bg-gray-700 rounded-full h-2.5">
-                  <div 
-                    className={`h-2.5 rounded-full ${
-                      skill.customColor 
-                        ? '' 
-                        : `bg-gradient-to-r ${skill.color}`
-                    }`}
-                    style={{ 
-                      width: `${skill.percentage}%`,
-                      background: skill.customColor ? `linear-gradient(to right, ${skill.customColor}, ${skill.customColor})` : undefined
-                    }}
-                  ></div>
-                </div>
-                <p className="text-gray-400 text-right mt-2">{skill.percentage}%</p>
-                 <div className="mt-4">
-                   <p className="text-gray-300 text-sm">
-                     {skill.name === "Full Stack Web Development" && "Complete web applications from frontend to backend"}
-                     {skill.name === "HTML & CSS" && "Semantic HTML5, CSS3, Responsive Design"}
-                     {skill.name === "JavaScript & React.js" && "ES6+, React Hooks, State Management"}
-                     {skill.name === "Next.js & PHP" && "Server-side rendering, API development"}
-                     {skill.name === "Laravel & Django" && "MVC frameworks, RESTful APIs"}
-                     {skill.name === "Database Design" && "MySQL, MongoDB, Database optimization"}
-                     {skill.name === "UI/UX Design" && "User research, Wireframing, Prototyping"}
-                     {skill.name === "Bootstrap & Tailwind CSS" && "CSS frameworks, Component libraries"}
-                     {skill.name === "Python & MongoDB" && "Data processing, NoSQL databases"}
-                     {skill.name === "Soft Skills" && "Communication, Teamwork, Problem-solving, Leadership"}
-                   </p>
-                 </div>
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
-        {/* Services Section */}
-        <div className={`mt-20 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-3xl font-bold text-white text-center mb-12">What I Offer</h2>
+        {/* Enhanced Services Section */}
+        <section className={`mt-32 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} aria-labelledby="services-title">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4">
+              <span className="text-sm text-green-400 font-medium">Services</span>
+            </div>
+            <h2 id="services-title" className="text-4xl md:text-5xl font-black text-white mb-6">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-blue-500 to-cyan-500">
+                What I Offer
+              </span>
+            </h2>
+            <p className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
+              Comprehensive solutions tailored to meet your digital needs and drive your business forward
+            </p>
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => (
-              <div key={index} className="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 transform transition duration-500 hover:scale-105 hover:border-blue-500">
-                <div className="text-4xl text-blue-500 mb-4">
-                  <i className={`fas ${service.icon}`}></i>
-                </div>
-                <h3 className="text-xl font-bold text-white mb-3">{service.title}</h3>
-                <p className="text-gray-300 mb-4">{service.description}</p>
-                <ul className="space-y-2">
-                  {service.features.map((feature, i) => (
-                    <li key={i} className="flex items-center text-gray-400 text-sm">
-                      <i className="fas fa-check-circle text-green-500 mr-2"></i>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Testimonials Section */}
-        <div className={`mt-20 transition-all duration-1000 delay-900 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-3xl font-bold text-white text-center mb-12">Client Testimonials</h2>
-          
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-gray-800 rounded-2xl p-8 shadow-xl border border-gray-700">
-              <div className="flex flex-col md:flex-row items-center">
-                <div className="mb-6 md:mb-0 md:mr-8">
-                  <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-full w-24 h-24 overflow-hidden border-4 border-white shadow-lg">
-                    <img 
-                      src={testimonials[activeTestimonial].avatar} 
-                      alt={testimonials[activeTestimonial].name} 
-                      className="w-full h-full object-cover"
-                    />
+              <div key={index} className="group relative bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/10 transform transition-all duration-700 hover:scale-110 hover:shadow-green-500/20 hover:border-green-500/30">
+                {/* Animated background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-blue-600/10 to-cyan-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                
+                {/* Floating particles */}
+                <div className="absolute top-6 right-6 w-2 h-2 bg-green-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-bounce transition-all duration-500" style={{animationDelay: '0.5s'}}></div>
+                <div className="absolute bottom-6 left-6 w-1.5 h-1.5 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-bounce transition-all duration-500" style={{animationDelay: '1s'}}></div>
+                
+                <div className="relative z-10">
+                  {/* Service icon */}
+                  <div className="mb-6">
+                    <div className="w-20 h-20 bg-gradient-to-br from-green-500 via-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center mb-6 group-hover:animate-pulse group-hover:scale-110 transition-transform duration-500">
+                      <i className={`fas ${service.icon} text-white text-3xl`}></i>
+                    </div>
                   </div>
-                </div>
-                <div className="text-center md:text-left">
-                  <p className="text-gray-300 text-lg italic mb-6">"{testimonials[activeTestimonial].content}"</p>
-                  <h4 className="text-xl font-bold text-white">{testimonials[activeTestimonial].name}</h4>
-                  <p className="text-blue-400">{testimonials[activeTestimonial].role}, {testimonials[activeTestimonial].company}</p>
-                  <div className="flex justify-center md:justify-start mt-2">
-                    {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
-                      <i key={i} className="fas fa-star text-yellow-500"></i>
+                  
+                  {/* Service title */}
+                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-green-400 group-hover:via-blue-500 group-hover:to-cyan-500 transition-all duration-700">
+                    {service.title}
+                  </h3>
+                  
+                  {/* Service description */}
+                  <p className="text-gray-300 mb-6 leading-relaxed group-hover:text-white transition-colors duration-500">
+                    {service.description}
+                  </p>
+                  
+                  {/* Features list */}
+                  <div className="space-y-3 mb-6">
+                    {service.features.map((feature, i) => (
+                      <div key={i} className="flex items-center group-hover:translate-x-2 transition-transform duration-300" style={{animationDelay: `${i * 0.1}s`}}>
+                        <div className="w-6 h-6 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center mr-3 group-hover:animate-pulse">
+                          <i className="fas fa-check text-white text-xs"></i>
+                        </div>
+                        <span className="text-gray-300 text-sm group-hover:text-white transition-colors duration-300">
+                          {feature}
+                        </span>
+                      </div>
                     ))}
                   </div>
-                </div>
-              </div>
-              
-              <div className="flex justify-center mt-8 space-x-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setActiveTestimonial(index)}
-                    className={`w-3 h-3 rounded-full ${index === activeTestimonial ? 'bg-blue-500' : 'bg-gray-600'}`}
-                  ></button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Blog Section */}
-        <div className={`mt-20 transition-all duration-1000 delay-1100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-3xl font-bold text-white text-center mb-12">Latest Articles</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {blogPosts.map((post, index) => (
-              <div key={index} className="bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 transform transition duration-500 hover:scale-105">
-                <div className="h-48 bg-gradient-to-r from-blue-500 to-purple-600"></div>
-                <div className="p-6">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="px-2 py-1 bg-gray-700 text-blue-400 text-xs font-medium rounded">
-                      {post.category}
-                    </span>
-                    <span className="text-gray-400 text-sm">{post.readTime}</span>
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-2">{post.title}</h3>
-                  <p className="text-gray-300 text-sm mb-4">{post.excerpt}</p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-400 text-sm">{post.date}</span>
-                    <button className="text-blue-400 hover:text-blue-300 text-sm font-medium">
-                      Read More
+                  
+                  {/* Call to action */}
+                  <div className="pt-4 border-t border-gray-700 group-hover:border-green-500/30 transition-colors duration-500">
+                    <button className="w-full bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform group-hover:scale-105 group-hover:shadow-lg">
+                      Learn More
                     </button>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-          
-          <div className="text-center mt-10">
-            <Link 
-              to="/blog" 
-              className="inline-block px-6 py-3 border border-gray-600 text-base font-medium rounded-md text-white hover:bg-gray-700 transition-all duration-300 transform hover:scale-105"
-            >
-              View All Articles
-            </Link>
-          </div>
-        </div>
+        </section>
 
-        {/* Contact Information Section */}
-        <div className={`mt-20 transition-all duration-1000 delay-1300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-3xl font-bold text-white text-center mb-12">Get In Touch</h2>
+        {/* Enhanced Testimonials Section */}
+        <section className={`mt-32 transition-all duration-1000 delay-900 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} aria-labelledby="testimonials-title">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4">
+              <span className="text-sm text-yellow-400 font-medium">Testimonials</span>
+            </div>
+            <h2 id="testimonials-title" className="text-4xl md:text-5xl font-black text-white mb-6">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500">
+                Client Testimonials
+              </span>
+            </h2>
+            <p className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
+              What clients say about working with me - real feedback from successful projects
+            </p>
+          </div>
           
-          <div className="bg-gray-800 rounded-2xl p-8 max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-bold text-white mb-4">Contact Information</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center">
-                    <i className="fas fa-envelope text-blue-500 text-xl mr-4"></i>
-                    <div>
-                      <p className="text-gray-400 text-sm">Email</p>
-                      <p className="text-white">mrwiyarahmadzai@gmail.com</p>
+          <div className="max-w-6xl mx-auto">
+            <div className="relative bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm rounded-3xl p-12 shadow-2xl border border-white/10 overflow-hidden">
+              {/* Animated background elements */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-500/20 to-orange-600/20 rounded-full blur-2xl"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-orange-500/20 to-red-600/20 rounded-full blur-2xl"></div>
+              
+              <div className="relative z-10">
+                <div className="flex flex-col lg:flex-row items-center">
+                  {/* Client avatar */}
+                  <div className="mb-8 lg:mb-0 lg:mr-12">
+                    <div className="relative">
+                      <div className="w-32 h-32 bg-gradient-to-br from-yellow-500 via-orange-600 to-red-500 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl">
+                        <img 
+                          src={testimonials[activeTestimonial].avatar} 
+                          alt={testimonials[activeTestimonial].name} 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      {/* Floating quote icon */}
+                      <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-full flex items-center justify-center shadow-lg animate-float">
+                        <i className="fas fa-quote-left text-white text-lg"></i>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-center">
-                    <i className="fas fa-phone text-blue-500 text-xl mr-4"></i>
-                    <div>
-                      <p className="text-gray-400 text-sm">Phone/WhatsApp</p>
-                      <p className="text-white">+93 776 992 603</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center">
-                    <i className="fab fa-github text-blue-500 text-xl mr-4"></i>
-                    <div>
-                      <p className="text-gray-400 text-sm">GitHub</p>
-                      <p className="text-white">github.com/WiyarAhmadZai</p>
+                  
+                  {/* Testimonial content */}
+                  <div className="text-center lg:text-left flex-1">
+                    {/* Quote */}
+                    <blockquote className="text-gray-200 text-xl lg:text-2xl italic mb-8 leading-relaxed">
+                      "{testimonials[activeTestimonial].content}"
+                    </blockquote>
+                    
+                    {/* Client info */}
+                    <div className="space-y-2">
+                      <h4 className="text-2xl font-bold text-white">
+                        {testimonials[activeTestimonial].name}
+                      </h4>
+                      <p className="text-yellow-400 font-semibold text-lg">
+                        {testimonials[activeTestimonial].role}
+                      </p>
+                      <p className="text-gray-400 text-base">
+                        {testimonials[activeTestimonial].company}
+                      </p>
+                      
+                      {/* Rating stars */}
+                      <div className="flex justify-center lg:justify-start mt-4">
+                        {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
+                          <i key={i} className="fas fa-star text-yellow-500 text-xl mr-1 animate-pulse" style={{animationDelay: `${i * 0.1}s`}}></i>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              
-              <div>
-                <h3 className="text-xl font-bold text-white mb-4">Connect With Me</h3>
-                <p className="text-gray-300 mb-6">
-                  I'm always open to discussing new opportunities, creative projects, or potential collaborations.
-                </p>
-                <div className="flex flex-wrap gap-4">
-                  <a 
-                    href="mailto:mrwiyarahmadzai@gmail.com" 
-                    className="flex items-center bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg transition duration-300"
-                  >
-                    <i className="fas fa-envelope mr-2"></i> Email
-                  </a>
-                  <a 
-                    href="https://wa.me/93776992603" 
-                    className="flex items-center bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition duration-300"
-                  >
-                    <i className="fab fa-whatsapp mr-2"></i> WhatsApp
-                  </a>
-                  <a 
-                    href="https://github.com/WiyarAhmadZai" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition duration-300"
-                  >
-                    <i className="fab fa-github mr-2"></i> GitHub
-                  </a>
+                
+                {/* Navigation dots */}
+                <div className="flex justify-center mt-12 space-x-3">
+                  {testimonials.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setActiveTestimonial(index)}
+                      className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                        index === activeTestimonial 
+                          ? 'bg-gradient-to-r from-yellow-500 to-orange-600 scale-125' 
+                          : 'bg-gray-600 hover:bg-gray-500'
+                      }`}
+                      aria-label={`View testimonial ${index + 1}`}
+                    ></button>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
+
+        {/* Enhanced Blog Section */}
+        <section className={`mt-32 transition-all duration-1000 delay-1100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} aria-labelledby="blog-title">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4">
+              <span className="text-sm text-indigo-400 font-medium">Blog</span>
+            </div>
+            <h2 id="blog-title" className="text-4xl md:text-5xl font-black text-white mb-6">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500">
+                Latest Articles
+              </span>
+            </h2>
+            <p className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
+              Insights, tutorials, and thoughts on web development, technology, and industry trends
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {blogPosts.map((post, index) => (
+              <article key={index} className="group relative bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm rounded-3xl overflow-hidden shadow-2xl border border-white/10 transform transition-all duration-700 hover:scale-105 hover:shadow-indigo-500/20 hover:border-indigo-500/30">
+                {/* Animated background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-600/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                
+                {/* Floating particles */}
+                <div className="absolute top-6 right-6 w-2 h-2 bg-indigo-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-bounce transition-all duration-500" style={{animationDelay: '0.5s'}}></div>
+                <div className="absolute bottom-6 left-6 w-1.5 h-1.5 bg-purple-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-bounce transition-all duration-500" style={{animationDelay: '1s'}}></div>
+                
+                {/* Featured image */}
+                <div className="relative h-48 bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-xs font-semibold rounded-full">
+                      {post.category}
+                    </span>
+                  </div>
+                  <div className="absolute bottom-4 right-4">
+                    <span className="text-white text-sm font-medium bg-black/30 backdrop-blur-sm px-2 py-1 rounded">
+                      {post.readTime}
+                    </span>
+                  </div>
+                </div>
+                
+                {/* Content */}
+                <div className="relative z-10 p-8">
+                  <h3 className="text-xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-indigo-400 group-hover:via-purple-500 group-hover:to-pink-500 transition-all duration-700">
+                    {post.title}
+                  </h3>
+                  
+                  <p className="text-gray-300 text-sm mb-6 leading-relaxed group-hover:text-white transition-colors duration-500">
+                    {post.excerpt}
+                  </p>
+                  
+                  <div className="flex justify-between items-center pt-4 border-t border-gray-700 group-hover:border-indigo-500/30 transition-colors duration-500">
+                    <span className="text-gray-400 text-sm group-hover:text-white transition-colors duration-300">
+                      {post.date}
+                    </span>
+                    <button className="text-indigo-400 hover:text-indigo-300 text-sm font-semibold group-hover:translate-x-1 transition-all duration-300">
+                      Read More <i className="fas fa-arrow-right ml-1"></i>
+                    </button>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <Link 
+              to="/blog" 
+              className="inline-block bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-indigo-500/25"
+            >
+              <span className="flex items-center">
+                <i className="fas fa-newspaper mr-2"></i>
+                View All Articles
+              </span>
+            </Link>
+          </div>
+        </section>
+
+        {/* Enhanced Contact Section */}
+        <section className={`mt-32 transition-all duration-1000 delay-1300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} aria-labelledby="contact-title">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4">
+              <span className="text-sm text-cyan-400 font-medium">Contact</span>
+            </div>
+            <h2 id="contact-title" className="text-4xl md:text-5xl font-black text-white mb-6">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500">
+                Get In Touch
+              </span>
+            </h2>
+            <p className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
+              Ready to start your next project? Let's discuss how I can help bring your ideas to life
+            </p>
+          </div>
+          
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm rounded-3xl p-12 shadow-2xl border border-white/10 overflow-hidden">
+              {/* Animated background elements */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-full blur-2xl"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-blue-500/20 to-indigo-600/20 rounded-full blur-2xl"></div>
+              
+              <div className="relative z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                  {/* Contact Information */}
+                  <div>
+                    <h3 className="text-2xl font-bold text-white mb-8">
+                      <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+                        Contact Information
+                      </span>
+                    </h3>
+                    <div className="space-y-6">
+                      <div className="group flex items-center p-4 bg-gradient-to-r from-gray-700/50 to-gray-800/50 rounded-2xl hover:from-cyan-500/20 hover:to-blue-600/20 transition-all duration-500">
+                        <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center mr-6 group-hover:animate-pulse group-hover:scale-110 transition-transform duration-500">
+                          <i className="fas fa-envelope text-white text-xl"></i>
+                        </div>
+                        <div>
+                          <p className="text-gray-400 text-sm font-medium">Email</p>
+                          <p className="text-white font-semibold text-lg group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-blue-500 transition-all duration-500">
+                            mrwiyarahmadzai@gmail.com
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className="group flex items-center p-4 bg-gradient-to-r from-gray-700/50 to-gray-800/50 rounded-2xl hover:from-green-500/20 hover:to-emerald-600/20 transition-all duration-500">
+                        <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mr-6 group-hover:animate-pulse group-hover:scale-110 transition-transform duration-500">
+                          <i className="fas fa-phone text-white text-xl"></i>
+                        </div>
+                        <div>
+                          <p className="text-gray-400 text-sm font-medium">Phone/WhatsApp</p>
+                          <p className="text-white font-semibold text-lg group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-green-400 group-hover:to-emerald-500 transition-all duration-500">
+                            +93 776 992 603
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className="group flex items-center p-4 bg-gradient-to-r from-gray-700/50 to-gray-800/50 rounded-2xl hover:from-purple-500/20 hover:to-pink-600/20 transition-all duration-500">
+                        <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mr-6 group-hover:animate-pulse group-hover:scale-110 transition-transform duration-500">
+                          <i className="fab fa-github text-white text-xl"></i>
+                        </div>
+                        <div>
+                          <p className="text-gray-400 text-sm font-medium">GitHub</p>
+                          <p className="text-white font-semibold text-lg group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-500 transition-all duration-500">
+                            github.com/WiyarAhmadZai
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Connect Section */}
+                  <div>
+                    <h3 className="text-2xl font-bold text-white mb-8">
+                      <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-500">
+                        Let's Connect
+                      </span>
+                    </h3>
+                    <p className="text-gray-300 mb-8 text-lg leading-relaxed">
+                      I'm always open to discussing new opportunities, creative projects, or potential collaborations. 
+                      Whether you have a project in mind or just want to chat about technology, feel free to reach out!
+                    </p>
+                    
+                    <div className="space-y-4">
+                      <a 
+                        href="mailto:mrwiyarahmadzai@gmail.com" 
+                        className="group flex items-center justify-center bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25"
+                      >
+                        <i className="fas fa-envelope mr-3 group-hover:animate-bounce"></i>
+                        Send Email
+                      </a>
+                      
+                      <a 
+                        href="https://wa.me/93776992603" 
+                        className="group flex items-center justify-center bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-green-500/25"
+                      >
+                        <i className="fab fa-whatsapp mr-3 group-hover:animate-bounce"></i>
+                        WhatsApp Chat
+                      </a>
+                      
+                      <a 
+                        href="https://github.com/WiyarAhmadZai" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="group flex items-center justify-center bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-semibold px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25"
+                      >
+                        <i className="fab fa-github mr-3 group-hover:animate-bounce"></i>
+                        View GitHub
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Call to Action */}
         <div className={`mt-20 text-center transition-all duration-1000 delay-1500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
