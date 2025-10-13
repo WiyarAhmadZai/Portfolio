@@ -34,9 +34,9 @@ const Home = () => {
     
     // Animated counters
     const animateCounters = () => {
-      const targets = { projects: 15, experience: 3, technologies: 20, contributions: 50 };
-      const duration = 2000; // 2 seconds
-      const steps = 60;
+      const targets = { projects: 0, experience: 3, technologies: 20, contributions: 3000 };
+      const duration = 3000; // 3 seconds for smoother animation
+      const steps = 80;
       const stepDuration = duration / steps;
       
       let step = 0;
@@ -383,7 +383,7 @@ const Home = () => {
                       <i className="fas fa-project-diagram text-white text-xs"></i>
                     </div>
                     <div>
-                      <div className="text-white font-bold text-sm group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-500 transition-all duration-300">{animatedCounters.projects}+</div>
+                      <div className="text-white font-bold text-sm group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-500 transition-all duration-300">Multiple</div>
                       <div className="text-gray-400 text-xs group-hover:text-white transition-colors duration-300">Projects</div>
                     </div>
                   </div>
@@ -419,7 +419,7 @@ const Home = () => {
                       <i className="fas fa-code text-white text-xs"></i>
                     </div>
                     <div>
-                      <div className="text-white font-bold text-sm group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-blue-500 transition-all duration-300">{animatedCounters.contributions}+</div>
+                      <div className="text-white font-bold text-sm group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-blue-500 transition-all duration-300">{animatedCounters.contributions.toLocaleString()}+</div>
                       <div className="text-gray-400 text-xs group-hover:text-white transition-colors duration-300">Contributions</div>
                     </div>
                   </div>
