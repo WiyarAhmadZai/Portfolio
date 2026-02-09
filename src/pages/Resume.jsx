@@ -642,7 +642,7 @@ const Resume = () => {
       name: "Full Stack Web Development",
       issuer: "Hushmand Shahar Technology",
       date: "2025",
-      credential: "Certified",
+      credential: "Certified ID: AWDB-2025-001",
       pdfFile: "/certificates/advanced-web-development.pdf"
     },
     {
