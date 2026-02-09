@@ -253,7 +253,7 @@ const Home = () => {
     <main className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8" role="main">
       <div className="max-w-7xl mx-auto">
         {/* Hero Section - Clean & Attractive */}
-        <section className={`relative py-32 flex items-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} aria-labelledby="hero-title">
+        <section className={`relative  md:py-32 flex items-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} aria-labelledby="hero-title">
           {/* Simplified Background Elements */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             {/* Subtle gradient orbs */}
