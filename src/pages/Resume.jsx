@@ -643,7 +643,7 @@ const Resume = () => {
       issuer: "Hushmand Shahar Technology",
       date: "2025",
       credential: "Certified",
-      pdfFile: "/certificates/advanced-web-development.pdf"
+      pdfFile: "/certificates/Work-Experience_Hushmand.pdf"
     },
     {
       name: "React Native Mobile Development",
