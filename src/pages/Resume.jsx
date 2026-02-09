@@ -642,7 +642,7 @@ const Resume = () => {
       name: "Full Stack Web Development",
       issuer: "Hushmand Shahar Technology",
       date: "2025",
-      credential: "Certified ",
+      credential: "Certified",
       pdfFile: "/certificates/advanced-web-development.pdf"
     },
     {
@@ -670,7 +670,7 @@ const Resume = () => {
       name: "DevOps Engineering Essentials",
       issuer: "Google Cloud",
       date: "2022",
-      credential: "DOEE-2022-005",
+      credential: "Certified",
       pdfFile: "/certificates/devops-essentials.pdf"
     },
     {
