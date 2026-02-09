@@ -642,28 +642,28 @@ const Resume = () => {
       name: "Full Stack Web Development",
       issuer: "Hushmand Shahar Technology",
       date: "2025",
-      credential: "Certified ID: AWDB-2025-001",
+      credential: "Certified ",
       pdfFile: "/certificates/advanced-web-development.pdf"
     },
     {
       name: "React Native Mobile Development",
       issuer: "Coursera",
       date: "2023",
-      credential: "RNMD-2023-002",
+      credential: "Certified",
       pdfFile: "/certificates/react-native-development.pdf"
     },
     {
       name: "Cloud Computing with AWS",
       issuer: "LinkedIn Learning",
       date: "2023",
-      credential: "CCAWS-2023-003",
+      credential: "Certified",
       pdfFile: "/certificates/aws-cloud-computing.pdf"
     },
     {
       name: "Machine Learning Fundamentals",
       issuer: "Stanford Online",
       date: "2022",
-      credential: "MLF-2022-004",
+      credential: "Certified",
       pdfFile: "/certificates/machine-learning-fundamentals.pdf"
     },
     {
