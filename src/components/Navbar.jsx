@@ -30,10 +30,10 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', path: '/', icon: 'fas fa-home' },
+    { name: 'Resume', path: '/resume', icon: 'fas fa-file-alt' },
     { name: 'About', path: '/about', icon: 'fas fa-user' },
     { name: 'Projects', path: '/projects', icon: 'fas fa-folder-open' },
     { name: 'Blog', path: '/blog', icon: 'fas fa-blog' },
-    { name: 'Resume', path: '/resume', icon: 'fas fa-file-alt' },
     { name: 'Contact', path: '/contact', icon: 'fas fa-envelope' }
   ];
 
