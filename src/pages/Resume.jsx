@@ -640,21 +640,45 @@ const Resume = () => {
   const certifications = [
     {
       name: "Full Stack Web Development",
+      issuer: "Hushmand Shahar Technology",
+      date: "2025",
+      credential: "Certified",
+      pdfFile: "/certificates/advanced-web-development.pdf"
+    },
+    {
+      name: "React Native Mobile Development",
       issuer: "Coursera",
       date: "2023",
-      credential: "FSWD-2023-001"
+      credential: "RNMD-2023-002",
+      pdfFile: "/certificates/react-native-development.pdf"
     },
     {
-      name: "React Specialization",
-      issuer: "Udemy",
-      date: "2022",
-      credential: "REACT-2022-002"
-    },
-    {
-      name: "Database Design Fundamentals",
+      name: "Cloud Computing with AWS",
       issuer: "LinkedIn Learning",
+      date: "2023",
+      credential: "CCAWS-2023-003",
+      pdfFile: "/certificates/aws-cloud-computing.pdf"
+    },
+    {
+      name: "Machine Learning Fundamentals",
+      issuer: "Stanford Online",
+      date: "2022",
+      credential: "MLF-2022-004",
+      pdfFile: "/certificates/machine-learning-fundamentals.pdf"
+    },
+    {
+      name: "DevOps Engineering Essentials",
+      issuer: "Google Cloud",
+      date: "2022",
+      credential: "DOEE-2022-005",
+      pdfFile: "/certificates/devops-essentials.pdf"
+    },
+    {
+      name: "Cybersecurity Fundamentals",
+      issuer: "CompTIA",
       date: "2021",
-      credential: "DBDF-2021-003"
+      credential: "CF-2021-006",
+      pdfFile: "/certificates/cybersecurity-fundamentals.pdf"
     }
   ];
 
@@ -965,16 +989,23 @@ const Resume = () => {
               <h2 className="text-2xl font-bold text-white mb-6 pb-2 border-b border-gray-700">Certifications</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {certifications.map((cert, index) => (
-                  <div key={index} className="bg-gray-900 p-6 rounded-xl border border-gray-700">
+                  <div key={index} className="bg-gray-900 p-6 rounded-xl border border-gray-700 hover:border-blue-500/50 transition-all duration-300">
                     <div className="flex items-center mb-4">
                       <i className="fas fa-certificate text-yellow-500 text-2xl mr-3"></i>
                       <h3 className="text-xl font-bold text-white">{cert.name}</h3>
                     </div>
                     <p className="text-blue-400 font-medium">{cert.issuer}</p>
-                    <div className="flex justify-between mt-3">
+                    <div className="flex justify-between mt-3 mb-4">
                       <span className="text-gray-400 text-sm">Issued: {cert.date}</span>
                       <span className="text-gray-500 text-xs">ID: {cert.credential}</span>
                     </div>
+                    <button
+                      onClick={() => window.open(cert.pdfFile, '_blank')}
+                      className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
+                    >
+                      <i className="fas fa-file-pdf mr-2"></i>
+                      Download Certificate
+                    </button>
                   </div>
                 ))}
               </div>
