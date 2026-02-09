@@ -639,46 +639,88 @@ const Resume = () => {
   // Certifications data
   const certifications = [
     {
-      name: "Full Stack Web Development",
-      issuer: "Hushmand Shahar Technology",
-      date: "2025",
+      name: "Achievement Certificate",
+      issuer: "Professional Development",
+      date: "2024",
       credential: "Certified",
-      pdfFile: "/certificates/Work-Experience_Hushmand.pdf"
+      pdfFile: "/certificates/Achievement Certificate.pdf"
     },
     {
-      name: "React Native Mobile Development",
-      issuer: "Coursera",
+      name: "Appreciation Certificate",
+      issuer: "Community Service",
       date: "2023",
       credential: "Certified",
-      pdfFile: "/certificates/react-native-development.pdf"
+      pdfFile: "/certificates/Appreciation Certificate.pdf"
     },
     {
-      name: "Cloud Computing with AWS",
-      issuer: "LinkedIn Learning",
+      name: "Artificial Intelligence Webinar",
+      issuer: "AI Training Institute",
       date: "2023",
       credential: "Certified",
-      pdfFile: "/certificates/aws-cloud-computing.pdf"
+      pdfFile: "/certificates/Blue Gold and White Modern Artificial Intelligence Webinar Certificate.png"
     },
     {
-      name: "Machine Learning Fundamentals",
-      issuer: "Stanford Online",
+      name: "Computer Volunteer Certificate",
+      issuer: "Technical Volunteer Program",
+      date: "2023",
+      credential: "Certified",
+      pdfFile: "/certificates/Computer Volanteer Certificate.pdf"
+    },
+    {
+      name: "Frontend Development Certificate",
+      issuer: "Web Development Institute",
       date: "2022",
       credential: "Certified",
-      pdfFile: "/certificates/machine-learning-fundamentals.pdf"
+      pdfFile: "/certificates/Fronted certificate.pdf"
     },
     {
-      name: "DevOps Engineering Essentials",
-      issuer: "Google Cloud",
+      name: "Math Volunteer Certificate",
+      issuer: "Educational Volunteer Program",
       date: "2022",
       credential: "Certified",
-      pdfFile: "/certificates/devops-essentials.pdf"
+      pdfFile: "/certificates/Math Volanteer.pdf"
     },
     {
-      name: "Cybersecurity Fundamentals",
-      issuer: "CompTIA",
+      name: "MS Office Certificate",
+      issuer: "Microsoft Training Center",
+      date: "2022",
+      credential: "Certified",
+      pdfFile: "/certificates/Ms Word Certificate.pdf"
+    },
+    {
+      name: "PTT Training Certificate",
+      issuer: "Professional Training Center",
       date: "2021",
       credential: "Certified",
-      pdfFile: "/certificates/cybersecurity-fundamentals.pdf"
+      pdfFile: "/certificates/PTT Certificate.pdf"
+    },
+    {
+      name: "Refa Foundation Certificate",
+      issuer: "Refa Foundation",
+      date: "2021",
+      credential: "Certified",
+      pdfFile: "/certificates/Refa foundation Certificate.pdf"
+    },
+    {
+      name: "Volunteer Certificate",
+      issuer: "Afghan Educational Center",
+      date: "2020",
+      credential: "Certified",
+      pdfFile: "/certificates/Volanteer in afghan educational center.pdf"
+    },
+    {
+      name: "Water Conference Certificate",
+      issuer: "International Water Conference",
+      date: "2020",
+      credential: "Certified",
+      pdfFile: "/certificates/Water International Conference certifica.pdf"
+    },
+    {
+      name: "Work Experience Certificate",
+      issuer: "Hushmand Shahar Technology",
+      date: "2023",
+      credential: "Certified",
+      pdfFile: "/certificates/Work-Experience-Hushmand.pdf"
     }
   ];
 
