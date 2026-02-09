@@ -677,7 +677,7 @@ const Resume = () => {
       name: "Cybersecurity Fundamentals",
       issuer: "CompTIA",
       date: "2021",
-      credential: "CF-2021-006",
+      credential: "Certified",
       pdfFile: "/certificates/cybersecurity-fundamentals.pdf"
     }
   ];
