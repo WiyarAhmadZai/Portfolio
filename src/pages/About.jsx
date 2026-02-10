@@ -268,9 +268,7 @@ const About = () => {
     <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="inline-block mb-4">
-            <span className="text-xs text-blue-400 font-medium tracking-wide uppercase">About</span>
-          </div>
+        
           <h1 className="text-3xl md:text-4xl font-black text-white mb-6 tracking-tight">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
               About Me
