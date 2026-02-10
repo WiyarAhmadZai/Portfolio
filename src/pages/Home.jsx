@@ -596,6 +596,129 @@ const Home = () => {
           </div>
         </section>
 
+        {/* Enhanced Certifications Section */}
+        <section className={`mt-32 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} aria-labelledby="certifications-title">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4">
+              <span className="text-xs text-orange-400 font-medium tracking-wide uppercase">Certifications</span>
+            </div>
+            <h2 id="certifications-title" className="text-3xl md:text-4xl font-black text-white mb-6 tracking-tight">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-red-500 to-yellow-500">
+                Professional Certificates
+              </span>
+            </h2>
+            <p className="text-gray-300 text-sm max-w-3xl mx-auto leading-relaxed">
+              Recognized certifications and achievements from various professional development programs
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {[
+              {
+                name: "Achievement Certificate",
+                issuer: "Professional Development",
+                date: "2021",
+                pdfFile: "/certificates/Achievement Certificate.pdf"
+              },
+              {
+                name: "Appreciation Certificate",
+                issuer: "Joining a Motivational Seminar",
+                date: "2023",
+                pdfFile: "/certificates/Appreciation Certificate.pdf"
+              },
+              {
+                name: "AI Webinar Certificate",
+                issuer: "AI Training Institute",
+                date: "2025",
+                pdfFile: "/certificates/Blue Gold and White Modern Artificial Intelligence Webinar Certificate.png"
+              },
+              {
+                name: "Computer Volunteer",
+                issuer: "Technical Volunteer Program",
+                date: "2023",
+                pdfFile: "/certificates/Computer Volanteer Certificate.pdf"
+              },
+              {
+                name: "Frontend Development",
+                issuer: "Web Development Institute",
+                date: "2024",
+                pdfFile: "/certificates/Fronted certificate.pdf"
+              },
+              {
+                name: "Math Volunteer",
+                issuer: "Educational Volunteer Program",
+                date: "2024",
+                pdfFile: "/certificates/Math Volanteer.pdf"
+              },
+              {
+                name: "MS Office Certificate",
+                issuer: "Microsoft Training Center",
+                date: "2018",
+                pdfFile: "/certificates/Ms Word Certificate.pdf"
+              },
+              {
+                name: "PTT Training",
+                issuer: "Potential Teacher Training",
+                date: "2021",
+                pdfFile: "/certificates/PTT Certificate.pdf"
+              }
+            ].map((cert, index) => (
+              <div key={index} className="group relative bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm rounded-3xl p-6 shadow-2xl border border-white/10 transform transition-all duration-700 hover:scale-105 hover:shadow-orange-500/20 hover:border-orange-500/30">
+                {/* Animated background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-red-600/10 to-yellow-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                
+                {/* Floating particles */}
+                <div className="absolute top-4 right-4 w-2 h-2 bg-orange-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-bounce transition-all duration-500" style={{animationDelay: '0.5s'}}></div>
+                <div className="absolute bottom-4 left-4 w-1.5 h-1.5 bg-red-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-bounce transition-all duration-500" style={{animationDelay: '1s'}}></div>
+                
+                <div className="relative z-10">
+                  {/* Certificate icon */}
+                  <div className="mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-orange-500 via-red-600 to-yellow-500 rounded-2xl flex items-center justify-center mb-4 group-hover:animate-pulse group-hover:scale-110 transition-transform duration-500">
+                      <i className="fas fa-certificate text-white text-2xl"></i>
+                    </div>
+                  </div>
+                  
+                  {/* Certificate title */}
+                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-orange-400 group-hover:via-red-500 group-hover:to-yellow-500 transition-all duration-700 tracking-tight line-clamp-2">
+                    {cert.name}
+                  </h3>
+                  
+                  {/* Certificate issuer */}
+                  <p className="text-orange-400 font-medium text-sm mb-2">{cert.issuer}</p>
+                  
+                  {/* Certificate date */}
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-gray-400 text-xs">Issued: {cert.date}</span>
+                    <i className="fas fa-award text-yellow-500 text-sm"></i>
+                  </div>
+                  
+                  {/* Download button */}
+                  <button
+                    onClick={() => window.open(cert.pdfFile, '_blank')}
+                    className="w-full bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-medium py-2 px-3 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center text-xs"
+                  >
+                    <i className="fas fa-file-pdf mr-2"></i>
+                    View Certificate
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* View all certificates button */}
+          <div className="text-center mt-12">
+            <Link 
+              to="/resume"
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-bold rounded-lg transition duration-300 transform hover:scale-105 shadow-lg"
+            >
+              <i className="fas fa-certificate mr-2"></i>
+              View All Certificates
+              <i className="fas fa-arrow-right ml-2"></i>
+            </Link>
+          </div>
+        </section>
+
         {/* Enhanced Services Section */}
         <section className={`mt-32 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} aria-labelledby="services-title">
           <div className="text-center mb-16">
