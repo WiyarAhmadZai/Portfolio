@@ -247,11 +247,11 @@ const About = () => {
 
   // Languages data
   const languages = [
+    { name: "Pashto", proficiency: "Native", level: 100 },
+    { name: "Dari", proficiency: "Fluent", level: 95 },
     { name: "English", proficiency: "Fluent", level: 90 },
-    { name: "Dari", proficiency: "Native", level: 100 },
-    { name: "Pashto", proficiency: "Intermediate", level: 70 },
-    { name: "Urdu", proficiency: "Can write and speak", level: 85 },
-    { name: "Hindi", proficiency: "Can speak only", level: 60 }
+    { name: "Urdu", proficiency: "Fluent", level: 85 },
+    { name: "Hindi", proficiency: "Speak well", level: 75 }
   ];
 
   // Interests data
