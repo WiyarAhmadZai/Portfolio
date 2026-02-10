@@ -203,7 +203,7 @@ const Home = () => {
       role: "CEO",
       company: "Digital Innovations",
       content: "Working with Wiyar was a game-changer for our business. His innovative solutions helped us increase efficiency by 40%.",
-      avatar: "/Photos Simples/1716635911147.jpg",
+      avatar: "",
       rating: 5
     },
     {
