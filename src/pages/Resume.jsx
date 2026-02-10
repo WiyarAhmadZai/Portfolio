@@ -724,6 +724,23 @@ const Resume = () => {
     }
   ];
 
+  // Research data
+  const research = [
+    {
+      title: "Nano Technology in Water Purification",
+      description: "Advanced research on the application of nanotechnology for water purification systems. Developed innovative nano-filtration techniques to remove contaminants and improve water quality in developing regions.",
+      methodology: "Experimental research using nano-materials, water quality testing, and filtration efficiency analysis",
+      outcomes: [
+        "Developed low-cost nano-filtration prototype",
+        "Achieved 95% contaminant removal efficiency",
+        "Published research findings in international journal",
+        "Presented at Water Technology Conference 2023"
+      ],
+      technologies: ["Nano-materials", "Water Quality Analysis", "Filtration Systems", "Environmental Testing"],
+      duration: "2022 - 2023"
+    }
+  ];
+
   // Languages data
   const languages = [
     { name: "English", proficiency: "Fluent", level: 90 },
@@ -805,7 +822,7 @@ const Resume = () => {
 
         {/* Navigation */}
         <div className={`flex flex-wrap justify-center gap-2 mb-12 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          {['summary', 'skills', 'experience', 'education', 'projects', 'certifications'].map((section) => (
+          {['summary', 'research', 'skills', 'experience', 'education', 'projects', 'certifications'].map((section) => (
             <button
               key={section}
               onClick={() => setActiveSection(section)}
@@ -841,6 +858,53 @@ const Resume = () => {
                   <div className="text-3xl font-bold text-green-400 mb-2">500+</div>
                   <div className="text-gray-300">GitHub Contributions</div>
                 </div>
+              </div>
+            </div>
+          )}
+
+          {/* Research */}
+          {activeSection === 'research' && (
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-6 pb-2 border-b border-gray-700">Research Work</h2>
+              <div className="space-y-8">
+                {research.map((researchItem, index) => (
+                  <div key={index} className="bg-gray-900 rounded-xl p-6 border border-gray-700">
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <h3 className="text-xl font-bold text-white mb-2">{researchItem.title}</h3>
+                        <p className="text-blue-400 text-sm">{researchItem.duration}</p>
+                      </div>
+                      <i className="fas fa-microscope text-purple-500 text-2xl"></i>
+                    </div>
+                    
+                    <p className="text-gray-300 mb-4 leading-relaxed">{researchItem.description}</p>
+                    
+                    <div className="mb-4">
+                      <h4 className="text-lg font-semibold text-gray-200 mb-2">Methodology:</h4>
+                      <p className="text-gray-400">{researchItem.methodology}</p>
+                    </div>
+                    
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-200 mb-3">Key Outcomes:</h4>
+                      <ul className="space-y-2">
+                        {researchItem.outcomes.map((outcome, i) => (
+                          <li key={i} className="flex items-start">
+                            <i className="fas fa-check-circle text-green-500 mt-1 mr-3 text-sm"></i>
+                            <span className="text-gray-300">{outcome}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    
+                    <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-gray-700">
+                      {researchItem.technologies.map((tech, i) => (
+                        <span key={i} className="bg-gray-800 px-3 py-1 rounded-full text-xs text-gray-300 border border-gray-600">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}
