@@ -195,15 +195,15 @@ const Home = () => {
       role: "Project Manager",
       company: "Tech Solutions",
       content: "Wiyar delivered our project ahead of schedule with exceptional quality. His technical skills and professionalism are outstanding.",
-      avatar: "",
+      avatar: "/Photos Simples/avatar 3.webp",
       rating: 5
     },
     {
-      name: "Fatima Noor",
+      name: "Subhan Agha",
       role: "CEO",
       company: "Digital Innovations",
       content: "Working with Wiyar was a game-changer for our business. His innovative solutions helped us increase efficiency by 40%.",
-      avatar: "",
+      avatar: "/Photos Simples/avatar 2.webp",
       rating: 5
     },
     {
@@ -211,7 +211,7 @@ const Home = () => {
       role: "CTO",
       company: "Startup Hub",
       content: "Wiyar's expertise in full-stack development is impressive. He transformed our vision into a robust, scalable application.",
-      avatar: "",
+      avatar: "/Photos Simples/avatar 1.jpg",
       rating: 5
     }
   ];
