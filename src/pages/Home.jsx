@@ -211,7 +211,7 @@ const Home = () => {
       role: "CTO",
       company: "Startup Hub",
       content: "Wiyar's expertise in full-stack development is impressive. He transformed our vision into a robust, scalable application.",
-      avatar: "/Photos Simples/20240328_124412.jpg",
+      avatar: "",
       rating: 5
     }
   ];
