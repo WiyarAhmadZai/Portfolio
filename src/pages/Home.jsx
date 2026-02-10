@@ -195,7 +195,7 @@ const Home = () => {
       role: "Project Manager",
       company: "Tech Solutions",
       content: "Wiyar delivered our project ahead of schedule with exceptional quality. His technical skills and professionalism are outstanding.",
-      avatar: "/Photos Simples/Cute Photo.jpg",
+      avatar: "",
       rating: 5
     },
     {
